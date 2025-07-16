@@ -151,6 +151,7 @@ FX::FXWindow::~FXWindow()
     #if defined(PLATFORM_LINUX)
         if (xDisplay && xWindow)
         {
+            XUnmapWindow(xDisplay, xWindow);
             XDestroyWindow(xDisplay, xWindow);
         }
     #elif defined(PLATFORM_HAIKU)
