@@ -8,6 +8,7 @@
     #include <xkbcommon/xkbcommon.h>
 #elif defined BACKEND_WAYLAND
     #include <wayland-client.h>
+    #include <wayland-cursor.h>
         #if WINDOW_CUSTOM_DECORATIONS
             #include <libdecor.h>
         #endif
@@ -31,6 +32,9 @@
 
 #if defined(BACKEND_BEAPI)
     static BApplication* app = nullptr;
+#elif defined (BACKEND_WAYLAND)
+    static struct wl_surface *surface = NULL;
+    static struct xdg_toplevel *xdg_toplevel = NULL;
 #endif
 
 namespace
@@ -41,6 +45,7 @@ namespace
         ::Atom wmDeleteMessage;
     #elif defined (BACKEND_WAYLAND)
         ::wl_display* wDisplay;
+        //::xdg_toplevel *xdg_toplevel;
     #elif defined(BACKEND_BEAPI)
         class FHaikuWindow;
         class FHaikuView;
