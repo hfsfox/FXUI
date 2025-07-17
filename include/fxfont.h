@@ -1,0 +1,33 @@
+#ifndef __FXFONT_H__
+#define __FXFONT_H__
+
+#include <stdint.h>
+
+namespace FX
+{
+    class FXFont
+    {
+        public:
+            FXFont();
+            ~FXFont();
+        public:
+            void Init();
+            void Cleanup();
+        public:
+            // get the name of the font
+            const char* GetFontName () const { return font_name; }
+        public:
+            void SetName (const char* newName);
+            void SetStyle(int32_t newStyle);
+            //void SetSize (CCoord newSize);
+        private:
+        virtual const void* GetPlatformFont () const;
+        public:
+            const char* font_name;
+            int32_t font_style;
+
+    };
+}
+
+
+#endif

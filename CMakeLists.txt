@@ -52,6 +52,8 @@ add_executable(${CMAKE_PROJECT_NAME}
     src/test/example.cpp
     src/fxdisplay.cpp
     src/fxwindow.cpp
+    src/fxbitmap.cpp
+    src/fxfont.cpp
     )
 
 if(LINUX)
