@@ -26,6 +26,7 @@
     #include <storage/Resources.h>
     #include <GraphicsDefs.h>
     #include <InterfaceDefs.h>
+    #include <iostream>
 #endif
 
 #include <cstdio>
