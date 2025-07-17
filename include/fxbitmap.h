@@ -10,6 +10,7 @@ namespace FX
         public:
             FXBitmap();
             FXBitmap(uint32_t resourceID);
+            FXBitmap(int width, int height);
             ~FXBitmap();
         public:
             inline uint32_t GetWidth(void) { return width; }
