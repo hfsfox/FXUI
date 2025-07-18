@@ -55,6 +55,7 @@ add_executable(${CMAKE_PROJECT_NAME}
     src/fxui/fxwindow.cpp
     src/fxui/fxbitmap.cpp
     src/fxui/fxfont.cpp
+    src/fxui/platform/haiku/BApplicationInstance.cpp
     )
 
 if(LINUX)

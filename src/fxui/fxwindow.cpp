@@ -27,7 +27,7 @@
     #include <GraphicsDefs.h>
     #include <InterfaceDefs.h>
     #include <iostream>
-    #include "platform/haiku/BAplicationInstance.h"
+    #include "platform/haiku/BApplicationInstance.h"
 #elif defined BACKEND_WINAPI
     #include <windows.h>
 #endif
