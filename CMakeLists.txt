@@ -43,6 +43,7 @@ message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
 include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     include
+    src/platform/haiku
     )
 
 add_executable(${CMAKE_PROJECT_NAME}
@@ -50,14 +51,14 @@ add_executable(${CMAKE_PROJECT_NAME}
 #    ${SRCS}
 #    src/test/main.cpp
     src/test/example.cpp
-    src/fxdisplay.cpp
-    src/fxwindow.cpp
-    src/fxbitmap.cpp
-    src/fxfont.cpp
+    src/fxui/fxdisplay.cpp
+    src/fxui/fxwindow.cpp
+    src/fxui/fxbitmap.cpp
+    src/fxui/fxfont.cpp
     )
 
 if(LINUX)
  target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Xext X11 Xpm GL GLU GLX )
 elseif(HAIKU)
-   target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC be root game tracker textencoding GL)
+   target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC be root game tracker textencoding GL stdc++ supc++)
 endif()
