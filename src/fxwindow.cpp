@@ -26,6 +26,9 @@
     #include <storage/Resources.h>
     #include <GraphicsDefs.h>
     #include <InterfaceDefs.h>
+    #include <iostream>
+#elif defined BACKEND_WINAPI
+    #include <windows.h>
 #endif
 
 #include <cstdio>
@@ -52,12 +55,9 @@ namespace
 
         FHaikuWindow* haikuWindow;
         FHaikuView* haikuView;
+    #elif defined (BACKEND_WINAPI)
+        ::HWND hWindow;
     #endif
-
-    /*#ifdef BACKEND_BEAPI
-    app = nullptr;
-    #endif*/
-
 
     #ifdef BACKEND_BEAPI
 class FHaikuView : public BView {
