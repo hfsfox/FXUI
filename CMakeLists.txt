@@ -46,16 +46,31 @@ include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     src/platform/haiku
     )
 
+
+set(FXUI_SOURCES
+    src/fxui/fxdisplay.cpp
+    src/fxui/fxwindow.cpp
+    src/fxui/fxbitmap.cpp
+    src/fxui/fxfont.cpp
+)
+
+if(HAIKU)
+    set(PLATFORM_SOURCES
+        src/fxui/platform/haiku/BApplicationInstance.cpp
+        src/fxui/platform/haiku/BeAPIWindow.cpp
+    )
+elseif(LINUX)
+    set(PLATFORM_SOURCES
+    )
+endif()
+
 add_executable(${CMAKE_PROJECT_NAME}
 #    ${AUIE_ADDITIONAL_SRCS}
 #    ${SRCS}
 #    src/test/main.cpp
     src/test/example.cpp
-    src/fxui/fxdisplay.cpp
-    src/fxui/fxwindow.cpp
-    src/fxui/fxbitmap.cpp
-    src/fxui/fxfont.cpp
-    src/fxui/platform/haiku/BApplicationInstance.cpp
+   ${FXUI_SOURCES}
+   ${PLATFORM_SOURCES}
     )
 
 if(LINUX)

@@ -28,6 +28,7 @@
     #include <InterfaceDefs.h>
     #include <iostream>
     #include "platform/haiku/BApplicationInstance.h"
+    #include "platform/haiku/BeAPIWindow.h"
 #elif defined BACKEND_WINAPI
     #include <windows.h>
 #endif
@@ -51,10 +52,10 @@ namespace
         ::wl_display* wDisplay;
         //::xdg_toplevel *xdg_toplevel;
     #elif defined(BACKEND_BEAPI)
-        class FHaikuWindow;
+        //class FHaikuWindow;
         class FHaikuView;
 
-        FHaikuWindow* haikuWindow;
+        BeAPIWindow* haikuWindow;
         FHaikuView* haikuView;
     #elif defined (BACKEND_WINAPI)
         ::HWND hWindow;
@@ -101,7 +102,7 @@ private:
     static int frameCount;
 };
 
-class FHaikuWindow : public BDirectWindow
+/*class FHaikuWindow : public BDirectWindow
     {
     public:
         FHaikuWindow(BRect frame, const char* title)
@@ -109,11 +110,6 @@ class FHaikuWindow : public BDirectWindow
             BDirectWindow(frame, title, B_TITLED_WINDOW, B_QUIT_ON_WINDOW_CLOSE), fShouldClose(false)
             {
             }
-
-        /*virtual bool QuitRequested() override {
-            fShouldClose = true;
-            return false; // Don't quit immediately, let main loop handle it
-        }*/
         virtual bool QuitRequested() override {
             fShouldClose = true;
             BApplicationInstance::GetInstance()->PostMessage(B_QUIT_REQUESTED);
@@ -122,23 +118,12 @@ class FHaikuWindow : public BDirectWindow
 
         bool ShouldClose() const { return fShouldClose; }
 
-        /*void DispatchMessage(BMessage *message, BHandler *handler) override
-        {
-            switch (message->what)
-            {
-                case B_MOUSE_DOWN:
-                case B_MOUSE_UP:
-                    std::cout << "click" << std::endl;
-                break;
-                default:
-                    BDirectWindow::DispatchMessage(message, handler);
-                    //break;
-            }
-        }*/
-
     private:
         volatile bool fShouldClose;
     };
+*/
+
+//#define FHaikuWindow Be;
 
     int FHaikuView::frameCount = 0;
     #endif
@@ -204,7 +189,8 @@ FX::FXWindow::Create()
         }
 
         BRect windowRect(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
-        haikuWindow = new FHaikuWindow(windowRect, title);
+        //haikuWindow = new FHaikuWindow(windowRect, title);
+        haikuWindow = new BeAPIWindow(windowRect, title);
 
         haikuView = new FHaikuView(haikuWindow->Bounds(), display);
         haikuWindow->AddChild(haikuView);
@@ -232,6 +218,10 @@ FX::FXWindow::Hide()
 {
     #if defined(PLATFORM_LINUX)
     #elif defined(PLATFORM_HAIKU)
+        if(!haikuWindow->IsHidden())
+        {
+            haikuWindow->Hide();
+        }
     #endif
 }
 
