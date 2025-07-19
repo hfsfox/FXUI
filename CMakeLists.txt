@@ -62,6 +62,9 @@ if(HAIKU)
 elseif(LINUX)
     set(PLATFORM_SOURCES
     )
+elseif(WIN32)
+    set(PLATFORM_SOURCES
+    )
 endif()
 
 add_executable(${CMAKE_PROJECT_NAME}
@@ -75,6 +78,8 @@ add_executable(${CMAKE_PROJECT_NAME}
 
 if(LINUX)
  target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Xext X11 Xpm GL GLU GLX )
+ elseif(WIN32)
+ target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC user32 gdi32 opengl32)
 elseif(HAIKU)
    target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC be root game tracker textencoding GL stdc++ supc++)
 endif()
