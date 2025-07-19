@@ -21,6 +21,7 @@ namespace FX
             uint32_t resourceID;
             uint32_t width;
             uint32_t height;
+            int pixel_format;
         private:
     };
 }
