@@ -2,17 +2,9 @@
 #include <fxplatformuidefs.h>
 
 #if defined BACKEND_X11 && !defined BACKEND_BEAPI
-    #include <X11/Xlib.h>
-    #include <X11/Xutil.h>
-    #include <X11/xpm.h>
-    #include <xkbcommon/xkbcommon.h>
+    #include "platform/unix/x11/X11APIWindow.h"
 #elif defined BACKEND_WAYLAND
-    #include <wayland-client.h>
-    #include <wayland-cursor.h>
-        #if WINDOW_CUSTOM_DECORATIONS
-            #include <libdecor.h>
-        #endif
-    #include <xkbcommon/xkbcommon.h>
+    #include "platform/unix/wayland/WaylandAPIWindow.h"
 #elif defined BACKEND_BEAPI
     #include <app/Application.h>
     //#include <interface/Window.h>

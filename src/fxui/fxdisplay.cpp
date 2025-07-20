@@ -2,9 +2,7 @@
 #include <fxdisplay.h>
 
 #if defined (BACKEND_X11)
-    #include <X11/Xlib.h>
-    #include <X11/Xutil.h>
-    #include <X11/xpm.h>
+    #include "platform/unix/x11/X11APIWindow.h"
 #elif defined (BACKEND_BEAPI)
     #include <interface/View.h>
     #include <support/String.h>
