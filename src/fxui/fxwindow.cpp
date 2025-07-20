@@ -15,20 +15,21 @@
     #include <xkbcommon/xkbcommon.h>
 #elif defined BACKEND_BEAPI
     #include <app/Application.h>
-    #include <interface/Window.h>
+    //#include <interface/Window.h>
     #include <game/DirectWindow.h>
     #include <interface/View.h>
-    #include <support/String.h>
-    #include <interface/Font.h>
-    #include <app/Cursor.h>
+    //#include <support/String.h>
+    //#include <interface/Font.h>
+    //#include <app/Cursor.h>
     #include <interface/Bitmap.h>
     #include <translation/TranslationUtils.h>
     #include <storage/Resources.h>
     #include <GraphicsDefs.h>
     #include <InterfaceDefs.h>
-    #include <iostream>
+    //#include <iostream>
     #include "platform/haiku/BApplicationInstance.h"
     #include "platform/haiku/BeAPIWindow.h"
+    #include "platform/haiku/BeAPIView.h"
 #elif defined BACKEND_WINAPI
     #include <windows.h>
 #endif
@@ -53,35 +54,26 @@ namespace
         //::xdg_toplevel *xdg_toplevel;
     #elif defined(BACKEND_BEAPI)
         //class FHaikuWindow;
-        class FHaikuView;
+        //class FHaikuView;
 
         BeAPIWindow* haikuWindow;
-        FHaikuView* haikuView;
+        BeAPIView* haikuView;
+        //int haikuView::frameCount = 0;
     #elif defined (BACKEND_WINAPI)
         ::HWND hWindow;
     #endif
 
     #ifdef BACKEND_BEAPI
-class FHaikuView : public BView {
+/*class FHaikuView : public BView {
 public:
     FHaikuView(BRect frame, FX::FXDisplay* display)
     :
     BView(frame, "FView", B_FOLLOW_ALL, B_WILL_DRAW | B_SUBPIXEL_PRECISE | B_PULSE_NEEDED), fDisplay(display)
     {
-        //SetViewColor(255, 255, 255);
-        //SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
-        //Invalidate(frame);
-        //Pulse();
     }
 
     virtual void Draw(BRect updateRect) override
     {
-        /*SetHighColor(20, 20, 20);
-        //DrawString("Hello, Haiku World!", BPoint(50, 50));
-        char buffer[64];
-        snprintf(buffer, sizeof(buffer), "Frame: %d", frameCount++);
-        DrawString(buffer, BPoint(50, 80));*/
-        //Invalidate(updateRect);
     }
 
     virtual void MouseUp(BPoint point) override
@@ -100,7 +92,7 @@ public:
 private:
     FX::FXDisplay* fDisplay;
     static int frameCount;
-};
+};*/
 
 /*class FHaikuWindow : public BDirectWindow
     {
@@ -125,7 +117,8 @@ private:
 
 //#define FHaikuWindow Be;
 
-    int FHaikuView::frameCount = 0;
+    //int BeAPIView::frameCount = 0;
+    //int BeAPIView::frameCount = 0;
     #endif
 }
 
@@ -192,7 +185,7 @@ FX::FXWindow::Create()
         //haikuWindow = new FHaikuWindow(windowRect, title);
         haikuWindow = new BeAPIWindow(windowRect, title);
 
-        haikuView = new FHaikuView(haikuWindow->Bounds(), display);
+        haikuView = new BeAPIView(haikuWindow->Bounds(), display);
         haikuWindow->AddChild(haikuView);
         //haikuView->EnableDirectMode(false);
         //haikuWindow

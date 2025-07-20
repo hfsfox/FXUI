@@ -58,6 +58,7 @@ if(HAIKU)
     set(PLATFORM_SOURCES
         src/fxui/platform/haiku/BApplicationInstance.cpp
         src/fxui/platform/haiku/BeAPIWindow.cpp
+        src/fxui/platform/haiku/BeAPIView.cpp
     )
 elseif(LINUX)
     set(PLATFORM_SOURCES
@@ -68,9 +69,6 @@ elseif(WIN32)
 endif()
 
 add_executable(${CMAKE_PROJECT_NAME}
-#    ${AUIE_ADDITIONAL_SRCS}
-#    ${SRCS}
-#    src/test/main.cpp
     src/test/example.cpp
    ${FXUI_SOURCES}
    ${PLATFORM_SOURCES}
