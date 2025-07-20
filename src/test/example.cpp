@@ -78,12 +78,14 @@ int main()
         display.DrawLine(FX::FXPoint(menubar_r.width, menubar_r.y), FX::FXPoint(menubar_r.width,menubar_r.height), menubar_color);
         //
         */
-        FX::FXRect menubar_r(0, 0, 800, 25);
+
+        FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 25);
         FX::FXColor menubar_color = {0,0,0,255};
         // 800 - width 25 - height
         //display.DrawRect(0, 0, 799, 25, menubar_color);
         display.DrawRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, menubar_color);
         display.DrawText("File", menubar_r.x+5, menubar_r.y+15, textColor);
+        //
 
 
         display.DrawCircle(radius+30, 100, radius, textColor);

@@ -57,6 +57,8 @@ namespace FX
             void SetViewColor(FX::FXColor color);
             FX::FXColor GetViewColor() const;
 
+            FX::FXRect GetDisplaySize() const;
+
             void Present();
 
         public:

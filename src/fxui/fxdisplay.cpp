@@ -1,3 +1,4 @@
+#include "fxwindow.h"
 #include <fxpoint.h>
 #include <fxdisplay.h>
 
@@ -223,6 +224,17 @@ FX::FXDisplay::GetViewColor() const
     //XGetC
     FXColor viewcolor = {0, 0, 0, 255};
     return viewcolor;
+}
+
+FX::FXRect
+FX::FXDisplay::GetDisplaySize() const
+{
+    #if defined(BACKEND_X11)
+        XWindowAttributes attr;
+        XGetWindowAttributes(display,window,&attr);
+        return {0,0,attr.width,attr.height};
+    #elif defined(PLATFORM_HAIKU)
+    #endif
 }
 
 void
