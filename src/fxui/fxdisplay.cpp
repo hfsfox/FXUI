@@ -17,7 +17,6 @@
     #include <winuser.h>
 #endif
 #include <cstring>
-//#include <iostream>
 
 namespace
 {
@@ -179,6 +178,20 @@ void
 FX::FXDisplay::DrawLine(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color)
 {
     DrawLine(where_begin.x, where_begin.y,where_end.x, where_end.y, color);
+}
+
+void
+FX::FXDisplay::DrawRect(int x_begin, int y_begin,int width, int height, FX::FXColor color)
+{
+    #if defined(BACKEND_X11)
+    XDrawRectangle(display, window, gc, x_begin, y_begin, width, height);
+    #elif defined(PLATFORM_HAIKU)
+    #endif
+}
+void
+FX::FXDisplay::DrawRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color)
+{
+    DrawRect(where_begin.x, where_begin.y, where_end.width, where_end.height, color);
 }
 
 void

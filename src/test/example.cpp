@@ -1,4 +1,5 @@
 #include "fxpoint.h"
+#include "fxwindow.h"
 #ifdef PLATFORM_HAIKU
 #include <InterfaceDefs.h>
 #endif
@@ -52,6 +53,9 @@ int main()
         FX::FXColor textColor = {0,0,0,255};
         //display.SetViewColor(ui_color(B_CONTROL_TEXT_COLOR));
         display.SetViewColor(color);
+
+        //display.DrawLine(FX::FXPoint(50, 50), FX::FXPoint(50,300), textColor);
+
         // Draw some text
         char buffer[256];
         sprintf(buffer, "Frame: %d", frameCount++);
@@ -59,6 +63,29 @@ int main()
         //display.SetViewColor(ui_color(B_CONTROL_TEXT_COLOR));
         display.DrawText("Hello, Haiku World!", 50, 50, textColor);
         int radius = 20;
+
+        /*
+        //menubar
+        FX::FXRect menubar_r(0, 10, 800, 25);
+        FX::FXColor menubar_color = {0,0,0,255};
+        //top
+        display.DrawLine(FX::FXPoint(menubar_r.x, menubar_r.y), FX::FXPoint(menubar_r.width,menubar_r.y), menubar_color);
+        //left
+        display.DrawLine(FX::FXPoint(0, 0), FX::FXPoint(0,menubar_r.height), menubar_color);
+        //bottom
+        display.DrawLine(FX::FXPoint(0, menubar_r.height), FX::FXPoint(menubar_r.width,menubar_r.height), menubar_color);
+        //left
+        display.DrawLine(FX::FXPoint(menubar_r.width, menubar_r.y), FX::FXPoint(menubar_r.width,menubar_r.height), menubar_color);
+        //
+        */
+        FX::FXRect menubar_r(0, 0, 800, 25);
+        FX::FXColor menubar_color = {0,0,0,255};
+        // 800 - width 25 - height
+        //display.DrawRect(0, 0, 799, 25, menubar_color);
+        display.DrawRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, menubar_color);
+        display.DrawText("File", menubar_r.x+5, menubar_r.y+15, textColor);
+
+
         display.DrawCircle(radius+30, 100, radius, textColor);
         FX::FXColor c1Color = {255,0,0,255};
         display.DrawCircle((radius*2)+10, 200, radius, c1Color);
@@ -68,6 +95,7 @@ int main()
         display.DrawCircle((radius*6)+10, 200, radius, c3Color);
         FX::FXColor line_color = {0,0,255,255};
         display.DrawLine(FX::FXPoint(((radius*6)+10), 200-10),FX::FXPoint(((radius*6)+90),200-10),line_color);
+
         display.Present();
         //display.DrawText("Hello, Haiku World!", 50, 50);
         std::this_thread::sleep_for(std::chrono::milliseconds(16));

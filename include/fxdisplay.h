@@ -51,6 +51,8 @@ namespace FX
             void DrawPoint(FX::FXPoint where, FX::FXColor color);
             void DrawLine(int center_x_begin, int center_y_begin,int center_x_end, int center_y_end, FX::FXColor color);
             void DrawLine(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
+            void DrawRect(int x_begin, int y_begin, int width, int height, FX::FXColor color);
+            void DrawRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
 
             void SetViewColor(FX::FXColor color);
             FX::FXColor GetViewColor() const;
