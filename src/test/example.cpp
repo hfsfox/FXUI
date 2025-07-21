@@ -62,6 +62,7 @@ int main()
         FX::FXMenuBar m(menubar_r, &display);
         FX::FXRect toolbar_r(0, 20, display.GetDisplaySize().width-1, 40);
         FX::FXToolBar t(toolbar_r, &display);
+        t.AddItemSeparator();
 
 
         FX::FXRect examplecontainer = {toolbar_r.x+50, toolbar_r.y+50, 80, 100};
