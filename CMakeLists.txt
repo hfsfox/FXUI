@@ -42,7 +42,7 @@ message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
 message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
 include_directories(${CMAKE_PROJECT_NAME} PUBLIC
-    include
+    include/base
     src/platform/haiku
     )
 
