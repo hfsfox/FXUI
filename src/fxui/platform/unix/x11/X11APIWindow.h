@@ -7,6 +7,8 @@
     #include <X11/xpm.h>
     #include <xkbcommon/xkbcommon.h>
 
+    #include<X11/Xft/Xft.h>
+
     #include <cstdlib>
     #include <cstring>
 

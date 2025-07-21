@@ -74,21 +74,6 @@ int main()
         display.DrawText("Hello, Haiku World!", examplecontainer.x+10, examplecontainer.y+20, textColor);
         int radius = 20;
 
-        /*
-        //menubar
-        FX::FXRect menubar_r(0, 10, 800, 25);
-        FX::FXColor menubar_color = {0,0,0,255};
-        //top
-        display.DrawLine(FX::FXPoint(menubar_r.x, menubar_r.y), FX::FXPoint(menubar_r.width,menubar_r.y), menubar_color);
-        //left
-        display.DrawLine(FX::FXPoint(0, 0), FX::FXPoint(0,menubar_r.height), menubar_color);
-        //bottom
-        display.DrawLine(FX::FXPoint(0, menubar_r.height), FX::FXPoint(menubar_r.width,menubar_r.height), menubar_color);
-        //left
-        display.DrawLine(FX::FXPoint(menubar_r.width, menubar_r.y), FX::FXPoint(menubar_r.width,menubar_r.height), menubar_color);
-        //
-        */
-
         /*FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
         FX::FXColor menubar_color = {0,0,0,255};
         // 800 - width 25 - height

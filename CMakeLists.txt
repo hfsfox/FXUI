@@ -41,10 +41,26 @@ message(STATUS "Build C flags:          ${CMAKE_C_FLAGS}")
 message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
 message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
+if(LINUX)
+    find_package(PkgConfig REQUIRED)
+    find_package(Freetype REQUIRED)
+endif()
+if(LINUX)
+    set(FXUI_FREETYPE_INCLUDE
+        ${FREETYPE_INCLUDE_DIRS}
+        /usr/include/freetype2
+    )
+else()
+    set(FXUI_FREETYPE_INCLUDE
+    )
+endif()
+
 include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     include/base
     include/widgets
     #src/platform/haiku
+    ${FXUI_FREETYPE_INCLUDE}
+    #/usr/include/freetype2
     )
 
 
@@ -76,7 +92,7 @@ add_executable(${CMAKE_PROJECT_NAME}
     )
 
 if(LINUX)
- target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Xext X11 Xpm GL GLU GLX )
+ target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
  elseif(WIN32)
  target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC user32 gdi32 opengl32)
 elseif(HAIKU)

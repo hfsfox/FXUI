@@ -1,4 +1,5 @@
 #include "fxwindow.h"
+#include <X11/Xft/Xft.h>
 #include <fxpoint.h>
 #include <fxdisplay.h>
 
@@ -27,6 +28,11 @@ namespace
         //return b | (g<<8) | (r<<16);
         return ((r << 16) | (g << 8) | (b));
     }
+
+    XftFont      *font;
+    XftDraw      *xftdraw;
+    XRenderColor xrcolor;
+    XftColor     xftcolor;
 }
 
 FX::FXDisplay::FXDisplay()
@@ -66,6 +72,7 @@ bool FX::FXDisplay::Init()
 void FX::FXDisplay::Cleanup()
 {
     #ifdef BACKEND_X11
+        //if(xftdraw) { XftDrawDestroy(xftdraw); }
         if (gc) { XFreeGC(display, gc); gc = nullptr; }
         if (display) { XCloseDisplay(display); display = nullptr; }
     #endif
@@ -110,7 +117,22 @@ FX::FXDisplay::DrawText(const char* text, int x, int y, FX::FXColor color)
     #if defined(PLATFORM_LINUX)
         if (display && window && gc) {
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
-            XDrawString(display, window, gc, x, y, text, strlen(text));
+            //XDrawString(display, window, gc, x, y, text, strlen(text));
+        font = XftFontOpenName(display,0,"Arial-10");
+        //if (!font) return 1;
+        /*xrcolor.red  =0x0000;
+        xrcolor.green=0x0000;
+        xrcolor.blue =0x0000;*/
+        xrcolor.red = color.red;
+        xrcolor.green = color.green;
+        xrcolor.blue = color.blue;
+        xrcolor.alpha=0xFFFF;
+        XftColorAllocValue(display,DefaultVisual(display,0),DefaultColormap(display,0),&xrcolor,&xftcolor);
+        xftdraw = XftDrawCreate(display,window,DefaultVisual(display,0),DefaultColormap(display,0));
+        XftDrawString8(xftdraw, &xftcolor, font, x, y, (XftChar8 *)text, strlen(text));
+        XftDrawDestroy(xftdraw);
+        XftColorFree(display,DefaultVisual(display,0),DefaultColormap(display,0),&xftcolor);
+        //font->height;
         }
     #elif defined(PLATFORM_HAIKU)
         // Text drawing handled in FHaikuView::Draw()

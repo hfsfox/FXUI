@@ -28,19 +28,27 @@ namespace FX
             FXMenuBar();
             FXMenuBar(FX::FXRect menubar_r, FX::FXDisplay* display)
             :
+            d(display),
+            rect(menubar_r),
             word_gap(30)
             {
-                FX::FXColor menubar_color = {0,0,0,255};
+                FX::FXColor menubar_color = {200,200,200,255};
                 FX::FXColor textColor = {0,0,0,255};
                 // 800 - width 25 - height
                 //FX::FXDisplay::FillRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, {255,255,255,255});
-                display->FillRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, {255,255,255,255});
-                display->DrawRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, menubar_color);
-                //
-                display->DrawText("File", menubar_r.x+5, menubar_r.y+15, textColor);
-                display->DrawText("Edit", menubar_r.x+word_gap+5, menubar_r.y+15, textColor);
-                display->DrawText("View", menubar_r.x+(word_gap*2)+5, menubar_r.y+15, textColor);
-                display->DrawText("Help", menubar_r.x+(word_gap*3)+5, menubar_r.y+15, textColor);
+                //display->DrawRect(rect.x, rect.y, rect.width, rect.height, menubar_color);
+                //d->DrawRect(rect.x, rect.y, rect.width, rect.height, menubar_color);
+                selected = false;
+                if(!selected)
+                {
+                    d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
+                    d->DrawRect(rect.x, rect.y, rect.width, rect.height, menubar_color);
+                    //
+                    d->DrawText("File", rect.x+5, rect.y+15, textColor);
+                    d->DrawText("Edit", rect.x+word_gap+5, rect.y+15, textColor);
+                    d->DrawText("View", rect.x+(word_gap*2)+5, rect.y+15, textColor);
+                    d->DrawText("Help", rect.x+(word_gap*3)+5, rect.y+15, textColor);
+                }
             }
             void AddMenu(const char* menu)
             {
@@ -54,6 +62,9 @@ namespace FX
         private:
             uint32_t menu_counter;
             uint32_t word_gap;
+            FX::FXRect rect;
+            FX::FXDisplay* d;
+            bool selected;
     };
 }
 
