@@ -1,4 +1,3 @@
-#include "fxmenubar.h"
 #ifdef PLATFORM_HAIKU
 #include <InterfaceDefs.h>
 #endif
@@ -58,6 +57,9 @@ int main()
 
         //display.DrawLine(FX::FXPoint(50, 50), FX::FXPoint(50,300), textColor);
 
+        FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
+        FX::FXMenuBar m(menubar_r, &display);
+
         // Draw some text
         char buffer[256];
         sprintf(buffer, "Frame: %d", frameCount++);
@@ -96,9 +98,6 @@ int main()
         //std::vector<int>menu_vec;
         */
         //
-
-        FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
-        FX::FXMenuBar m(menubar_r, &display);
 
 
         display.DrawCircle(radius+30, 100, radius, textColor);
