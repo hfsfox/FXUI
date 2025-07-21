@@ -63,12 +63,14 @@ int main()
         FX::FXRect toolbar_r(0, 20, display.GetDisplaySize().width-1, 40);
         FX::FXToolBar t(toolbar_r, &display);
 
+
+        FX::FXRect examplecontainer = {toolbar_r.x+50, toolbar_r.y+50, 80, 100};
         // Draw some text
         char buffer[256];
         sprintf(buffer, "Frame: %d", frameCount++);
-        display.DrawText(buffer, 50, 80, textColor);
+        display.DrawText(buffer, examplecontainer.x+10, examplecontainer.y+10, textColor);
         //display.SetViewColor(ui_color(B_CONTROL_TEXT_COLOR));
-        display.DrawText("Hello, Haiku World!", 50, 50, textColor);
+        display.DrawText("Hello, Haiku World!", examplecontainer.x+10, examplecontainer.y+20, textColor);
         int radius = 20;
 
         /*
