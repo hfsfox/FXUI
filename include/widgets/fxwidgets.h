@@ -13,5 +13,6 @@
 #define     __fxwidgets__
 
 #include <fxmenubar.h>
+#include <fxtoolbar.h>
 
 #endif

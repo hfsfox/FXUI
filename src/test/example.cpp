@@ -1,3 +1,4 @@
+#include "fxtoolbar.h"
 #ifdef PLATFORM_HAIKU
 #include <InterfaceDefs.h>
 #endif
@@ -59,6 +60,8 @@ int main()
 
         FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
         FX::FXMenuBar m(menubar_r, &display);
+        FX::FXRect toolbar_r(0, 20, display.GetDisplaySize().width-1, 40);
+        FX::FXToolBar t(toolbar_r, &display);
 
         // Draw some text
         char buffer[256];
