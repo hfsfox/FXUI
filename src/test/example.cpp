@@ -1,10 +1,10 @@
-#include "fxpoint.h"
-#include "fxwindow.h"
+#include "fxmenubar.h"
 #ifdef PLATFORM_HAIKU
 #include <InterfaceDefs.h>
 #endif
 
 #include <fxui.h>
+#include <fxwidgets.h>
 
 #include <iostream>
 #include <thread>
@@ -81,7 +81,7 @@ int main()
         //
         */
 
-        FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
+        /*FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
         FX::FXColor menubar_color = {0,0,0,255};
         // 800 - width 25 - height
         //display.DrawRect(0, 0, 799, 25, menubar_color);
@@ -94,7 +94,11 @@ int main()
         display.DrawText("View", menubar_r.x+65, menubar_r.y+15, textColor);
         display.DrawText("Help", menubar_r.x+95, menubar_r.y+15, textColor);
         //std::vector<int>menu_vec;
+        */
         //
+
+        FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
+        FX::FXMenuBar m(menubar_r, &display);
 
 
         display.DrawCircle(radius+30, 100, radius, textColor);

@@ -43,7 +43,8 @@ message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
 include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     include/base
-    src/platform/haiku
+    include/widgets
+    #src/platform/haiku
     )
 
 
