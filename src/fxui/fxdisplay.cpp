@@ -5,14 +5,15 @@
 #if defined (BACKEND_X11)
     #include "platform/unix/x11/X11APIWindow.h"
 #elif defined (BACKEND_BEAPI)
-    #include <interface/View.h>
-    #include <support/String.h>
-    #include <interface/Font.h>
-    #include <interface/Bitmap.h>
-    #include <translation/TranslationUtils.h>
-    #include <storage/Resources.h>
-    #include <GraphicsDefs.h>
-    #include <InterfaceDefs.h>
+    //#include <interface/View.h>
+    //#include <support/String.h>
+    //#include <interface/Font.h>
+    //#include <interface/Bitmap.h>
+    //#include <translation/TranslationUtils.h>
+    //#include <storage/Resources.h>
+    //#include <GraphicsDefs.h>
+    //#include <InterfaceDefs.h>
+    #include "platform/haiku/BeAPIView.h"
 #elif defined (BACKEND_WINAPI)
     #include <windows.h>
     #include <winuser.h>
@@ -187,6 +188,10 @@ FX::FXDisplay::DrawRect(int x_begin, int y_begin,int width, int height, FX::FXCo
     #if defined(BACKEND_X11)
     XDrawRectangle(display, window, gc, x_begin, y_begin, width, height);
     #elif defined(PLATFORM_HAIKU)
+    view->LockLooper();
+    view->SetHighColor(color.red, color.green, color.blue, color.alpha);
+    view->StrokeRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
+    view->UnlockLooper();
     #endif
 }
 void
@@ -221,9 +226,15 @@ FX::FXDisplay::SetViewColor(FX::FXColor color)
 FX::FXColor
 FX::FXDisplay::GetViewColor() const
 {
-    //XGetC
-    FXColor viewcolor = {0, 0, 0, 255};
-    return viewcolor;
+    #if defined(BACKEND_X11)
+        FXColor viewcolor = {0, 0, 0, 255};
+        return viewcolor;
+    #elif defined(PLATFORM_HAIKU)
+        view->LockLooper();
+        FXColor viewcolor = {view->ViewColor().red, view->ViewColor().green, view->ViewColor().blue, 255};
+        view->UnlockLooper();
+        return viewcolor;
+    #endif
 }
 
 FX::FXRect
@@ -234,6 +245,10 @@ FX::FXDisplay::GetDisplaySize() const
         XGetWindowAttributes(display,window,&attr);
         return {0,0,attr.width,attr.height};
     #elif defined(PLATFORM_HAIKU)
+        view->LockLooper();
+        BRect frame = view->Frame();
+        view->UnlockLooper();
+        return {0,0,(int)frame.Width(),(int)frame.Height()};
     #endif
 }
 

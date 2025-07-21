@@ -79,7 +79,7 @@ int main()
         //
         */
 
-        FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 25);
+        FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
         FX::FXColor menubar_color = {0,0,0,255};
         // 800 - width 25 - height
         //display.DrawRect(0, 0, 799, 25, menubar_color);

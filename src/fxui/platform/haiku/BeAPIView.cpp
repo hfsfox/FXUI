@@ -17,13 +17,13 @@ BeAPIView::Draw(BRect updateRect)
 void
 BeAPIView::MouseUp(BPoint point)
 {
-    std::cout << "click up" << std::endl;
+    std::cout << "click up:" << "x: " << point.x << " y: " << point.y << std::endl;
     BView::MouseUp(point);
 }
 
 void
 BeAPIView::MouseDown(BPoint point)
 {
-    std::cout << "click down" << std::endl;
+    std::cout << "click down" << "x: " << point.x << " y: " << point.y << std::endl;
     BView::MouseDown(point);
 }
