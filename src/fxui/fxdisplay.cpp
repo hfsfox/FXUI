@@ -186,12 +186,13 @@ void
 FX::FXDisplay::DrawRect(int x_begin, int y_begin,int width, int height, FX::FXColor color)
 {
     #if defined(BACKEND_X11)
-    XDrawRectangle(display, window, gc, x_begin, y_begin, width, height);
+        XDrawRectangle(display, window, gc, x_begin, y_begin, width, height);
+        XFlush(display);
     #elif defined(PLATFORM_HAIKU)
-    view->LockLooper();
-    view->SetHighColor(color.red, color.green, color.blue, color.alpha);
-    view->StrokeRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
-    view->UnlockLooper();
+        view->LockLooper();
+        view->SetHighColor(color.red, color.green, color.blue, color.alpha);
+        view->StrokeRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
+        view->UnlockLooper();
     #endif
 }
 void
@@ -209,6 +210,9 @@ FX::FXDisplay::FillRect(int x_begin, int y_begin, int width, int height, FX::FXC
         view->FillRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
         view->UnlockLooper();
     #elif defined (PLATFORM_LINUX)
+        XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
+        XFillRectangle(display,window, gc, x_begin, y_begin, width, height);
+        XFlush(display);
     #endif
 }
 void
@@ -221,14 +225,14 @@ void
 FX::FXDisplay::FillCircle(int center_x, int center_y, int radius, FX::FXColor color)
 {
     #if defined(PLATFORM_HAIKU)
-    view->LockLooper();
-    view->SetHighColor(color.red, color.green, color.blue, color.alpha);
-    view->FillEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
-    view->UnlockLooper();
+        view->LockLooper();
+        view->SetHighColor(color.red, color.green, color.blue, color.alpha);
+        view->FillEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
+        view->UnlockLooper();
     #elif defined (PLATFORM_LINUX)
-    XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
-    XDrawArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
-    XFlush(display);
+        XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
+        XFillArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
+        XFlush(display);
     #endif
 }
 

@@ -85,11 +85,14 @@ int main()
         FX::FXColor menubar_color = {0,0,0,255};
         // 800 - width 25 - height
         //display.DrawRect(0, 0, 799, 25, menubar_color);
+        //display.DrawRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, menubar_color);
         display.FillRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, {255,255,255,255});
         display.DrawRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, menubar_color);
+        //
         display.DrawText("File", menubar_r.x+5, menubar_r.y+15, textColor);
-        display.DrawText("Edit", menubar_r.x+30, menubar_r.y+15, textColor);
-        display.DrawText("View", menubar_r.x+60, menubar_r.y+15, textColor);
+        display.DrawText("Edit", menubar_r.x+35, menubar_r.y+15, textColor);
+        display.DrawText("View", menubar_r.x+65, menubar_r.y+15, textColor);
+        display.DrawText("Help", menubar_r.x+95, menubar_r.y+15, textColor);
         //std::vector<int>menu_vec;
         //
 
@@ -100,8 +103,10 @@ int main()
         display.DrawCircle((radius*2)+10, 200, radius, c1Color);
         FX::FXColor c2Color = {0,255,0,255};
         display.DrawCircle((radius*4)+10, 200, radius, c2Color);
+        display.FillCircle((radius*4)+10, 200, radius, {100,100,100,255});
         FX::FXColor c3Color = {0,0,255,255};
         display.DrawCircle((radius*6)+10, 200, radius, c3Color);
+        display.FillCircle((radius*6)+10, 200, radius, {0,0,0,255});
         FX::FXColor line_color = {0,0,255,255};
         display.DrawLine(FX::FXPoint(((radius*6)+10), 200-10),FX::FXPoint(((radius*6)+90),200-10),line_color);
 
