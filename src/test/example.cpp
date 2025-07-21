@@ -10,6 +10,8 @@
 #include <thread>
 #include <chrono>
 
+//#include <vector>
+
 // Example usage
 int main()
 {
@@ -83,13 +85,18 @@ int main()
         FX::FXColor menubar_color = {0,0,0,255};
         // 800 - width 25 - height
         //display.DrawRect(0, 0, 799, 25, menubar_color);
+        display.FillRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, {255,255,255,255});
         display.DrawRect(menubar_r.x, menubar_r.y, menubar_r.width, menubar_r.height, menubar_color);
         display.DrawText("File", menubar_r.x+5, menubar_r.y+15, textColor);
+        display.DrawText("Edit", menubar_r.x+30, menubar_r.y+15, textColor);
+        display.DrawText("View", menubar_r.x+60, menubar_r.y+15, textColor);
+        //std::vector<int>menu_vec;
         //
 
 
         display.DrawCircle(radius+30, 100, radius, textColor);
         FX::FXColor c1Color = {255,0,0,255};
+        display.FillCircle((radius*2)+10, 200, radius, {255,255,255,255});
         display.DrawCircle((radius*2)+10, 200, radius, c1Color);
         FX::FXColor c2Color = {0,255,0,255};
         display.DrawCircle((radius*4)+10, 200, radius, c2Color);

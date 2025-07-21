@@ -201,6 +201,44 @@ FX::FXDisplay::DrawRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXCo
 }
 
 void
+FX::FXDisplay::FillRect(int x_begin, int y_begin, int width, int height, FX::FXColor color)
+{
+    #if defined(PLATFORM_HAIKU)
+        view->LockLooper();
+        view->SetHighColor(color.red, color.green, color.blue, color.alpha);
+        view->FillRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
+        view->UnlockLooper();
+    #elif defined (PLATFORM_LINUX)
+    #endif
+}
+void
+FX::FXDisplay::FillRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color)
+{
+    FillRect(where_begin.x, where_begin.y, where_end.width, where_end.height, color);
+}
+
+void
+FX::FXDisplay::FillCircle(int center_x, int center_y, int radius, FX::FXColor color)
+{
+    #if defined(PLATFORM_HAIKU)
+    view->LockLooper();
+    view->SetHighColor(color.red, color.green, color.blue, color.alpha);
+    view->FillEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
+    view->UnlockLooper();
+    #elif defined (PLATFORM_LINUX)
+    XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
+    XDrawArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
+    XFlush(display);
+    #endif
+}
+
+void
+FX::FXDisplay::FillCircle(FX::FXPoint point, int radius, FX::FXColor color)
+{
+    FXDisplay::FillCircle(point.x, point.y, radius, color);
+}
+
+void
 FX::FXDisplay::SetViewColor(FX::FXColor color)
 {
     #if defined(PLATFORM_HAIKU)
