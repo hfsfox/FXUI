@@ -4,13 +4,40 @@
 #define __FXFONT_H__
 
 #include <stdint.h>
+#include <fxdisplay.h>
+
+enum
+{
+    FONT_SIZE_PLAIN_UI =10
+};
+
+enum
+{
+    FONT_STYLE_DEFAULT = 0,
+    FONT_STYLE_BOLD,
+    FONT_STYLE_ITALIC,
+    FONT_STYLE_LIGHT
+};
 
 namespace FX
 {
     class FXFont
     {
         public:
-            FXFont();
+            /*FXFont()
+            {
+            }
+            FXFont(FX::FXDisplay* d)
+            {
+            }*/
+            FXFont(FX::FXDisplay* display, const char* font_name);
+            /*:
+            font_name(font_name),
+            font_style(FONT_STYLE_DEFAULT),
+            font_size(FONT_SIZE_PLAIN_UI),
+            d(display)
+            {
+            }*/
             ~FXFont();
         public:
             void Init();
@@ -29,7 +56,8 @@ namespace FX
         public:
             const char* font_name;
             int32_t font_style;
-
+            int32_t font_size;
+            FX::FXDisplay* d;
     };
 }
 

@@ -1,4 +1,3 @@
-#include "fxtoolbar.h"
 #ifdef PLATFORM_HAIKU
 #include <InterfaceDefs.h>
 #endif
@@ -67,6 +66,9 @@ int main()
 
         FX::FXRect examplecontainer = {toolbar_r.x+50, toolbar_r.y+50, 80, 100};
         // Draw some text
+        //FX::FXFont font(display,"");
+        FX::FXFont f(&display,"Arial");
+        //font = new FX::FXFont(display,"");
         char buffer[256];
         sprintf(buffer, "Frame: %d", frameCount++);
         display.DrawText(buffer, examplecontainer.x+10, examplecontainer.y+10, textColor);

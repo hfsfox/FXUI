@@ -23,9 +23,14 @@ namespace
     #endif
 }
 
-FX::FXFont::FXFont()
-{
-}
+FX::FXFont::FXFont(FXDisplay* display, const char* fontName)
+    :
+    font_name(fontName),
+    font_style(FONT_STYLE_DEFAULT),
+    font_size(FONT_SIZE_PLAIN_UI),
+    d(display)
+    {
+    }
 
 FX::FXFont::~FXFont()
 {

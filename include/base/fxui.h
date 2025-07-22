@@ -16,6 +16,7 @@
 #include <fxcompilerdefs.h>
 #include <fxplatformdefs.h>
 #include <fxplatformuidefs.h>
+#include <fxfont.h>
 #include <fxuicolor.h>
 #include <fxrect.h>
 #include <fxpoint.h>
