@@ -21,6 +21,7 @@
 namespace FX
 {
     typedef struct FXColor FXColor;
+    class FXFont;
 }
 //struct FX::FXColor;
 
@@ -58,7 +59,8 @@ namespace FX
             void FillRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
             void FillCircle(int center_x, int center_y, int radius, FX::FXColor color);
             void FillCircle(FX::FXPoint where, int radius, FX::FXColor color);
-
+        public:
+            void SetFont(FX::FXFont);
             void SetViewColor(FX::FXColor color);
             FX::FXColor GetViewColor() const;
 

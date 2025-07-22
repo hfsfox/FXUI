@@ -24,20 +24,7 @@ namespace FX
     class FXFont
     {
         public:
-            /*FXFont()
-            {
-            }
-            FXFont(FX::FXDisplay* d)
-            {
-            }*/
             FXFont(FX::FXDisplay* display, const char* font_name);
-            /*:
-            font_name(font_name),
-            font_style(FONT_STYLE_DEFAULT),
-            font_size(FONT_SIZE_PLAIN_UI),
-            d(display)
-            {
-            }*/
             ~FXFont();
         public:
             void Init();
@@ -51,7 +38,7 @@ namespace FX
             // set the style of the font (TODO: see font style defines)
             void SetFontStyle(uint32_t newStyle);
             //void SetSize ( FX::FXCoord newSize);
-        private:
+        public:
         virtual const void* GetPlatformFont () const;
         public:
             const char* font_name;

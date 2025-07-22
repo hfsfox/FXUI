@@ -32,12 +32,13 @@ FX::FXFont::FXFont(FXDisplay* display, const char* fontName)
     {
         #if defined(PLATFORM_HAIKU)
         #elif defined (PLATFORM_LINUX)
-        xrcolor.red = 0xFFFF;
+        /*xrcolor.red = 0xFFFF;
         xrcolor.green = 0xFFFF;
         xrcolor.blue = 0xFFFF;
         xrcolor.alpha=0xFFFF;
         //display->display
-        XftColorAllocValue(display->display,DefaultVisual(display->display,0),DefaultColormap(display->display,0),&xrcolor,&xftcolor);
+        XftColorAllocValue(display->display,DefaultVisual(display->display,0),DefaultColormap(display->display,0),&xrcolor,&xftcolor);*/
+        font = XftFontOpenName(display->display,0,"Arial-10");
         #endif
     }
 
@@ -68,4 +69,7 @@ FX::FXFont::SetFontStyle(uint32_t newFontStyle)
 const void*
 FX::FXFont::GetPlatformFont() const
 {
+    #if defined BACKEND_X11
+        return static_cast<void*>(font);
+    #endif
 }

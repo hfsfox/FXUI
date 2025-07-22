@@ -1,8 +1,10 @@
 #include "fxwindow.h"
 #include <X11/Xft/Xft.h>
+#include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 #include <fxpoint.h>
 #include <fxdisplay.h>
+#include <fxfont.h>
 
 #if defined (BACKEND_X11)
     #include "platform/unix/x11/X11APIWindow.h"
@@ -123,6 +125,7 @@ FX::FXDisplay::DrawText(const char* text, int x, int y, FX::FXColor color)
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
             //XDrawString(display, window, gc, x, y, text, strlen(text));
         font = XftFontOpenName(display,0,"Arial-10");
+        //font = SetFont()
         //if (!font) return 1;
         /*xrcolor.red  =0x0000;
         xrcolor.green=0x0000;
@@ -269,6 +272,21 @@ void
 FX::FXDisplay::FillCircle(FX::FXPoint point, int radius, FX::FXColor color)
 {
     FXDisplay::FillCircle(point.x, point.y, radius, color);
+}
+
+void
+FX::FXDisplay::SetFont(FX::FXFont fxfont)
+{
+    #if defined (BACKEND_X11)
+        const char* name = fxfont.GetFontName();
+        //char font_buffer[256];
+        //sprintf(font_buffer, name , "-10", "\n");
+        //std::cout << font_buffer << std::endl;
+        //font = XftFontOpenName(display,0, font_buffer/*"Arial-10"*/);
+        //font = XSetFont(display, gc , font_buffer);
+        /*font = (XftFont*)fxfont.GetPlatformFont();
+        std::cout << font->height << std::endl;*/
+    #endif
 }
 
 void

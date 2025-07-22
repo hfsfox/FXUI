@@ -68,6 +68,8 @@ int main()
         // Draw some text
         //FX::FXFont font(display,"");
         FX::FXFont f(&display,"Arial");
+
+        display.SetFont(f);
         //font = new FX::FXFont(display,"");
         char buffer[256];
         sprintf(buffer, "Frame: %d", frameCount++);
