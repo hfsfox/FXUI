@@ -30,6 +30,15 @@ FX::FXFont::FXFont(FXDisplay* display, const char* fontName)
     font_size(FONT_SIZE_PLAIN_UI),
     d(display)
     {
+        #if defined(PLATFORM_HAIKU)
+        #elif defined (PLATFORM_LINUX)
+        xrcolor.red = 0xFFFF;
+        xrcolor.green = 0xFFFF;
+        xrcolor.blue = 0xFFFF;
+        xrcolor.alpha=0xFFFF;
+        //display->display
+        XftColorAllocValue(display->display,DefaultVisual(display->display,0),DefaultColormap(display->display,0),&xrcolor,&xftcolor);
+        #endif
     }
 
 FX::FXFont::~FXFont()
