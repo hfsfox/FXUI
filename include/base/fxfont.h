@@ -22,7 +22,7 @@ namespace FX
             // set the name of the font
             void SetFontName (const char* newName);
             // set the style of the font (TODO: see font style defines)
-            void SetFontStyle(int32_t newStyle);
+            void SetFontStyle(uint32_t newStyle);
             //void SetSize ( FX::FXCoord newSize);
         private:
         virtual const void* GetPlatformFont () const;

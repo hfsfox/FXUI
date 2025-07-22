@@ -1,5 +1,6 @@
 #include "fxwindow.h"
 #include <X11/Xft/Xft.h>
+#include <X11/extensions/Xrender.h>
 #include <fxpoint.h>
 #include <fxdisplay.h>
 
@@ -20,6 +21,7 @@
     #include <winuser.h>
 #endif
 #include <cstring>
+//#include <iostream>
 
 namespace
 {
@@ -33,6 +35,8 @@ namespace
     XftDraw      *xftdraw;
     XRenderColor xrcolor;
     XftColor     xftcolor;
+    XGlyphInfo xglyphinfo;
+    //XftTextExtents8
 }
 
 FX::FXDisplay::FXDisplay()
@@ -130,6 +134,9 @@ FX::FXDisplay::DrawText(const char* text, int x, int y, FX::FXColor color)
         XftColorAllocValue(display,DefaultVisual(display,0),DefaultColormap(display,0),&xrcolor,&xftcolor);
         xftdraw = XftDrawCreate(display,window,DefaultVisual(display,0),DefaultColormap(display,0));
         XftDrawString8(xftdraw, &xftcolor, font, x, y, (XftChar8 *)text, strlen(text));
+        XftTextExtents8 (display, font, (XftChar8 *)text, strlen(text), &xglyphinfo);
+        //std::cout << xglyphinfo.width << std::endl;
+        //xglyphinfo->width;
         XftDrawDestroy(xftdraw);
         XftColorFree(display,DefaultVisual(display,0),DefaultColormap(display,0),&xftcolor);
         //font->height;
