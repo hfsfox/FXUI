@@ -43,6 +43,7 @@ message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
 if(LINUX)
     find_package(PkgConfig REQUIRED)
+    find_package(X11 REQUIRED)
     find_package(Freetype REQUIRED)
 endif()
 if(LINUX)

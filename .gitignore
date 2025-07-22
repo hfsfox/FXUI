@@ -45,6 +45,8 @@ CMakeUserPresets.json
 /build*
 /objects*
 /.cache*
+# Kate backup files
+*.kate-swp
 
 # CLion
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
