@@ -5,6 +5,8 @@
 #ifndef __BEAPIWINDOW_H__
 #define __BEAPIWINDOW_H__
 
+#if defined BACKEND_BEAPI
+
 #include <game/DirectWindow.h>
 
 class BDirectWindow;
@@ -20,5 +22,6 @@ class BeAPIWindow : public BDirectWindow
 };
 
 
+#endif
 
 #endif // _H

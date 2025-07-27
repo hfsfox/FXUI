@@ -39,12 +39,14 @@ namespace
     XftColor     xftcolor;
     XGlyphInfo xglyphinfo;
     //XftTextExtents8
+    //X11Display* dx11;
 }
 
 FX::FXDisplay::FXDisplay()
 {
     #if defined(BACKEND_X11)
             display = nullptr; screen = 0; window = 0; gc = nullptr;
+            //X11Display* dx11 = new X11Display();
     #elif defined(BACKEND_BEAPI)
         view = nullptr;
     #endif
@@ -66,6 +68,7 @@ bool FX::FXDisplay::Init()
         return true;
     #elif defined(BACKEND_X11)
         display = XOpenDisplay(nullptr);
+        //display = dx11->GetPlatformDisplay();
         if (!display) return false;
         screen = DefaultScreen(display);
         return true;
@@ -345,7 +348,7 @@ void
 FX::FXDisplay::Present()
 {
     #if defined(BACKEND_X11)
-        if (display) XFlush(display);
+        //if (display) XFlush(display);
     #elif defined(PLATFORM_HAIKU)
         // Presentation handled automatically by Haiku
     #endif
