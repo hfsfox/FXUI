@@ -21,8 +21,19 @@
         #define HAS_MULTITOUCH
         //#define HAS_SCREEN_KBD
     #endif
+    #ifdef DDRAW
+        #define BACKEND_DIRECTDRAW
+    #endif
 #elif defined (PLATFORM_MACOSX)
     #define BACKEND_COCOA 1
+#elif defined (PLATFORM_IOS)
+    #define BACKEND_UIKIT 1
+    #define HAS_MULTITOUCH
+    #define HAS_SCREEN_ROTATE
+    #define HAS_SCREEN_KBD
+    #if GLES
+        #define BACKEND_GL_ES
+    #endif
 #elif defined (PLATFORM_LINUX)
 /*#elif defined (PLATFORM_UNIX_COMPATIBLE) \
 && (!defined(PLATFORM_ANDROID) || !defined(PLATFORM_HAIKU) \
@@ -32,6 +43,18 @@
     #define BACKEND_X11 1
     #if defined MULTITOUCH
         #define HAS_MULTITOUCH
+    #endif
+        #ifdef BACKEND_WITH_GL
+            #ifdef GLX
+                #define BACKEND_GLX
+            #elif EGL
+                #define BACKEND_EGL
+            #elif GLES
+                #define BACKEND_GL_ES
+            #endif
+        #endif
+    #ifdef VULKAN
+        #define HAS_VULKAN
     #endif
 #elif defined (PLATFORM_ANDROID)
     #define BACKEND_ANDROID 1
