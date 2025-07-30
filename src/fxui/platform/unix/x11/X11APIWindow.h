@@ -12,15 +12,16 @@
     #include <cstdlib>
     #include <cstring>
 
-struct X11Platform
+/*struct X11Platform
 {
     ::Display* x11display;
     ::Window x11window;
     ::GC x11gc;
     int screen;
     ::XImage img;
-};
+};*/
 
+/*
 class X11Display
 {
     public:
@@ -112,13 +113,11 @@ class X11Display
         int GetPlatformScreen() const {return x11p->screen;}
     private:
         ::Display* x11dpy;
-        /*::Window x11window;
-        ::GC x11gc;
-        int screen;
-        ::XImage img;*/
         X11Platform* x11p;
 
 };
+*/
+
 
  /*
     class X11APIWindow

@@ -54,64 +54,6 @@ namespace
     #elif defined (BACKEND_WINAPI)
         ::HWND hWindow;
     #endif
-
-    #ifdef BACKEND_BEAPI
-/*class FHaikuView : public BView {
-public:
-    FHaikuView(BRect frame, FX::FXDisplay* display)
-    :
-    BView(frame, "FView", B_FOLLOW_ALL, B_WILL_DRAW | B_SUBPIXEL_PRECISE | B_PULSE_NEEDED), fDisplay(display)
-    {
-    }
-
-    virtual void Draw(BRect updateRect) override
-    {
-    }
-
-    virtual void MouseUp(BPoint point) override
-    {
-        std::cout << "click up" << std::endl;
-        BView::MouseUp(point);
-    }
-
-    virtual void MouseDown(BPoint point) override
-    {
-        std::cout << "click down" << std::endl;
-        BView::MouseDown(point);
-    }
-
-
-private:
-    FX::FXDisplay* fDisplay;
-    static int frameCount;
-};*/
-
-/*class FHaikuWindow : public BDirectWindow
-    {
-    public:
-        FHaikuWindow(BRect frame, const char* title)
-            :
-            BDirectWindow(frame, title, B_TITLED_WINDOW, B_QUIT_ON_WINDOW_CLOSE), fShouldClose(false)
-            {
-            }
-        virtual bool QuitRequested() override {
-            fShouldClose = true;
-            BApplicationInstance::GetInstance()->PostMessage(B_QUIT_REQUESTED);
-            return true;
-        }
-
-        bool ShouldClose() const { return fShouldClose; }
-
-    private:
-        volatile bool fShouldClose;
-    };
-*/
-
-//#define FHaikuWindow Be;
-
-    //int BeAPIView::frameCount = 0;
-    //int BeAPIView::frameCount = 0;
-    #endif
 }
 
 FX::FXWindow::FXWindow(FX::FXDisplay* display, const FX::FXRect& rect, const char* title)
