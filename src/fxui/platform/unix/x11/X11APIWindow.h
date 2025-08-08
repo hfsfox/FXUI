@@ -12,6 +12,23 @@
     #include <cstdlib>
     #include <cstring>
 
+    #include <mutex>
+    #include <memory>
+
+
+class X11DisplayInstance
+{
+    public:
+        static ::Display* GetDisplayInstance();
+        // Prevent copying and assignment
+        X11DisplayInstance(const X11DisplayInstance&) = delete;
+        X11DisplayInstance& operator=(const X11DisplayInstance&) = delete;
+    private:
+		X11DisplayInstance() = default;
+        static std::once_flag initialized;
+    	static std::unique_ptr<::Display*> instance;
+};
+
 /*struct X11Platform
 {
     ::Display* x11display;

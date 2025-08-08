@@ -12,6 +12,8 @@
 #if defined (BACKEND_X11) && !defined (PLATFORM_HAIKU)
     #include <X11/Xlib.h>
     #include <X11/Xutil.h>
+#elif defined (BACKEND_WAYLAND)
+    #include <wayland-client.h>
 #elif defined (BACKEND_BEAPI)
     #include <interface/View.h>
 #elif defined (BACKEND_WINAPI)
@@ -75,6 +77,8 @@ namespace FX
             ::Window window;
             ::GC gc;
             int screen;
+        #elif defined (BACKEND_WAYLAND)
+            struct wl_display* display;
         #elif defined (BACKEND_BEAPI)
         //#elif defined(PLATFORM_HAIKU)
             BView* view;

@@ -31,7 +31,7 @@ FX::FXFont::FXFont(FXDisplay* display, const char* fontName)
     d(display)
     {
         #if defined(PLATFORM_HAIKU)
-        #elif defined (PLATFORM_LINUX)
+        #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
         /*xrcolor.red = 0xFFFF;
         xrcolor.green = 0xFFFF;
         xrcolor.blue = 0xFFFF;

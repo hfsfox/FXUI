@@ -45,11 +45,13 @@ int main()
         window.SetTitle("FXWindow");
         #if defined (PLATFORM_HAIKU)
             FX::FXColor color = {ui_color(B_CONTROL_BACKGROUND_COLOR).red, ui_color(B_CONTROL_BACKGROUND_COLOR).green, ui_color(B_CONTROL_BACKGROUND_COLOR).blue,ui_color(B_CONTROL_BACKGROUND_COLOR).alpha};
-        #elif defined PLATFORM_LINUX
+        #elif defined PLATFORM_LINUX && defined (BACKEND_X11)
             //XColor xcolor = { 160, 160, 160, 255};
             //XColor xcolor = { 237, 237, 237, 255};
             XColor xcolor = { 216, 216, 216, 255};
             FX::FXColor color = {xcolor.red, xcolor.green, xcolor.blue, 255};
+        #else
+            FX::FXColor color = {216, 216, 216, 255};
         #endif
         FX::FXColor textColor = {0,0,0,255};
         //display.SetViewColor(ui_color(B_CONTROL_TEXT_COLOR));

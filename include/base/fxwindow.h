@@ -35,6 +35,7 @@ namespace FX
             FX::FXDisplay* display;
             FX::FXRect rect;
             const char* title;
+        public:
             bool shouldClose;
         private:
     };

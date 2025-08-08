@@ -80,6 +80,10 @@ if(HAIKU)
     )
 elseif(LINUX)
     set(PLATFORM_SOURCES
+    src/fxui/platform/unix/x11/X11APIWindow.cpp
+    src/fxui/platform/unix/wayland/WaylandAPIWindow.cpp
+    src/fxui/platform/unix/wayland/protocols/xdg-shell-protocol.c
+    src/fxui/platform/unix/wayland/protocols/xdg-decoration-unstable-v1.c
     )
 elseif(WIN32)
     set(PLATFORM_SOURCES
@@ -92,8 +96,17 @@ add_executable(${CMAKE_PROJECT_NAME}
    ${PLATFORM_SOURCES}
     )
 
+add_executable(${CMAKE_PROJECT_NAME}_init_dpy
+    src/test/example_init_dpy.cpp
+   ${FXUI_SOURCES}
+   ${PLATFORM_SOURCES}
+    )
+
 if(LINUX)
- target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
+ #target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
+ target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC wayland-client wayland-cursor Xpm GL GLU GLX ${FREETYPE_LIBRARIES})
+ #target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
+ target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC wayland-client wayland-cursor Xpm GL GLU GLX ${FREETYPE_LIBRARIES})
  elseif(WIN32)
  target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC user32 gdi32 opengl32)
 elseif(HAIKU)

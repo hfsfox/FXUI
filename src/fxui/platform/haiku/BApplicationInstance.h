@@ -4,7 +4,7 @@
  */
 #ifndef __BAPPLICATIONINSTANCE_H__
 #define __BAPPLICATIONINSTANCE_H__
-
+#if defined BACKEND_BEAPI
 #include <Application.h>
 #include <SupportDefs.h>
 
@@ -23,5 +23,7 @@ class BApplicationInstance
 		static std::once_flag initialized;
     	static std::unique_ptr<BApplication> instance;
 };
+
+#endif
 
 #endif // _H

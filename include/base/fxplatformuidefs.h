@@ -40,7 +40,8 @@
 || !defined(PLATFORM_BEOS) || !defined(PLATFORM_MACOSX) || \
 !defined(PLATFORM_QNX) || !defined(PLATFORM_FUCHSIA) || \
 !defined(PLATFORM_PLAN9))*/
-    #define BACKEND_X11 1
+    //#define BACKEND_X11 1
+    #define BACKEND_WAYLAND 1
     #if defined MULTITOUCH
         #define HAS_MULTITOUCH
     #endif

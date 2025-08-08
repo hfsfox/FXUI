@@ -8,6 +8,8 @@
 
 #if defined (BACKEND_X11)
     #include "platform/unix/x11/X11APIWindow.h"
+#elif defined (BACKEND_WAYLAND)
+    #include "platform/unix/wayland/WaylandAPIWindow.h"
 #elif defined (BACKEND_BEAPI)
     //#include <interface/View.h>
     //#include <support/String.h>
@@ -157,6 +159,8 @@ FX::FXDisplay::FXDisplay()
     #if defined(BACKEND_X11)
             display = nullptr; screen = 0; window = 0; gc = nullptr;
             //X11Display* dx11 = new X11Display();
+    #elif defined (BACKEND_WAYLAND)
+        display = nullptr;
     #elif defined(BACKEND_BEAPI)
         view = nullptr;
     #endif
@@ -177,12 +181,18 @@ bool FX::FXDisplay::Init()
     #ifdef PLATFORM_MACOSX
         return true;
     #elif defined(BACKEND_X11)
-        display = XOpenDisplay(nullptr);
+        //display = XOpenDisplay(nullptr);
+        X11DisplayInstance* xdi;
+        display = xdi->GetDisplayInstance();
         //dx11->OpenPlatformDisplay();
         //display = dx11->GetPlatformDisplay();
         if (!display) return false;
         screen = DefaultScreen(display);
         //screen = dx11->GetPlatformScreen();
+        return true;
+    #elif defined (BACKEND_WAYLAND)
+        WaylandDisplayInstance* wdi;
+        display = wdi->GetDisplayInstance();
         return true;
     #elif defined(BACKEND_BEAPI)
         return true;
@@ -204,6 +214,8 @@ FX::FXDisplay::GetNativeContext() const
 {
         #if defined(BACKEND_X11)
             return static_cast<void*>(display);
+        #elif defined(BACKEND_WAYLAND)
+            return static_cast<void*>(display);
         #elif defined(BACKEND_BEAPI)
             return static_cast<void*>(view);
         #endif
@@ -212,7 +224,7 @@ FX::FXDisplay::GetNativeContext() const
 void
 FX::FXDisplay::Clear()
 {
-    #if defined(PLATFORM_LINUX)
+    #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
         if (display && window && gc)
         {
             XClearWindow(display, window);
@@ -235,7 +247,7 @@ FX::FXDisplay::ClearDisplay()
 void
 FX::FXDisplay::DrawText(const char* text, int x, int y, FX::FXColor color)
 {
-    #if defined(PLATFORM_LINUX)
+    #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
         if (display && window && gc) {
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
             //XDrawString(display, window, gc, x, y, text, strlen(text));
@@ -282,7 +294,7 @@ FX::FXDisplay::DrawCircle(int center_x, int center_y, int radius, FX::FXColor co
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->StrokeEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX)
+    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XDrawArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
         XFlush(display);
@@ -299,7 +311,7 @@ void
 FX::FXDisplay::DrawPoint(int center_x, int center_y, FX::FXColor color)
 {
     #if defined(PLATFORM_HAIKU)
-    #elif defined (PLATFORM_LINUX)
+    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
     #endif
 }
 
@@ -318,7 +330,7 @@ FX::FXDisplay::DrawLine(int center_x_begin, int center_y_begin,int center_x_end,
         view->StrokeLine(BPoint(center_x_begin,center_y_begin), BPoint(center_x_end,center_y_end),B_SOLID_HIGH);
         //view->StrokeEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX)
+    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
         XDrawLine(display, window, gc, center_x_begin, center_y_begin, center_x_end, center_y_end);
     #endif
 }
@@ -356,7 +368,7 @@ FX::FXDisplay::FillRect(int x_begin, int y_begin, int width, int height, FX::FXC
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->FillRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX)
+    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XFillRectangle(display,window, gc, x_begin, y_begin, width, height);
         XFlush(display);
@@ -376,7 +388,7 @@ FX::FXDisplay::FillCircle(int center_x, int center_y, int radius, FX::FXColor co
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->FillEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX)
+    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XFillArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
         XFlush(display);
@@ -411,7 +423,7 @@ FX::FXDisplay::SetViewColor(FX::FXColor color)
         view->LockLooper();
         view->SetViewColor(color.red, color.green, color.blue, color.alpha);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX)
+    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
         //XColor c;
         //c = {color.red,color.green,color.blue};
         //c = {160, 160, 160, 255};
