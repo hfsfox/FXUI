@@ -41,7 +41,11 @@ namespace FX
                 selected = false;
                 if(!selected)
                 {
-                    d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
+                    //for(uint i = 0; i < rect.height; i++)
+                    //{
+                        d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
+                        //d->FillRect(rect.x, rect.y, rect.width, rect.height, {(165/255)-i,(165/255)-i,(165/255)-i,255});
+                    //}
                     d->DrawRect(rect.x, rect.y, rect.width, rect.height, menubar_color);
                     //
                     d->DrawText("File", rect.x+5, rect.y+15, textColor);

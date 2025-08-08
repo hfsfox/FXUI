@@ -4,15 +4,15 @@
 
 #if defined BACKEND_X11 && !defined BACKEND_BEAPI
     #include "platform/unix/x11/X11APIWindow.h"
-#elif defined BACKEND_WAYLAND
+#elif defined BACKEND_WAYLAND && !defined BACKEND_BEAPI
     #include "platform/unix/wayland/WaylandAPIWindow.h"
-    #include "platform/unix/wayland/protocols/xdg-shell-client-protocol.h"
-    #include "platform/unix/wayland/protocols/xdg-decoration-unstable-v1.h"
-    #include <sys/mman.h>
-    #include <sys/stat.h>
-    #include <errno.h>
-    #include <fcntl.h>
-    #include <unistd.h>
+    //#include "platform/unix/wayland/protocols/xdg-shell-client-protocol.h"
+    //#include "platform/unix/wayland/protocols/xdg-decoration-unstable-v1.h"
+    //#include <sys/mman.h>
+    //#include <sys/stat.h>
+    //#include <errno.h>
+    //#include <fcntl.h>
+    //#include <unistd.h>
 #elif defined BACKEND_BEAPI
     #include <app/Application.h>
     //#include <interface/Window.h>
@@ -41,11 +41,12 @@
     static BApplication* app = nullptr;
 #elif defined (BACKEND_WAYLAND)
     static struct wl_surface *surface = NULL;
-    static struct xdg_toplevel *xdg_toplevel = NULL;
     static struct wl_compositor* compositor = NULL;
-    static struct xdg_surface *xdg_surface = NULL;
     static struct wl_buffer *buffer = NULL;
+    static struct xdg_toplevel *xdg_toplevel = NULL;
+    static struct xdg_surface *xdg_surface = NULL;
     static struct xdg_wm_base *xdg_wm_base = NULL;
+    static struct wl_registry* registry = NULL;
 
     static struct wl_shm* shm = NULL;
 
@@ -62,7 +63,18 @@
     //struct xdg_toplevel *xdg_toplevel;
 #endif
 
-#if defined (BACKEND_WAYLAND)
+#if defined (BACKEND_WAYLAND) && !defined (BACKEND_X11)
+
+    // XDG WM Base callbacks
+    static void xdg_wm_base_ping(void *data, struct xdg_wm_base *xdg_wm_base, uint32_t serial)
+    {
+        xdg_wm_base_pong(xdg_wm_base, serial);
+    }
+
+    static const struct xdg_wm_base_listener xdg_wm_base_listener = {
+        .ping = xdg_wm_base_ping,
+    };
+
     // XDG toplevel callbacks
         static void xdg_toplevel_configure(void *data, struct xdg_toplevel *xdg_toplevel,
                                  int32_t width, int32_t height, struct wl_array *states)
@@ -90,8 +102,7 @@
     static const struct xdg_toplevel_listener xdg_toplevel_listener =
     {
         .configure = xdg_toplevel_configure,
-        .close = xdg_toplevel_close,
-        //.
+        .close = xdg_toplevel_close
     };
 
     // XDG surface callbacks
@@ -219,7 +230,7 @@ namespace
         {
             //xdg_wm_base = (xdg_wm_base*)wl_registry_bind(registry, id, &xdg_wm_base_interface, 1);
             xdg_wm_base = static_cast<struct xdg_wm_base*>( wl_registry_bind(registry, id, &xdg_wm_base_interface, 1));
-            xdg_wm_base_add_listener(xdg_wm_base, /*&xdg_wm_base_listener*/NULL, NULL);
+            xdg_wm_base_add_listener(xdg_wm_base, &xdg_wm_base_listener, NULL);
         }
 
         else if (strcmp(interface, zxdg_decoration_manager_v1_interface.name) == 0)
@@ -296,6 +307,39 @@ FX::FXWindow::~FXWindow()
             XUnmapWindow(xDisplay, xWindow);
             XDestroyWindow(xDisplay, xWindow);
         }
+    #elif defined(PLATFORM_LINUX) && defined (BACKEND_WAYLAND)
+        fprintf(stdout, "cleanup window structs \n");
+        if (buffer)
+        {
+            wl_buffer_destroy(buffer);
+            munmap(shm_data, width * height * 4);
+        }
+        if (xdg_toplevel) {
+            xdg_toplevel_destroy(xdg_toplevel);
+        }
+        if (xdg_surface) {
+            xdg_surface_destroy(xdg_surface);
+        }
+        if (surface) {
+            wl_surface_destroy(surface);
+        }
+
+        if (xdg_wm_base) {
+            xdg_wm_base_destroy(xdg_wm_base);
+        }
+        if (shm) {
+            wl_shm_destroy(shm);
+        }
+        if (compositor) {
+            wl_compositor_destroy(compositor);
+        }
+        if (registry) {
+            wl_registry_destroy(registry);
+        }
+        if(wDisplay)
+        {
+            wl_display_disconnect(wDisplay);
+        }
     #elif defined(PLATFORM_HAIKU)
         // Window cleanup handled by Haiku - no manual locking needed
         if (haikuWindow && haikuWindow->Lock())
@@ -336,7 +380,7 @@ FX::FXWindow::Create()
         wDisplay = wdi->GetDisplayInstance();
 
         // Get registry
-        wl_registry* registry = wl_display_get_registry(wDisplay);
+        registry = wl_display_get_registry(wDisplay);
         wl_registry_add_listener(registry, &registry_listener, NULL);
         // Wait for registry events
         wl_display_roundtrip(wDisplay);
@@ -434,25 +478,25 @@ FX::FXWindow::Hide()
 bool
 FX::FXWindow::ProcessEvents()
 {
-    #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
+    #if defined(BACKEND_X11)
         if (!xDisplay) return false;
         XEvent event;
-        while (XPending(xDisplay)) {
+        while (XPending(xDisplay))
+        {
             XNextEvent(xDisplay, &event);
-            if (event.type == ClientMessage && event.xclient.data.l[0] == wmDeleteMessage) {
+            if (event.type == ClientMessage && event.xclient.data.l[0] == wmDeleteMessage)
+            {
                 shouldClose = true;
                 return false;
             }
-            if (event.type == Expose) {
+            if (event.type == Expose)
+            {
                 display->Clear();
-                /*FColor textColor = {0,0,0,255};
-                display->DrawText("Hello, Linux World!", 50, 50, textColor);*/
                 display->Present();
             }
         }
         return !shouldClose;
-
-    #elif defined(PLATFORM_LINUX) && defined (BACKEND_WAYLAND)
+    #elif defined (BACKEND_WAYLAND)
     if(!wDisplay) return false;
     //wl_display_dispatch(wDisplay);
         //while (!configured && shouldClose)
@@ -460,17 +504,25 @@ FX::FXWindow::ProcessEvents()
         //wl_display_dispatch(wDisplay);
     //}
 
-    while (shouldClose == toplevel_close) {
+    while (!shouldClose /*== toplevel_close*/)
+    {
         if (configured)
         {
             render_frame();
         }
+        SetTitle(title);
+        //ResizeTo(FX::FXRect rect());
         if (wl_display_dispatch(wDisplay) == -1) {
             fprintf(stderr, "Display dispatch failed\n");
             break;
         }
+        if(toplevel_close == true)
+        {
+            shouldClose = toplevel_close;
+        }
     }
 
+    return !shouldClose;
 
     #elif defined(PLATFORM_HAIKU)
         // Process events without blocking

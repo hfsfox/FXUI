@@ -10,6 +10,14 @@
     #endif
 #include <xkbcommon/xkbcommon.h>
 
+    #include "protocols/xdg-shell-client-protocol.h"
+    #include "protocols/xdg-decoration-unstable-v1.h"
+    #include <sys/mman.h>
+    #include <sys/stat.h>
+    #include <errno.h>
+    #include <fcntl.h>
+    #include <unistd.h>
+
 #include <mutex>
 #include <memory>
 
