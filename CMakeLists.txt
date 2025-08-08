@@ -42,6 +42,25 @@ message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
 message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
 if(LINUX)
+    if(BACKEND_WAYLAND)
+        add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
+    #USE_HAL_DRIVER
+	#STM32F103xB
+	#__TARGET_STM32F103C8T6__
+	BACKEND_WAYLAND
+    )
+    endif()
+    if(BACKEND_X11)
+        add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
+    #USE_HAL_DRIVER
+	#STM32F103xB
+	#__TARGET_STM32F103C8T6__
+	BACKEND_X11
+    )
+    endif()
+endif()
+
+if(LINUX)
     find_package(PkgConfig REQUIRED)
     find_package(X11 REQUIRED)
     find_package(Freetype REQUIRED)
