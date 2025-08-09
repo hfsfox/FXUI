@@ -12,7 +12,9 @@
 #ifndef     __fxwidgets__
 #define     __fxwidgets__
 
+#include <fxbutton.h>
 #include <fxmenubar.h>
 #include <fxtoolbar.h>
+#include <fxprogressbar.h>
 
 #endif

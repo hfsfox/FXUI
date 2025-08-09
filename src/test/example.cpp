@@ -1,3 +1,5 @@
+#include "fxbutton.h"
+#include "fxwindow.h"
 #ifdef PLATFORM_HAIKU
 #include <InterfaceDefs.h>
 #endif
@@ -41,7 +43,7 @@ int main()
     int frameCount = 0;
     // Main loop
     while (window.ProcessEvents() && !window.ShouldClose()) {
-        display.Clear();
+        //display.Clear();
         window.SetTitle("FXWindow");
         #if defined (PLATFORM_HAIKU)
             FX::FXColor color = {ui_color(B_CONTROL_BACKGROUND_COLOR).red, ui_color(B_CONTROL_BACKGROUND_COLOR).green, ui_color(B_CONTROL_BACKGROUND_COLOR).blue,ui_color(B_CONTROL_BACKGROUND_COLOR).alpha};
@@ -109,6 +111,9 @@ int main()
         display.FillCircle((radius*6)+10, 200, radius, {0,0,0,255});
         FX::FXColor line_color = {0,0,255,255};
         display.DrawLine(FX::FXPoint(((radius*6)+10), 200-10),FX::FXPoint(((radius*6)+90),200-10),line_color);
+
+
+        FX::FXButton* button = new FX::FXButton("OK",FX::FXRect(examplecontainer.x+50, examplecontainer.y+40, 70, 25),&display);
 
         display.Present();
         //display.DrawText("Hello, Haiku World!", 50, 50);
