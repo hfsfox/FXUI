@@ -14,6 +14,8 @@ X11DisplayInstance::GetDisplayInstance()
 {
     std::call_once(initialized, []()
     {
+        // Crucial for multi-threaded Xlib usage
+        XInitThreads();
         instance = std::make_unique<::Display*>(XOpenDisplay(0));
     }
     );

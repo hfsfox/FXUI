@@ -1,3 +1,4 @@
+#include <X11/Xlib.h>
 #include <fxwindow.h>
 #include <fxplatformuidefs.h>
 
@@ -371,7 +372,14 @@ FX::FXWindow::Create()
 
         display->window = xWindow;
         display->gc = XCreateGC(xDisplay, xWindow, 0, nullptr);
-        XSelectInput(xDisplay, xWindow, ExposureMask | KeyPressMask | StructureNotifyMask);
+        //XSelectInput(xDisplay, xWindow, ExposureMask | KeyPressMask | StructureNotifyMask);
+        XSelectInput(xDisplay, xWindow,
+        KeyPressMask | KeyReleaseMask
+        | ButtonPressMask | ButtonReleaseMask | PointerMotionMask
+        | StructureNotifyMask | ExposureMask
+        | FocusChangeMask
+        | EnterWindowMask | LeaveWindowMask
+        );
         return true;
 
     #elif defined (BACKEND_WAYLAND)
@@ -457,7 +465,8 @@ void
 FX::FXWindow::Show()
 {
     #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
-        if (xDisplay && xWindow) XMapWindow(xDisplay, xWindow);
+        if (xDisplay && xWindow) //XMapWindow(xDisplay, xWindow);
+            XMapRaised(xDisplay, xWindow);
     #elif defined(PLATFORM_HAIKU)
         if (haikuWindow) haikuWindow->Show();
     #endif
@@ -491,8 +500,21 @@ FX::FXWindow::ProcessEvents()
             }
             if (event.type == Expose)
             {
-                display->Clear();
-                display->Present();
+                //display->Clear();
+                //display->Present();
+            }
+            if (event.type == ButtonPress)
+            {
+                if (event.xbutton.button == 1)
+                {
+                    fprintf(stdout, "right click \n");
+                }
+                if (event.xbutton.button == 3)
+                {
+                    fprintf(stdout, "left click \n");
+                }
+            //exit(0);
+            //return NULL;
             }
         }
         return !shouldClose;

@@ -1,8 +1,9 @@
-#include "fxprogressbar.h"
-#include "fxradiobutton.h"
 #include <fxui.h>
 #include <fxwidgets.h>
 #include <iostream>
+
+#include <thread>
+#include <chrono>
 
 int
 main()
@@ -13,7 +14,7 @@ main()
         return -1;
     }
 
-    FX::FXRect windowRect(100, 100, 800, 600);
+    FX::FXRect windowRect(100, 100, 500, 400);
     FX::FXWindow window(&display, windowRect, "Cross-Platform FXWindow Demo");
 
     if (!window.Create()) {
@@ -47,12 +48,17 @@ main()
 
     FX::FXRect progressbar_rect(button_1_rect.x, button_1_rect.y+button_1_rect.height+10, button_1_rect.width+button_3_rect.width+button_3_rect.width+10+10, 25);
 
-    FX::FXRect radio_button_1_rect(progressbar_rect.x, progressbar_rect.y+progressbar_rect.height+10,0,0);
-    FX::FXRect radio_button_2_rect(radio_button_1_rect.x+radio_button_1_rect.x+3, progressbar_rect.y+progressbar_rect.height+10,0,0);
+    FX::FXRect radio_button_1_rect(progressbar_rect.x, progressbar_rect.y+progressbar_rect.height+10,20,0);
+    FX::FXRect radio_button_2_rect(radio_button_1_rect.x+radio_button_1_rect.width+3, progressbar_rect.y+progressbar_rect.height+10,15,0);
+
+    FX::FXRect check_box_1_rect(radio_button_2_rect.x+radio_button_2_rect.width+3+3, progressbar_rect.y+progressbar_rect.height+10,15,0);
+
+    FX::FXRect check_box_2_rect(check_box_1_rect.x+check_box_1_rect.width+3+3, progressbar_rect.y+progressbar_rect.height+10,15,0);
+
+    FX::FXRect slider_1_rect(progressbar_rect.x,radio_button_1_rect.y+10+10,progressbar_rect.width,15);
 
     while (window.ProcessEvents() && !window.ShouldClose())
     {
-        //FX::FXColor color = {216, 216, 216, 255};
         display.SetViewColor(color);
 
         FX::FXRect menubar_r(0, 0, display.GetDisplaySize().width-1, 20);
@@ -60,40 +66,34 @@ main()
         FX::FXRect toolbar_r(0, 20, display.GetDisplaySize().width-1, 40);
         FX::FXToolBar* t = new FX::FXToolBar(toolbar_r, &display);
 
-        //FX::FXRect examplecontainer = {toolbar_r.x+50, toolbar_r.y+50, 80, 100};
-
-        //FX::FXRect button_1_rect(examplecontainer.x+50, examplecontainer.y+40, 70, 25);
-
         FX::FXButton* button1 = new FX::FXButton("Button 1",FX::FXRect(button_1_rect),&display);
-
-        //FX::FXRect button_2_rect(button_1_rect.x+button_1_rect.width+10, button_1_rect.y, 70, 25);
 
         FX::FXButton* button2 = new FX::FXButton("Button 2",FX::FXRect(button_2_rect),&display);
 
-        //FX::FXRect button_3_rect(button_2_rect.x+button_2_rect.width+10, button_2_rect.y, 70, 25);
-
         FX::FXButton* button3 = new FX::FXButton("Button 3",FX::FXRect(button_3_rect),&display);
 
-        //FX::FXRect progressbar_rect(button_1_rect.x, /*button_2_rect.height+button_2_rect.height+10*/button_1_rect.y+button_1_rect.height+10, button_1_rect.width+button_3_rect.width+button_3_rect.width+10+10, 25);
+        FX::FXProgressBar* pb = new FX::FXProgressBar("Progress",FX::FXRect(progressbar_rect),&display);
 
-        FX::FXProgressBar* p = new FX::FXProgressBar("Progress",FX::FXRect(progressbar_rect),&display);
-
-        //FX::FXRect radio_button_1_rect(progressbar_rect.x, progressbar_rect.y+progressbar_rect.height+10,0,0);
 
         FX::FXRadioButton* rb_1 = new FX::FXRadioButton("",radio_button_1_rect, &display);
-        rb_1->Selected(false);
-
-        //FX::FXRect radio_button_2_rect(radio_button_1_rect.x+radio_button_1_rect.x+3, progressbar_rect.y+progressbar_rect.height+10,0,0);
+        rb_1->Selected(true);
 
         FX::FXRadioButton* rb_2 = new FX::FXRadioButton("",radio_button_2_rect, &display);
-        rb_2->Selected(true);
+        rb_2->Selected(false);
 
-        p->SetLimits(0, 10);
-        p->SetProgress(45);
+        FX::FXCheckBox* cb_1 = new FX::FXCheckBox("",check_box_1_rect, &display);
+        cb_1->Selected(true);
 
+        FX::FXCheckBox* cb_2 = new FX::FXCheckBox("",check_box_2_rect, &display);
+        cb_2->Selected(false);
 
+        pb->SetLimits(0, 10);
+        pb->SetProgress(45);
+
+        FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),&display);
 
         display.Present();
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
 
     return 0;

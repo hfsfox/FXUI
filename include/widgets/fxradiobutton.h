@@ -26,24 +26,14 @@ namespace FX
                 //selected = false;
                 if(!selected)
                 {
-                    //d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
-                    //d->DrawRect(rect.x, rect.y, rect.width, rect.height, bg_color);
-
-                    //d->FillRect(rect.x, rect.y, /*progress*/55, rect.height, progressbar_color);
-
-                    //if(strlen(caption) != 0)
-                    //{
-                    //    d->DrawText(caption, rect.x+5+strlen(caption), rect.y+15, textColor);
-                    //}
-                    //d->FillCircle(rect.x,rect.y,{255,255,255,255});
                     d->DrawCircle(rect.x, rect.y, 8, {0,0,0,255});
                     d->FillCircle(rect.x, rect.y, 8, {255,255,255,255});
+                    d->FillCircle(rect.x, rect.y, 5, select_color);
                 }
                 else
                 {
                     d->DrawCircle(rect.x, rect.y, 8, {0,0,0,255});
                     d->FillCircle(rect.x, rect.y, 8, {255,255,255,255});
-                    d->FillCircle(rect.x, rect.y, 5, select_color);
                 }
             }
             ~FXRadioButton()
