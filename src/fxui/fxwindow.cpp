@@ -1,4 +1,3 @@
-#include <X11/Xlib.h>
 #include <fxwindow.h>
 #include <fxplatformuidefs.h>
 
