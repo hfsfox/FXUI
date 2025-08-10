@@ -1,4 +1,3 @@
-#include "dialogs/fxmessagebox.h"
 #include <fxui.h>
 #include <fxwidgets.h>
 #include <iostream>
@@ -15,7 +14,13 @@ main()
         return -1;
     }
 
-    FX::FXMessageBox* messagebox = new FX::FXMessageBox(&display, {100,100,600,200}, "Message box", "This is example message box");
+    FX::FXDisplay dpy;
+    if (!dpy.Init()) {
+        std::cerr << "Failed to initialize display" << std::endl;
+        return -1;
+    }
+
+    FX::FXMessageBox* messagebox = new FX::FXMessageBox(&dpy, {100,100,600,200}, "Message box", "This is example message box");
 
     if (!messagebox->Create()) {
         std::cerr << "Failed to create window" << std::endl;
