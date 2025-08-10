@@ -1,3 +1,5 @@
+#if defined (BACKEND_BEAPI)
+
 #include "BApplicationInstance.h"
 #include <mutex>
 #include <memory>
@@ -15,3 +17,5 @@ BApplicationInstance::GetInstance()
     );
     return instance.get();
 }
+
+#endif

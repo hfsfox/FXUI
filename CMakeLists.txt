@@ -44,20 +44,20 @@ message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 if(LINUX)
     if(BACKEND_WAYLAND)
         add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
-    #USE_HAL_DRIVER
-	#STM32F103xB
-	#__TARGET_STM32F103C8T6__
 	BACKEND_WAYLAND
     )
     endif()
     if(BACKEND_X11)
         add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
-    #USE_HAL_DRIVER
-	#STM32F103xB
-	#__TARGET_STM32F103C8T6__
 	BACKEND_X11
     )
     endif()
+endif()
+
+if(HAIKU)
+    add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
+	BACKEND_BEAPI
+    )
 endif()
 
 if(LINUX)
@@ -156,5 +156,6 @@ if(LINUX)
  elseif(WIN32)
  target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC user32 gdi32 opengl32)
 elseif(HAIKU)
-   target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC be root game tracker textencoding GL stdc++ supc++)
+   target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC be root game tracker textencoding GL stdc++ supc++)
+   target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC be root game tracker textencoding GL stdc++ supc++)
 endif()
