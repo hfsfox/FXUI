@@ -1,6 +1,5 @@
 #include <fxwindow.h>
 #include <fxplatformuidefs.h>
-#include <wayland-client-protocol.h>
 
 #if defined BACKEND_X11 && !defined BACKEND_BEAPI
     #include "platform/unix/x11/X11APIWindow.h"
@@ -8,6 +7,7 @@
     #include "platform/unix/wayland/WaylandAPIWindow.h"
     //#include "platform/unix/wayland/protocols/xdg-shell-client-protocol.h"
     //#include "platform/unix/wayland/protocols/xdg-decoration-unstable-v1.h"
+    #include <wayland-client-protocol.h>
     //#include <sys/mman.h>
     //#include <sys/stat.h>
     //#include <errno.h>

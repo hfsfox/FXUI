@@ -18,7 +18,7 @@ namespace FX
             d(display),
             rect(progressbar_r),
             caption(progressbar_caption),
-            progress(0),
+            //progress(0),
             begin(0),
             end(100)
             {
@@ -32,7 +32,7 @@ namespace FX
                     d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
                     d->DrawRect(rect.x, rect.y, rect.width, rect.height, bg_color);
 
-                    d->FillRect(rect.x, rect.y, progress/*55*/, rect.height, progressbar_color);
+                    d->FillRect(rect.x, rect.y, /*progress*/55, rect.height, progressbar_color);
 
                     if(strlen(caption) != 0)
                     {

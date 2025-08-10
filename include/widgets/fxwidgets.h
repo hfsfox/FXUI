@@ -16,5 +16,6 @@
 #include <fxmenubar.h>
 #include <fxtoolbar.h>
 #include <fxprogressbar.h>
+#include <fxradiobutton.h>
 
 #endif
