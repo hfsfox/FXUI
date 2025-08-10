@@ -481,7 +481,7 @@ FX::FXWindow::ProcessEvents()
     #if defined(BACKEND_X11)
         if (!xDisplay) return false;
         XEvent event;
-        while (XPending(xDisplay))
+        while (XPending(xDisplay) > 0)
         {
             XNextEvent(xDisplay, &event);
             if (event.type == ClientMessage && event.xclient.data.l[0] == wmDeleteMessage)
