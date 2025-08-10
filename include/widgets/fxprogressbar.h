@@ -1,3 +1,14 @@
+//-----------------------------------------------------------------------------
+// FXUI SDK
+// FXUI: Graphical User Interface Framework:
+//
+// Version 0.1       Date :
+//
+//-----------------------------------------------------------------------------
+// MIT
+// © 2025, , All Rights Reserved
+//-----------------------------------------------------------------------------
+
 #ifndef __FXPROGRESSBAR_H__
 #define __FXPROGRESSBAR_H__
 
@@ -17,10 +28,10 @@ namespace FX
             :
             d(display),
             rect(progressbar_r),
-            caption(progressbar_caption),
+            caption(progressbar_caption)
             //progress(0),
-            begin(0),
-            end(100)
+            //begin(0),
+            //end(100)
             {
                 FX::FXColor bg_color = {200,200,200,255};
                 FX::FXColor textColor = {0,0,0,255};
@@ -32,7 +43,9 @@ namespace FX
                     d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
                     d->DrawRect(rect.x, rect.y, rect.width, rect.height, bg_color);
 
-                    d->FillRect(rect.x, rect.y, /*progress*/55, rect.height, progressbar_color);
+                    // Progress Bar Length = ( (Current Value - Minimum Value) / (Maximum Value - Minimum Value) ) * Total Available Length
+                    //d->FillRect(rect.x, rect.y, progress, rect.height, progressbar_color);
+                    d->FillRect(rect.x, rect.y, (int)((progress-0)/(0-100/*end-begin*/)) * rect.width, rect.height, progressbar_color);
 
                     if(strlen(caption) != 0)
                     {

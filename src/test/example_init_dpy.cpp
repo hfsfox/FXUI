@@ -1,3 +1,4 @@
+#include "dialogs/fxmessagebox.h"
 #include <fxui.h>
 #include <fxwidgets.h>
 #include <iostream>
@@ -13,6 +14,14 @@ main()
         std::cerr << "Failed to initialize display" << std::endl;
         return -1;
     }
+
+    FX::FXMessageBox* messagebox = new FX::FXMessageBox(&display, {100,100,600,200}, "Message box", "This is example message box");
+
+    if (!messagebox->Create()) {
+        std::cerr << "Failed to create window" << std::endl;
+        return -1;
+    }
+    messagebox->Show();
 
     FX::FXRect windowRect(100, 100, 500, 400);
     FX::FXWindow window(&display, windowRect, "Cross-Platform FXWindow Demo");
@@ -39,6 +48,14 @@ main()
 
     window.SetTitle("FXWindow");
     FX::FXColor color = {216, 216, 216, 255};
+
+    //FX::FXMessageBox* messagebox = new FX::FXMessageBox(&display, {100,100,600,200}, "Message box");
+
+    //if (!messagebox->Create()) {
+    //    std::cerr << "Failed to create window" << std::endl;
+    //    return -1;
+    //}
+    //messagebox->Show();
 
     FX::FXRect examplecontainer = {0+50, 20+50, 80, 100};
 
@@ -74,7 +91,6 @@ main()
 
         FX::FXProgressBar* pb = new FX::FXProgressBar("Progress",FX::FXRect(progressbar_rect),&display);
 
-
         FX::FXRadioButton* rb_1 = new FX::FXRadioButton("",radio_button_1_rect, &display);
         rb_1->Selected(true);
 
@@ -91,6 +107,15 @@ main()
         pb->SetProgress(45);
 
         FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),&display);
+
+        /*FX::FXMessageBox* messagebox = new FX::FXMessageBox(&display, {100,100,600,200}, "Message box");
+
+        if (!messagebox->Create())
+        {
+            std::cerr << "Failed to create window" << std::endl;
+            return -1;
+        }*/
+        //messagebox->Show();
 
         display.Present();
         std::this_thread::sleep_for(std::chrono::milliseconds(20));

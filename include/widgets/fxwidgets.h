@@ -21,5 +21,7 @@
 #include <fxcheckbox.h>
 #include <fxprogressbar.h>
 #include <fxradiobutton.h>
+// dialogs
+#include <dialogs/fxmessagebox.h>
 
 #endif

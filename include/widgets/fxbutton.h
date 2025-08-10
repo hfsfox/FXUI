@@ -1,3 +1,14 @@
+//-----------------------------------------------------------------------------
+// FXUI SDK
+// FXUI: Graphical User Interface Framework:
+//
+// Version 0.1       Date :
+//
+//-----------------------------------------------------------------------------
+// MIT
+// © 2025, , All Rights Reserved
+//-----------------------------------------------------------------------------
+
 #ifndef __FXBUTTON_H__
 #define __FXBUTTON_H__
 
@@ -24,7 +35,7 @@ namespace FX
                 selected = false;
                 if(!selected)
                 {
-                    d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
+                    d->FillRect(rect.x, rect.y, rect.width, rect.height, {245,245,245,255});
                     d->DrawRect(rect.x, rect.y, rect.width, rect.height, button_bg_color);
 
                     d->DrawText(caption, rect.x+5+strlen(caption), rect.y+15, textColor);
