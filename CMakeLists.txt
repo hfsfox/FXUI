@@ -143,14 +143,22 @@ add_executable(${CMAKE_PROJECT_NAME}_init_dpy
    ${PLATFORM_SOURCES}
     )
 
+add_executable(${CMAKE_PROJECT_NAME}_init_messagebox
+    src/test/example_init_messagebox.cpp
+   ${FXUI_SOURCES}
+   ${PLATFORM_SOURCES}
+    )
+
 if(LINUX)
     if (BACKEND_X11)
         target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
         target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
+        target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
     endif()
     if (BACKEND_WAYLAND)
         target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
         target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
+        target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
     endif()
  #target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC wayland-client wayland-cursor Xpm GL GLU GLX ${FREETYPE_LIBRARIES})
  elseif(WIN32)
@@ -158,4 +166,5 @@ if(LINUX)
 elseif(HAIKU)
    target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC be root game tracker textencoding GL stdc++ supc++)
    target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC be root game tracker textencoding GL stdc++ supc++)
+   target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC be root game tracker textencoding GL stdc++ supc++)
 endif()

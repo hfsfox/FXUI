@@ -20,13 +20,13 @@ main()
         return -1;
     }
 
-    FX::FXMessageBox* messagebox = new FX::FXMessageBox(&dpy, {100,100,600,200}, "Message box", "This is example message box");
+    /*FX::FXMessageBox* messagebox = new FX::FXMessageBox(&display, {100,100,600,200}, "Message box", "This is example message box");
 
     if (!messagebox->Create()) {
         std::cerr << "Failed to create window" << std::endl;
         return -1;
     }
-    messagebox->Show();
+    messagebox->Show();*/
 
     FX::FXRect windowRect(100, 100, 500, 400);
     FX::FXWindow window(&display, windowRect, "Cross-Platform FXWindow Demo");
@@ -112,15 +112,6 @@ main()
         pb->SetProgress(45);
 
         FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),&display);
-
-        /*FX::FXMessageBox* messagebox = new FX::FXMessageBox(&display, {100,100,600,200}, "Message box");
-
-        if (!messagebox->Create())
-        {
-            std::cerr << "Failed to create window" << std::endl;
-            return -1;
-        }*/
-        //messagebox->Show();
 
         display.Present();
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
