@@ -56,11 +56,15 @@ namespace FX
             void DrawLine(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
             void DrawRect(int x_begin, int y_begin, int width, int height, FX::FXColor color);
             void DrawRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
+            void DrawTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_begin,int x_c_begin, int y_c_begin);
+            void DrawTriangle(FX::FXPoint where_a_begin, FX::FXPoint where_b_begin, FX::FXPoint where_c_begin);
         public:
             void FillRect(int x_begin, int y_begin, int width, int height, FX::FXColor color);
             void FillRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
             void FillCircle(int center_x, int center_y, int radius, FX::FXColor color);
             void FillCircle(FX::FXPoint where, int radius, FX::FXColor color);
+            void FillTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_begin,int x_c_begin, int y_c_begin);
+            void FillTriangle(FX::FXPoint where_a_begin, FX::FXPoint where_b_begin, FX::FXPoint where_c_begin);
         public:
             void SetFont(FX::FXFont);
             void SetViewColor(FX::FXColor color);

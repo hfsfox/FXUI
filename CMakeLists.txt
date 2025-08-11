@@ -5,7 +5,7 @@
 #=============================================================================
 
 #
-# - FXUI
+# - FXUI: Graphical User Interface Framework
 #
 
 cmake_minimum_required(VERSION 3.30)
@@ -83,12 +83,32 @@ include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     #/usr/include/freetype2
     )
 
-
-set(FXUI_SOURCES
+set(FXUI_BASE_SOURCES
     src/fxui/fxdisplay.cpp
     src/fxui/fxwindow.cpp
     src/fxui/fxbitmap.cpp
     src/fxui/fxfont.cpp
+)
+
+set(FXUI_WIDGET_SOURCES
+    src/fxui/widgets/fxbutton.cpp
+    src/fxui/widgets/fxcheckbox.cpp
+    src/fxui/widgets/fxmenubar.cpp
+    src/fxui/widgets/fxprogressbar.cpp
+    src/fxui/widgets/fxradiobutton.cpp
+    src/fxui/widgets/fxslider.cpp
+    src/fxui/widgets/fxtextfield.cpp
+    src/fxui/widgets/fxtextview.cpp
+    src/fxui/widgets/fxtoolbar.cpp
+)
+
+set(FXUI_WIDGET_DIALOG_SOURCES
+)
+
+set(FXUI_SOURCES
+    ${FXUI_BASE_SOURCES}
+    ${FXUI_WIDGET_SOURCES}
+    ${FXUI_WIDGET_DIALOG_SOURCES}
 )
 
 if(HAIKU)
@@ -101,7 +121,6 @@ elseif(LINUX)
     if (BACKEND_WAYLAND)
         set(
         PLATFORM_SOURCES
-        #WAYLAND_PLATFORM_SOURCES
         src/fxui/platform/unix/wayland/WaylandAPIWindow.cpp
         src/fxui/platform/unix/wayland/protocols/xdg-shell-protocol.c
         src/fxui/platform/unix/wayland/protocols/xdg-decoration-unstable-v1.c
@@ -109,23 +128,9 @@ elseif(LINUX)
     elseif(BACKEND_X11)
         set(
         PLATFORM_SOURCES
-        #X11_PLATFORM_SOURCES
         src/fxui/platform/unix/x11/X11APIWindow.cpp
         )
     endif()
-
-    #set(PLATFORM_SOURCES
-    #src/fxui/platform/unix/x11/X11APIWindow.cpp
-    #src/fxui/platform/unix/wayland/WaylandAPIWindow.cpp
-    #src/fxui/platform/unix/wayland/protocols/xdg-shell-protocol.c
-    #src/fxui/platform/unix/wayland/protocols/xdg-decoration-unstable-v1.c
-        #if(BACKEND_X11)
-        #    ${X11_PLATFORM_SOURCES}
-        #endif()
-        #if(BACKEND_WAYLAND)
-        #    ${WAYLAND_PLATFORM_SOURCES}
-        #endif()
-    #)
 elseif(WIN32)
     set(PLATFORM_SOURCES
     )
@@ -160,9 +165,10 @@ if(LINUX)
         target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
         target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
     endif()
- #target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC wayland-client wayland-cursor Xpm GL GLU GLX ${FREETYPE_LIBRARIES})
  elseif(WIN32)
- target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC user32 gdi32 opengl32)
+    target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC user32 gdi32 opengl32)
+    target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC user32 gdi32 opengl32)
+    target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC user32 gdi32 opengl32)
 elseif(HAIKU)
    target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC be root game tracker textencoding GL stdc++ supc++)
    target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC be root game tracker textencoding GL stdc++ supc++)

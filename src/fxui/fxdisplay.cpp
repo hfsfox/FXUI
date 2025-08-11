@@ -402,6 +402,32 @@ FX::FXDisplay::FillCircle(FX::FXPoint point, int radius, FX::FXColor color)
 }
 
 void
+FX::FXDisplay::DrawTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_begin,int x_c_begin, int y_c_begin)
+{
+    #if defined (BACKEND_X11)
+    #endif
+}
+
+void
+FX::FXDisplay::DrawTriangle(FX::FXPoint where_a_begin, FX::FXPoint where_b_begin, FX::FXPoint where_c_begin)
+{
+    FXDisplay::DrawTriangle(where_a_begin.x, where_a_begin.y, where_b_begin.x, where_b_begin.y, where_c_begin.x, where_c_begin.y);
+}
+
+void
+FX::FXDisplay::FillTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_begin,int x_c_begin, int y_c_begin)
+{
+    #if defined (BACKEND_X11)
+    #endif
+}
+
+void
+FX::FXDisplay::FillTriangle(FX::FXPoint where_a_begin, FX::FXPoint where_b_begin, FX::FXPoint where_c_begin)
+{
+    FXDisplay::FillTriangle( where_a_begin.x, where_a_begin.y, where_b_begin.x, where_b_begin.y, where_c_begin.x, where_c_begin.y);
+}
+
+void
 FX::FXDisplay::SetFont(FX::FXFont fxfont)
 {
     #if defined (BACKEND_X11)
