@@ -23,6 +23,9 @@
 #include <fxbitmap.h>
 #include <fxdisplay.h>
 #include <fxwindow.h>
+#include <fxview.h>
+#include <fxuidefs.h>
+
 #include <cstdint>
 
 #if !defined PLATFORM_HAIKU
