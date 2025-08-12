@@ -195,7 +195,7 @@ static void render_frame(/*struct wayland_window *state*/)
 
     uint32_t *pixel = (uint32_t *)shm_data;
 
-    memset(pixel, 0x00EEEEEEEE, width * height * 4);
+    //memset(pixel, 0x00EEEEEEEE, width * height * 4);
 
     // Attach buffer and commit
     wl_surface_attach(surface, buffer, 0, 0);
@@ -302,6 +302,7 @@ FX::FXWindow::FXWindow(FX::FXDisplay* display, const FX::FXRect& rect, const cha
 FX::FXWindow::~FXWindow()
 {
     #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
+        fprintf(stdout, "cleanup window structs \n");
         if (xDisplay && xWindow)
         {
             XUnmapWindow(xDisplay, xWindow);

@@ -36,7 +36,16 @@ namespace FX
     typedef struct FXColor FXColor;
     class FXFont;
 }
-//struct FX::FXColor;
+
+namespace FX
+{
+    typedef struct MonitorInfo
+        {
+            const char* name;       // The name of monitor
+            bool        primary;    // The monitor is primary
+            FX::FXRect  rect;       // The position and size of monitor
+        } MonitorInfo;
+}
 
 namespace FX
 {

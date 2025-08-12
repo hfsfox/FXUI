@@ -78,6 +78,7 @@ endif()
 include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     include/base
     include/widgets
+    include/widgets/dialogs
     #src/platform/haiku
     ${FXUI_FREETYPE_INCLUDE}
     #/usr/include/freetype2

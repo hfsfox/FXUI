@@ -23,5 +23,6 @@
 #include <fxradiobutton.h>
 // dialogs
 #include <dialogs/fxmessagebox.h>
+#include <dialogs/fxfiledialog.h>
 
 #endif
