@@ -14,7 +14,7 @@ project("FXUI"
         VERSION 0.0.58
         DESCRIPTION "Code for lab works by student ONPU group AT-221"
         HOMEPAGE_URL "http://github.com/hfsfox/fxui/"
-        LANGUAGES CXX C ASM
+        LANGUAGES OBJC OBJCXX CXX C ASM
         )
 
 if(CMAKE_C_STANDARD LESS 11)
