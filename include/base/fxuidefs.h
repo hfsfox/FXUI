@@ -32,4 +32,9 @@ enum ui_direction
     FX_HORIZONTAL
 };
 
+enum widget_abilities
+{
+    FX_HAVE_PLATFORM_EQUIVALENT
+};
+
 #endif

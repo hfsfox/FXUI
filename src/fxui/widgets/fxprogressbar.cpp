@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <fxprogressbar.h>
 
 #include <cstring>
@@ -18,6 +19,12 @@ FX::FXProgressBar::FXProgressBar(const char* progressbar_caption, FX::FXRect pro
                 FX::FXColor textColor = {0,0,0,255};
                 FX::FXColor progressbar_color = {134, 206, 250, 255};
 
+                //float progress_c = (float)progress / 100;
+                //int filled_width = static_cast<int>(rect.width * progress);
+
+                int one_len = (int)(rect.width / 100);
+                int total = 0;
+
                 //selected = false;
                 //if(!selected)
                 //{
@@ -25,8 +32,18 @@ FX::FXProgressBar::FXProgressBar(const char* progressbar_caption, FX::FXRect pro
                     d->DrawRect(rect.x, rect.y, rect.width, rect.height, bg_color);
 
                     // Progress Bar Length = ( (Current Value - Minimum Value) / (Maximum Value - Minimum Value) ) * Total Available Length
-                    //d->FillRect(rect.x, rect.y, progress, rect.height, progressbar_color);
-                    d->FillRect(rect.x, rect.y, (int)((progress-0)/(0-100/*end-begin*/)) * rect.width, rect.height, progressbar_color);
+                    //for(int i = 0; i < 64 ; i++)
+                    //{
+                        //for (int i = 0; i < progress; ++i) {
+                        //total += one_len;
+                        //}
+
+                        //printf("progress %d", progress);
+                        progress =19;
+
+                        d->FillRect(rect.x, rect.y, (int)(one_len*progress), rect.height, progressbar_color);
+                    //}
+                    //d->FillRect(rect.x, rect.y, (int)((progress-0)/(0-100/*end-begin*/)) * rect.width, rect.height, progressbar_color);
 
                     if(strlen(caption) != 0)
                     {
