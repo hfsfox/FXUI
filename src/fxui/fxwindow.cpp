@@ -301,14 +301,14 @@ FX::FXWindow::FXWindow(FX::FXDisplay* display, const FX::FXRect& rect, const cha
 
 FX::FXWindow::~FXWindow()
 {
-    #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
+    #if defined (BACKEND_X11)
         fprintf(stdout, "cleanup window structs \n");
         if (xDisplay && xWindow)
         {
             XUnmapWindow(xDisplay, xWindow);
             XDestroyWindow(xDisplay, xWindow);
         }
-    #elif defined(PLATFORM_LINUX) && defined (BACKEND_WAYLAND)
+    #elif defined (BACKEND_WAYLAND)
         fprintf(stdout, "cleanup window structs \n");
         if (buffer)
         {
@@ -464,7 +464,7 @@ FX::FXWindow::Create()
 void
 FX::FXWindow::Show()
 {
-    #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
+    #if defined (BACKEND_X11)
         if (xDisplay && xWindow) //XMapWindow(xDisplay, xWindow);
             XMapRaised(xDisplay, xWindow);
     #elif defined(PLATFORM_HAIKU)
@@ -475,8 +475,8 @@ FX::FXWindow::Show()
 void
 FX::FXWindow::Hide()
 {
-    #if defined(PLATFORM_LINUX)
-    #elif defined(PLATFORM_HAIKU)
+    #if defined(BACKEND_WAYLAND)
+    #elif defined(BACKEND_BEAPI)
         if(!haikuWindow->IsHidden())
         {
             haikuWindow->Hide();
@@ -587,7 +587,7 @@ FX::FXWindow::SetTitle(const char* title)
 void
 FX::FXWindow::MoveTo(FX::FXPoint where)
 {
-    #if defined(PLATFORM_LINUX)
+    #if defined(BACKEND_WAYLAND)
     #elif defined(PLATFORM_HAIKU)
     #endif
 }
@@ -595,7 +595,7 @@ FX::FXWindow::MoveTo(FX::FXPoint where)
 void
 FX::FXWindow::ResizeTo(FX::FXRect& newSize)
 {
-    #if defined(PLATFORM_LINUX)
+    #if defined(BACKEND_WAYLAND)
     #elif defined(PLATFORM_HAIKU)
     #endif
 }

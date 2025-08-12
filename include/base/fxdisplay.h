@@ -20,7 +20,7 @@
 //#if defined (PLATFORM_UNIX_COMPATIBLE)
 // Platform detection
 
-#if defined (BACKEND_X11) && !defined (PLATFORM_HAIKU)
+#if defined (BACKEND_X11)
     #include <X11/Xlib.h>
     #include <X11/Xutil.h>
 #elif defined (BACKEND_WAYLAND)
@@ -29,6 +29,8 @@
     #include <interface/View.h>
 #elif defined (BACKEND_WINAPI)
     #include <windows.h>
+#elif defined (BACKEND_COCOA)
+    #include <Cocoa/Cocoa.h>
 #endif
 
 namespace FX
@@ -96,7 +98,6 @@ namespace FX
 
         public:
         #if defined (BACKEND_X11)
-        //#if defined(PLATFORM_LINUX)
             ::Display* display;
             ::Window window;
             ::GC gc;
@@ -104,10 +105,10 @@ namespace FX
         #elif defined (BACKEND_WAYLAND)
             struct wl_display* display;
         #elif defined (BACKEND_BEAPI)
-        //#elif defined(PLATFORM_HAIKU)
             BView* view;
+        #elif defined (BACKEND_COCOA)
+            NSView* view;
         #elif defined (BACKEND_WINAPI)
-        //#elif defined (PLATFORM_WINDOWS)
             HDC hdc;
             HWND hwnd;
         #endif

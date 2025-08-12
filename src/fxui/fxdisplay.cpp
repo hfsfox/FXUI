@@ -151,6 +151,8 @@ namespace
 
         X11Display* dx11;
         */
+    #elif defined BACKEND_COCOA
+        bool standaloneApp = NULL;
     #endif
 }
 
@@ -178,7 +180,16 @@ FX::FXDisplay::~FXDisplay()
 
 bool FX::FXDisplay::Init()
 {
-    #ifdef PLATFORM_MACOSX
+    #if defined BACKEND_COCOA
+        if (NSApp == NULL)
+                {
+                    [NSApplication sharedApplication];
+                    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+                    [NSApp activateIgnoringOtherApps:YES];
+                    standaloneApp = true;
+                }
+                else
+                    standaloneApp = false;
         return true;
     #elif defined(BACKEND_X11)
         //display = XOpenDisplay(nullptr);
@@ -224,7 +235,7 @@ FX::FXDisplay::GetNativeContext() const
 void
 FX::FXDisplay::Clear()
 {
-    #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
+    #if defined (BACKEND_X11)
         if (display && window && gc)
         {
             XClearWindow(display, window);
@@ -247,7 +258,7 @@ FX::FXDisplay::ClearDisplay()
 void
 FX::FXDisplay::DrawText(const char* text, int x, int y, FX::FXColor color)
 {
-    #if defined(PLATFORM_LINUX) && defined (BACKEND_X11)
+    #if defined (BACKEND_X11)
         if (display && window && gc) {
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
             //XDrawString(display, window, gc, x, y, text, strlen(text));
@@ -271,7 +282,7 @@ FX::FXDisplay::DrawText(const char* text, int x, int y, FX::FXColor color)
         XftColorFree(display,DefaultVisual(display,0),DefaultColormap(display,0),&xftcolor);
         //font->height;
         }
-    #elif defined(PLATFORM_HAIKU)
+    #elif defined(BACKEND_BEAPI)
         // Text drawing handled in FHaikuView::Draw()
         view->LockLooper();
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
@@ -289,12 +300,12 @@ FX::FXDisplay::DrawText(const char* text, FX::FXPoint point, FX::FXColor color)
 void
 FX::FXDisplay::DrawCircle(int center_x, int center_y, int radius, FX::FXColor color)
 {
-    #if defined(PLATFORM_HAIKU)
+    #if defined(BACKEND_BEAPI)
         view->LockLooper();
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->StrokeEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
+    #elif defined (BACKEND_X11)
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XDrawArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
         XFlush(display);
@@ -310,8 +321,8 @@ FX::FXDisplay::DrawCircle(FX::FXPoint point, int radius, FX::FXColor color)
 void
 FX::FXDisplay::DrawPoint(int center_x, int center_y, FX::FXColor color)
 {
-    #if defined(PLATFORM_HAIKU)
-    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
+    #if defined(BACKEND_BEAPI)
+    #elif defined (BACKEND_X11)
     #endif
 }
 
@@ -324,13 +335,13 @@ FX::FXDisplay::DrawPoint(FX::FXPoint where, FX::FXColor color)
 void
 FX::FXDisplay::DrawLine(int center_x_begin, int center_y_begin,int center_x_end, int center_y_end, FX::FXColor color)
 {
-    #if defined(PLATFORM_HAIKU)
+    #if defined(BACKEND_BEAPI)
     	view->LockLooper();
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->StrokeLine(BPoint(center_x_begin,center_y_begin), BPoint(center_x_end,center_y_end),B_SOLID_HIGH);
         //view->StrokeEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
+    #elif defined (BACKEND_X11)
         XDrawLine(display, window, gc, center_x_begin, center_y_begin, center_x_end, center_y_end);
     #endif
 }
@@ -347,7 +358,7 @@ FX::FXDisplay::DrawRect(int x_begin, int y_begin,int width, int height, FX::FXCo
     #if defined(BACKEND_X11)
         XDrawRectangle(display, window, gc, x_begin, y_begin, width, height);
         XFlush(display);
-    #elif defined(PLATFORM_HAIKU)
+    #elif defined(BACKEND_BEAPI)
         view->LockLooper();
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->StrokeRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
@@ -363,12 +374,12 @@ FX::FXDisplay::DrawRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXCo
 void
 FX::FXDisplay::FillRect(int x_begin, int y_begin, int width, int height, FX::FXColor color)
 {
-    #if defined(PLATFORM_HAIKU)
+    #if defined(BACKEND_BEAPI)
         view->LockLooper();
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->FillRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
+    #elif defined (BACKEND_X11)
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XFillRectangle(display,window, gc, x_begin, y_begin, width, height);
         XFlush(display);
@@ -383,12 +394,12 @@ FX::FXDisplay::FillRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXCo
 void
 FX::FXDisplay::FillCircle(int center_x, int center_y, int radius, FX::FXColor color)
 {
-    #if defined(PLATFORM_HAIKU)
+    #if defined(BACKEND_BEAPI)
         view->LockLooper();
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->FillEllipse(BPoint(center_x,center_y),radius,radius, B_SOLID_HIGH);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
+    #elif defined (BACKEND_X11)
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XFillArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
         XFlush(display);
@@ -445,11 +456,11 @@ FX::FXDisplay::SetFont(FX::FXFont fxfont)
 void
 FX::FXDisplay::SetViewColor(FX::FXColor color)
 {
-    #if defined(PLATFORM_HAIKU)
+    #if defined(BACKEND_BEAPI)
         view->LockLooper();
         view->SetViewColor(color.red, color.green, color.blue, color.alpha);
         view->UnlockLooper();
-    #elif defined (PLATFORM_LINUX) && defined (BACKEND_X11)
+    #elif defined (BACKEND_X11)
         //XColor c;
         //c = {color.red,color.green,color.blue};
         //c = {160, 160, 160, 255};
@@ -472,7 +483,7 @@ FX::FXDisplay::GetViewColor() const
     #if defined(BACKEND_X11)
         FXColor viewcolor = {0, 0, 0, 255};
         return viewcolor;
-    #elif defined(PLATFORM_HAIKU)
+    #elif defined(BACKEND_BEAPI)
         view->LockLooper();
         FXColor viewcolor = {view->ViewColor().red, view->ViewColor().green, view->ViewColor().blue, 255};
         view->UnlockLooper();
@@ -487,7 +498,7 @@ FX::FXDisplay::GetDisplaySize() const
         XWindowAttributes attr;
         XGetWindowAttributes(display,window,&attr);
         return {0,0,attr.width,attr.height};
-    #elif defined(PLATFORM_HAIKU)
+    #elif defined(BACKEND_BEAPI)
         view->LockLooper();
         BRect frame = view->Frame();
         view->UnlockLooper();
@@ -500,7 +511,7 @@ FX::FXDisplay::Present()
 {
     #if defined(BACKEND_X11)
         //if (display) XFlush(display);
-    #elif defined(PLATFORM_HAIKU)
+    #elif defined(BACKEND_BEAPI)
         // Presentation handled automatically by Haiku
     #endif
 }

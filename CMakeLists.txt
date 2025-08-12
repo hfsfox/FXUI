@@ -41,7 +41,16 @@ message(STATUS "Build C flags:          ${CMAKE_C_FLAGS}")
 message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
 message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
-if(LINUX)
+if(APPLE)
+    add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
+	BACKEND_COCOA
+    )
+    set(CMAKE_C_FLAGS "-x objective-c")
+    set(CMAKE_CXX_FLAGS "-x objective-c++")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework AppKit -framework Foundation")
+endif()
+
+if(UNIX AND NOT APPLE AND NOT HAIKU)
     if(BACKEND_WAYLAND)
         add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
 	BACKEND_WAYLAND
