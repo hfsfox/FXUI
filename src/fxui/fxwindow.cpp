@@ -46,28 +46,31 @@
     static BApplication* app = nullptr;
 #elif defined(BACKEND_COCOA)
     #define cls objc_getClass
-#define sel sel_getUid
-#define msg ((id(*)(id, SEL, ...))objc_msgSend)
-#define cls_msg ((id(*)(Class, SEL, ...))objc_msgSend)
+    #define sel sel_getUid
+    #define msg ((id(*)(id, SEL, ...))objc_msgSend)
+    #define cls_msg ((id(*)(Class, SEL, ...))objc_msgSend)
 
-// poor man's bindings!
-typedef enum NSApplicationActivationPolicy {
-  NSApplicationActivationPolicyRegular = 0,
-  NSApplicationActivationPolicyAccessory = 1,
-  NSApplicationActivationPolicyERROR = 2,
-} NSApplicationActivationPolicy;
+    // poor man's bindings!
+    typedef enum NSApplicationActivationPolicy
+    {
+        NSApplicationActivationPolicyRegular = 0,
+        NSApplicationActivationPolicyAccessory = 1,
+        NSApplicationActivationPolicyERROR = 2,
+    } NSApplicationActivationPolicy;
 
-typedef enum NSWindowStyleMask {
-  NSWindowStyleMaskBorderless = 0,
-  NSWindowStyleMaskTitled = 1 << 0,
-  NSWindowStyleMaskClosable = 1 << 1,
-  NSWindowStyleMaskMiniaturizable = 1 << 2,
-  NSWindowStyleMaskResizable = 1 << 3,
-} NSWindowStyleMask;
+    typedef enum NSWindowStyleMask
+    {
+        NSWindowStyleMaskBorderless = 0,
+        NSWindowStyleMaskTitled = 1 << 0,
+        NSWindowStyleMaskClosable = 1 << 1,
+        NSWindowStyleMaskMiniaturizable = 1 << 2,
+        NSWindowStyleMaskResizable = 1 << 3,
+    } NSWindowStyleMask;
 
-typedef enum NSBackingStoreType {
-  NSBackingStoreBuffered = 2,
-} NSBackingStoreType;
+    typedef enum NSBackingStoreType
+    {
+        NSBackingStoreBuffered = 2,
+    } NSBackingStoreType;
 #elif defined (BACKEND_WAYLAND)
     static struct wl_surface *surface = NULL;
     static struct wl_compositor* compositor = NULL;
@@ -488,7 +491,7 @@ FX::FXWindow::Create()
         //display->
         return true;
     #elif defined (BACKEND_COCOA)
-        struct CGRect frameRect = {rect.x, rect.y, rect.x + rect.width, };
+        struct CGRect frameRect = {rect.x, rect.y, rect.x + rect.width, rect.y + rect.height};
         id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
               sel("initWithContentRect:styleMask:backing:defer:"), frameRect,
               NSWindowStyleMaskTitled | NSWindowStyleMaskClosable |
