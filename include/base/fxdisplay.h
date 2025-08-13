@@ -31,6 +31,9 @@
     #include <windows.h>
 #elif defined (BACKEND_COCOA)
     //#include <Cocoa/Cocoa.h>
+    #include <Carbon/Carbon.h>
+    #include <objc/message.h>
+    #include <objc/runtime.h>
 #endif
 
 namespace FX

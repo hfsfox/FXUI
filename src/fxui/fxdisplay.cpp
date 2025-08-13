@@ -23,6 +23,10 @@
 #elif defined (BACKEND_WINAPI)
     #include <windows.h>
     #include <winuser.h>
+#elif defined (BACKEND_COCOA)
+    #include <Carbon/Carbon.h>
+    #include <objc/message.h>
+    #include <objc/runtime.h>
 #endif
 #include <cstring>
 //#include <iostream>
@@ -153,6 +157,33 @@ namespace
         */
     #elif defined BACKEND_COCOA
         //bool standaloneApp = NULL;
+        #define cls objc_getClass
+        #define sel sel_getUid
+        #define msg ((id(*)(id, SEL, ...))objc_msgSend)
+        #define cls_msg ((id(*)(Class, SEL, ...))objc_msgSend)
+
+        // poor man's bindings!
+typedef enum NSApplicationActivationPolicy {
+  NSApplicationActivationPolicyRegular = 0,
+  NSApplicationActivationPolicyAccessory = 1,
+  NSApplicationActivationPolicyERROR = 2,
+} NSApplicationActivationPolicy;
+
+typedef enum NSWindowStyleMask
+   {
+        NSWindowStyleMaskBorderless = 0,
+        NSWindowStyleMaskTitled = 1 << 0,
+        NSWindowStyleMaskClosable = 1 << 1,
+        NSWindowStyleMaskMiniaturizable = 1 << 2,
+        NSWindowStyleMaskResizable = 1 << 3,
+    } NSWindowStyleMask;
+
+    typedef enum NSBackingStoreType
+    {
+        NSBackingStoreBuffered = 2,
+    } NSBackingStoreType;
+
+
     #endif
 }
 
@@ -192,6 +223,8 @@ bool FX::FXDisplay::Init()
 	//	{
         //            standaloneApp = false;
 	//	}
+        id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
+        msg(app, sel("setActivationPolicy:"), NSApplicationActivationPolicyRegular);
         return true;
     #elif defined(BACKEND_X11)
         //display = XOpenDisplay(nullptr);
@@ -231,6 +264,10 @@ FX::FXDisplay::GetNativeContext() const
             return static_cast<void*>(display);
         #elif defined(BACKEND_BEAPI)
             return static_cast<void*>(view);
+        #elif defined (BACKEND_COCOA)
+            //int* dpy;
+            //dpy = 1; 
+	    //return static_cast<void*>(dpy);
         #endif
 }
 
