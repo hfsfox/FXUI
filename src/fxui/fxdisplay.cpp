@@ -152,7 +152,7 @@ namespace
         X11Display* dx11;
         */
     #elif defined BACKEND_COCOA
-        bool standaloneApp = NULL;
+        //bool standaloneApp = NULL;
     #endif
 }
 
@@ -181,15 +181,17 @@ FX::FXDisplay::~FXDisplay()
 bool FX::FXDisplay::Init()
 {
     #if defined BACKEND_COCOA
-        if (NSApp == NULL)
-                {
-                    [NSApplication sharedApplication];
-                    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
-                    [NSApp activateIgnoringOtherApps:YES];
-                    standaloneApp = true;
-                }
-                else
-                    standaloneApp = false;
+        //if (NSApp == NULL)
+        //        {
+        //            [NSApplication sharedApplication];
+        //           [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+        //            [NSApp activateIgnoringOtherApps:YES];
+        //            standaloneApp = true;
+        //        }
+        //       else
+	//	{
+        //            standaloneApp = false;
+	//	}
         return true;
     #elif defined(BACKEND_X11)
         //display = XOpenDisplay(nullptr);

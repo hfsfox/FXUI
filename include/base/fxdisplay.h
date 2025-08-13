@@ -30,7 +30,7 @@
 #elif defined (BACKEND_WINAPI)
     #include <windows.h>
 #elif defined (BACKEND_COCOA)
-    #include <Cocoa/Cocoa.h>
+    //#include <Cocoa/Cocoa.h>
 #endif
 
 namespace FX
@@ -107,7 +107,7 @@ namespace FX
         #elif defined (BACKEND_BEAPI)
             BView* view;
         #elif defined (BACKEND_COCOA)
-            NSView* view;
+            //NSView* view;
         #elif defined (BACKEND_WINAPI)
             HDC hdc;
             HWND hwnd;
