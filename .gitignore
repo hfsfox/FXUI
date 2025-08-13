@@ -47,7 +47,8 @@ CMakeUserPresets.json
 /.cache*
 # Kate backup files
 *.kate-swp
-
+# DS_Store
+*.DS_Store
 # CLion
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
