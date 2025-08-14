@@ -491,13 +491,19 @@ FX::FXWindow::Create()
         //display->
         return true;
     #elif defined (BACKEND_COCOA)
+<<<<<<< HEAD
         struct CGRect frameRect = {rect.x, rect.y, rect.x + rect.width, rect.y + rect.height};
         id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
+=======
+        //struct CGRect frameRect = {(CGFloat)rect.x, (CGFloat)rect.y, (CGFloat)rect.x + rect.width, (CGFloat)rect.y + rect.height};
+        /*id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
+>>>>>>> 198d3b4a8558f4541dccdc3b16f924acbec90fef
               sel("initWithContentRect:styleMask:backing:defer:"), frameRect,
               NSWindowStyleMaskTitled | NSWindowStyleMaskClosable |
               NSWindowStyleMaskResizable, NSBackingStoreBuffered, false);
 
   	msg(window, sel("setTitle:"), cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "FXWindow"));
+    */
     #endif
 }
 
