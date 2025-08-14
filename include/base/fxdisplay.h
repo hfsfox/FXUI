@@ -111,6 +111,7 @@ namespace FX
             BView* view;
         #elif defined (BACKEND_COCOA)
             //NSView* view;
+            id app;
         #elif defined (BACKEND_WINAPI)
             HDC hdc;
             HWND hwnd;

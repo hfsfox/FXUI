@@ -270,6 +270,7 @@ FX::FXDisplay::GetNativeContext() const
             //int* dpy;
             //dpy = 1; 
 	    //return static_cast<void*>(dpy);
+           return static_cast<void*>(app); 
         #endif
 }
 
