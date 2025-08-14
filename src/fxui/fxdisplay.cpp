@@ -225,6 +225,8 @@ bool FX::FXDisplay::Init()
 	//	}
         id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
         msg(app, sel("setActivationPolicy:"), NSApplicationActivationPolicyRegular);
+        msg(app, sel("activateIgnoringOtherApps:"), true);
+        msg(app, sel("run"));
         return true;
     #elif defined(BACKEND_X11)
         //display = XOpenDisplay(nullptr);
