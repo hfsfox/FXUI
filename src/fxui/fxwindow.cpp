@@ -494,13 +494,20 @@ FX::FXWindow::Create()
         struct CGRect frameRect = {static_cast<CGFloat>(rect.x), static_cast<CGFloat>(rect.y), static_cast<CGFloat>(rect.x + rect.width), static_cast<CGFloat>(rect.y + rect.height)};
         //id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
         //struct CGRect frameRect = {(CGFloat)rect.x, (CGFloat)rect.y, (CGFloat)rect.x + rect.width, (CGFloat)rect.y + rect.height};
-        id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
+        id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
+        /*id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
               sel("initWithContentRect:styleMask:backing:defer:"), frameRect,
               NSWindowStyleMaskTitled | NSWindowStyleMaskClosable |
               NSWindowStyleMaskResizable, NSBackingStoreBuffered, false);
 
-  	msg(window, sel("setTitle:"), cls_msg(cls("NSString"), sel("stringWithUTF8String:"), title/*"FXWindow"*/));
+  	msg(window, sel("setTitle:"), cls_msg(cls("NSString"), sel("stringWithUTF8String:"), title));
     msg(window, sel("makeKeyAndOrderFront:"), NULL);
+
+    if (window == NULL)
+    {
+        fprintf(stderr, "Failed to create NSWindow\n");
+    }
+    */
     //id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));
     //id menu = msg((id)display->GetNativeContext(), sel("setMainMenu:"), cls_msg(cls("NSMenu"), sel("alloc"), sel("init")));
     //[[NSApp mainMenu] addItem:[[[NSMenuItem alloc] init] autorelease]];
@@ -531,7 +538,7 @@ FX::FXWindow::Create()
     // Release the menu (equivalent to autorelease in the original)
     msg(newMenu, sel("release"));*/
 
-    id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
+    //id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
     
     // Create main menu bar
     id mainMenuBar = msg(cls_msg(cls("NSMenu"), sel("alloc")), sel("init"));
@@ -543,7 +550,7 @@ FX::FXWindow::Create()
     msg(mainMenuBar, sel("addItem:"), appMenuItem);
     
     // Create application submenu
-    id appTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "Application");
+    id appTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "@Application");
     id appMenu = msg(cls_msg(cls("NSMenu"), sel("alloc")), sel("initWithTitle:"), appTitle);
     
     // Set the submenu for the application menu item
@@ -552,7 +559,7 @@ FX::FXWindow::Create()
     // Add some common application menu items
     
     // About menu item
-    id aboutTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "About");
+    id aboutTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "@About");
     id aboutItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")), 
                       sel("initWithTitle:action:keyEquivalent:"), 
                       aboutTitle, sel("orderFrontStandardAboutPanel:"), 
@@ -565,13 +572,25 @@ FX::FXWindow::Create()
     msg(appMenu, sel("addItem:"), separator);
     
     // Quit menu item
-    id quitTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "Quit");
-    id quitKeyEquiv = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "q");
+    id quitTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "@Quit");
+    id quitKeyEquiv = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "@q");
     id quitItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")),
                      sel("initWithTitle:action:keyEquivalent:"),
                      quitTitle, sel("terminate:"), quitKeyEquiv);
     msg(quitItem, sel("setTarget:"), app);
     msg(appMenu, sel("addItem:"), quitItem);
+
+    id fileMenuItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")), sel("init"));
+
+    msg(mainMenuBar, sel("addItem:"), fileMenuItem);
+
+    // Create application submenu
+    id fileTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "@File");
+    id fileMenu = msg(cls_msg(cls("NSMenu"), sel("alloc")), sel("initWithTitle:"), fileTitle);
+    
+    // Set the submenu for the application menu item
+    msg(appMenuItem, sel("setSubmenu:"), fileMenu);
+    
     
     // Set the main menu
     msg(app, sel("setMainMenu:"), mainMenuBar);

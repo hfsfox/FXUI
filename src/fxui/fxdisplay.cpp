@@ -226,6 +226,58 @@ bool FX::FXDisplay::Init()
         id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
         msg(app, sel("setActivationPolicy:"), NSApplicationActivationPolicyRegular);
         msg(app, sel("activateIgnoringOtherApps:"), true);
+
+// Create main menu bar
+    id mainMenuBar = msg(cls_msg(cls("NSMenu"), sel("alloc")), sel("init"));
+    
+    // Create application menu item (this will be the first item in the menu bar)
+    id appMenuItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")), sel("init"));
+    
+    // Add application menu item to main menu bar
+    msg(mainMenuBar, sel("addItem:"), appMenuItem);
+    
+    // Create application submenu
+    id appTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "Application");
+    id appMenu = msg(cls_msg(cls("NSMenu"), sel("alloc")), sel("initWithTitle:"), appTitle);
+    
+    // Set the submenu for the application menu item
+    msg(appMenuItem, sel("setSubmenu:"), appMenu);
+    
+    // Add some common application menu items
+    
+    // About menu item
+    id aboutTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "About");
+    id aboutItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")), 
+                      sel("initWithTitle:action:keyEquivalent:"), 
+                      aboutTitle, sel("orderFrontStandardAboutPanel:"), 
+                      cls_msg(cls("NSString"), sel("string")));
+    msg(aboutItem, sel("setTarget:"), app);
+    msg(appMenu, sel("addItem:"), aboutItem);
+    
+    // Separator
+    id separator = cls_msg(cls("NSMenuItem"), sel("separatorItem"));
+    msg(appMenu, sel("addItem:"), separator);
+    
+    // Quit menu item
+    id quitTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "Quit");
+    id quitKeyEquiv = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "q");
+    id quitItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")),
+                     sel("initWithTitle:action:keyEquivalent:"),
+                     quitTitle, sel("terminate:"), quitKeyEquiv);
+    msg(quitItem, sel("setTarget:"), app);
+    msg(appMenu, sel("addItem:"), quitItem);
+    
+    // Set the main menu
+    msg(app, sel("setMainMenu:"), mainMenuBar);
+    
+    // Clean up (release objects)
+    msg(appMenuItem, sel("release"));
+    msg(appMenu, sel("release"));
+    msg(aboutItem, sel("release"));
+    msg(quitItem, sel("release"));
+    msg(mainMenuBar, sel("release"));
+
+
         msg(app, sel("run"));
         return true;
     #elif defined(BACKEND_X11)
