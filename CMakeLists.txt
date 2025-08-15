@@ -144,6 +144,10 @@ elseif(LINUX)
 elseif(WIN32)
     set(PLATFORM_SOURCES
     )
+elseif(APPLE)
+    set(PLATFORM_SOURCES
+    src/fxui/platform/macosx/MacOSXAPIWindow.mm
+    )
 endif()
 
 add_executable(${CMAKE_PROJECT_NAME}_example

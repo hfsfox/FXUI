@@ -5,6 +5,8 @@
 #ifndef __BEAPIVIEW_H__
 #define __BEAPIVIEW_H__
 
+	#if defined (BACKEND_BEAPI)
+
 #include <interface/View.h>
 
 namespace FX
@@ -27,5 +29,5 @@ class BeAPIView : public BView
 	public:
     	static int frameCount;
 	};
-
+	#endif
 #endif
