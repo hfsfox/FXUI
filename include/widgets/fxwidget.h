@@ -9,22 +9,13 @@
 // © 2025, , All Rights Reserved
 //-----------------------------------------------------------------------------
 
-#ifndef     __fxwidgets__
-#define     __fxwidgets__
+#ifndef __FXWIDGET_H__
+#define __FXWIDGET_H__
 
-#include <fxwidget.h>
-//
-#include <fxslider.h>
-#include <fxbutton.h>
-#include <fxmenubar.h>
-#include <fxtextview.h>
-#include <fxtextfield.h>
-#include <fxtoolbar.h>
-#include <fxcheckbox.h>
-#include <fxprogressbar.h>
-#include <fxradiobutton.h>
-// dialogs
-#include <dialogs/fxmessagebox.h>
-#include <dialogs/fxfiledialog.h>
+class FWidget
+{
+    public:
+    private:
+};
 
 #endif

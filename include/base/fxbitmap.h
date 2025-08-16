@@ -3,6 +3,13 @@
 
 #include <stdint.h>
 
+enum color_space
+{
+    FX_RGB = 0,
+    FX_RGBA,
+    FX_GRAYSCALE
+};
+
 namespace FX
 {
     class FXBitmap
@@ -10,18 +17,19 @@ namespace FX
         public:
             FXBitmap();
             FXBitmap(uint32_t resourceID);
-            FXBitmap(int width, int height);
+            FXBitmap(int width, int height, color_space colorspace);
             ~FXBitmap();
         public:
-            inline uint32_t GetWidth(void) { return width; }
-            inline uint32_t GetHeight (void) { return height; }
+            uint32_t GetWidth(void) { return width; }
+            uint32_t GetHeight (void) { return height; }
         public:
-            bool IsLoaded ();
+            bool IsLoaded () {return loaded;}
         public:
             uint32_t resourceID;
             uint32_t width;
             uint32_t height;
             int pixel_format;
+            bool loaded;
         private:
     };
 }

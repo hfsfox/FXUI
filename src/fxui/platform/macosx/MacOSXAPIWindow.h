@@ -8,4 +8,13 @@
 
 //NSApplication       *NSApplicationInstance;
 
+class MacOSXWindow: public NSWindow
+{
+    public:
+        MacOSXWindow(BRect frame, const char* title);
+        virtual bool QuitRequested() override;
+        bool ShouldClose() const { return fShouldClose; }
+        volatile bool fShouldClose;
+};
+
 #endif

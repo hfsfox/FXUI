@@ -44,3 +44,17 @@ _LoadPixmap(char** xpm_data)
     }
     #endif
 }
+
+FX::FXBitmap::FXBitmap()
+{
+}
+
+FX::FXBitmap::FXBitmap(int width, int height, color_space colorspace)
+{
+}
+
+FX::FXBitmap::~FXBitmap()
+{
+}
+
+
