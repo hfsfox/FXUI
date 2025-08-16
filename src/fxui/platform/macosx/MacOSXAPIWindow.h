@@ -1,3 +1,4 @@
+#include <fxrect.h>
 #ifdef BACKEND_COCOA
 
 #include <Cocoa/Cocoa.h>
@@ -8,11 +9,11 @@
 
 //NSApplication       *NSApplicationInstance;
 
-class MacOSXWindow: public NSWindow
+class MacOSXWindow
 {
     public:
-        MacOSXWindow(BRect frame, const char* title);
-        virtual bool QuitRequested() override;
+        MacOSXWindow(FX::FXRect frame, const char* title);
+        virtual bool QuitRequested();
         bool ShouldClose() const { return fShouldClose; }
         volatile bool fShouldClose;
 };
