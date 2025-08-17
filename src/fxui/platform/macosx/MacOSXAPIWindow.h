@@ -15,7 +15,15 @@ class MacOSXWindow
         MacOSXWindow(FX::FXRect frame, const char* title);
         virtual bool QuitRequested();
         bool ShouldClose() const { return fShouldClose; }
+    public:
         volatile bool fShouldClose;
+    public:
+        //NSString*
+        void* cocoaWindowTitle = nullptr;
+        // CocoaAPIWindow*
+        void* window = nullptr;
+        // CocoaAPIView*
+	    void* view = nullptr;
 };
 
 #endif
