@@ -46,8 +46,12 @@ MacOSXAPIApplication::MacOSXAPIApplication()
 
 MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect frame, const char* title)
 {
-    //[NSApplication sharedApplication];
+    id app = [NSApplication sharedApplication];
+    [app setActivationPolicy:NSApplicationActivationPolicyRegular];
     //[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+    //Get screen size
+    //NSRect screenRect = [[NSScreen mainScreen] frame];
+    [app run];
 };
 
 bool
