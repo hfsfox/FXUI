@@ -204,7 +204,7 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //[app setMainMenu: CreateMenuBar("File")];
 
     //[app ]
-    [window makeKeyAndOrderFront: NSApp];
+    [window makeKeyAndOrderFront: app];
 
     [app run];
 
