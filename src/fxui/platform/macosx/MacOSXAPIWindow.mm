@@ -184,6 +184,8 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
         fprintf(stderr, "Failed to create NSWindow\n");
     }
 
+    [window setStyleMask: NSResizableWindowMask];
+
     //msg(window, sel("setTitle:"), cls_msg(cls("NSString"), sel("stringWithUTF8String:"), title));
 
     [window setTitle: ConvertFromChar(title)];
