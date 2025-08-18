@@ -184,15 +184,16 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
         fprintf(stderr, "Failed to create NSWindow\n");
     }
 
-    [window setStyleMask: NSResizableWindowMask];
+    [window setStyleMask: NSResizableWindowMask | NSClosableWindowMask | NSTitledWindowMask];
 
     //msg(window, sel("setTitle:"), cls_msg(cls("NSString"), sel("stringWithUTF8String:"), title));
 
     [window setTitle: ConvertFromChar(title)];
 
-    [app setMainMenu: CreateMenuBar("File")];
+    //[app setMainMenu: CreateMenuBar("File")];
 
     //[window makeKeyAndOrderFront:nil];
+    [window makeKeyAndOrderFront: app];
     
     //MacOSXAPIMenuBar* mb = new MacOSXAPIMenuBar("File");
 
@@ -204,7 +205,6 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //[app setMainMenu: CreateMenuBar("File")];
 
     //[app ]
-    [window makeKeyAndOrderFront: app];
 
     [app run];
 
