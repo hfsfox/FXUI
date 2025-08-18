@@ -40,6 +40,8 @@
 
 MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect frame, const char* title)
 {
+    [NSApplication sharedApplication];
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
 };
 
 bool

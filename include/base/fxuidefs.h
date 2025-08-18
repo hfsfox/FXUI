@@ -16,7 +16,8 @@ enum window_look
 {
     FX_WF_DEFAUILT = 0,
     FX_WF_MODAL,
-    FX_WF_BORDERLESS
+    FX_WF_BORDERLESS,
+    FX_WF_FULLSCREEN
 };
 
 enum window_flags
