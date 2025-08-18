@@ -272,6 +272,7 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
 bool
 MacOSXAPIWindow::QuitRequested()
 {
+    [NSApp terminate:[NSApplication sharedApplication]];
 };
 
 
