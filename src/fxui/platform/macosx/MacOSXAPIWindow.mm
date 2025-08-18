@@ -38,6 +38,13 @@
 @implementation CocoaAPIMenuBar: NSMenu
 @end
 
+NSString* 
+ConvertFromChar(const char* char_str)
+{
+    return [[NSString stringWithUTF8String: char_str]autorelease];
+};
+
+
 MacOSXAPIApplication::MacOSXAPIApplication()
 {
     //[NSApplication sharedApplication];
@@ -75,7 +82,9 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
         fprintf(stderr, "Failed to create NSWindow\n");
     }
 
-    msg(window, sel("setTitle:"), cls_msg(cls("NSString"), sel("stringWithUTF8String:"), title));
+    //msg(window, sel("setTitle:"), cls_msg(cls("NSString"), sel("stringWithUTF8String:"), title));
+
+    [window setTitle: ConvertFromChar(title)];
 
     [window makeKeyAndOrderFront:nil];
     
