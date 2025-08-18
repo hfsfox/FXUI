@@ -25,8 +25,20 @@
 @interface CocoaAPIView : NSView
 //- (BOOL)	acceptsFirstResponder;
 //- (BOOL)	isOpaque;
-
+{
+}
 @end
+
+/*@interface CocoaAPIMenu : NSMenu
+{
+}
+//-(void)dealloc;
+//- (id)copyWithZone:(NSZone *)zone;
+@end
+
+@implementation CocoaAPIMenu
+
+@end*/
 
 @implementation CocoaAPIView
 
@@ -35,15 +47,30 @@
 @interface CocoaAPIMenuBar: NSMenu
 @end
 
-@implementation CocoaAPIMenuBar: NSMenu
+@implementation CocoaAPIMenuBar
 @end
 
-NSString* 
-ConvertFromChar(const char* char_str)
+namespace
 {
-    return [[NSString stringWithUTF8String: char_str]autorelease];
+    NSString*
+    ConvertFromChar(const char* char_str)
+    {
+        return [[NSString stringWithUTF8String: char_str]autorelease];
+    };
+}
+
+
+MacOSXAPIMenuBar::MacOSXAPIMenuBar(const char* _label)
+{
+    CocoaAPIMenuBar* menubar;
+    NSString* label = (NSString *)ConvertFromChar(_label);
+    menubar=[[CocoaAPIMenuBar alloc] initWithTitle:label];
+    [laebl release];
+    menubar=[[CocoaAPIMenuBar alloc] init];
+    [menubar setAutoenablesItems:NO];
 };
 
+//MacOSXAPIMenuBar::
 
 MacOSXAPIApplication::MacOSXAPIApplication()
 {
@@ -88,6 +115,8 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
 
     [window makeKeyAndOrderFront:nil];
     
+    MacOSXAPIMenuBar* mb = new MacOSXAPIMenuBar("File");
+
     //
     //
     [app run];

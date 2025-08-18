@@ -1,4 +1,5 @@
 #include <fxrect.h>
+#include <limits>
 #ifdef BACKEND_COCOA
 
 //NSApplication       *NSApplicationInstance;
@@ -33,7 +34,10 @@ class MacOSAPIView
 
 class MacOSXAPIMenuBar
 {
-
+    public:
+        MacOSXAPIMenuBar();
+    public:
+        void* menubar;
 };
 
 #endif
