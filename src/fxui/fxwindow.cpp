@@ -34,9 +34,10 @@
     #include <windows.h>
 #elif defined (BACKEND_COCOA)
     //#include <Cocoa/Cocoa.h>
-    #include <Carbon/Carbon.h>
-    #include <objc/message.h>
-    #include <objc/runtime.h>
+    //#include <Carbon/Carbon.h>
+    //#include <objc/message.h>
+    //#include <objc/runtime.h>
+    #include "platform/macosx/MacOSXAPIWindow.h"
 #endif
 
 #include <cstdio>
@@ -491,10 +492,11 @@ FX::FXWindow::Create()
         //display->
         return true;
     #elif defined (BACKEND_COCOA)
-        struct CGRect frameRect = {static_cast<CGFloat>(rect.x), static_cast<CGFloat>(rect.y), static_cast<CGFloat>(rect.x + rect.width), static_cast<CGFloat>(rect.y + rect.height)};
+        MacOSXAPIWindow* win = new MacOSXAPIWindow(FX::FXRect(10,10,100,100), "Cocoa Window");
+        //struct CGRect frameRect = {static_cast<CGFloat>(rect.x), static_cast<CGFloat>(rect.y), static_cast<CGFloat>(rect.x + rect.width), static_cast<CGFloat>(rect.y + rect.height)};
         //id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
         //struct CGRect frameRect = {(CGFloat)rect.x, (CGFloat)rect.y, (CGFloat)rect.x + rect.width, (CGFloat)rect.y + rect.height};
-        id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
+        //id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
         /*id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
               sel("initWithContentRect:styleMask:backing:defer:"), frameRect,
               NSWindowStyleMaskTitled | NSWindowStyleMaskClosable |
@@ -540,6 +542,7 @@ FX::FXWindow::Create()
 
     //id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
     
+    /*
     // Create main menu bar
     id mainMenuBar = msg(cls_msg(cls("NSMenu"), sel("alloc")), sel("init"));
     
@@ -603,6 +606,7 @@ FX::FXWindow::Create()
     msg(mainMenuBar, sel("release"));
 
     //msg(pool, sel("drain"));
+    */
     return true;
     #endif
 }
