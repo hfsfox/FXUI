@@ -277,7 +277,7 @@ MacOSXAPIWindow::QuitRequested()
 
 
 void
-MacOSXAPIWindow::setTitle(const char* title)
+MacOSXAPIWindow::SetTitle(const char* title)
 {
     [window setTitle: ConvertFromChar(title)];
 };
