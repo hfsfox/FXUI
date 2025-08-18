@@ -174,7 +174,9 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     [app activateIgnoringOtherApps:YES];
 
     struct CGRect frameRect = {static_cast<CGFloat>(rect.x), static_cast<CGFloat>(rect.y), static_cast<CGFloat>(rect.x + rect.width), static_cast<CGFloat>(rect.y + rect.height)};
-    id window = [[NSWindow alloc] initWithContentRect:frameRect
+    //id window
+    CocoaAPIWindow* window
+     = (NSWindow*)[[CocoaAPIWindow alloc] initWithContentRect:frameRect
     styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskResizable
     backing:NSBackingStoreBuffered defer:NO];
 
@@ -279,7 +281,7 @@ MacOSXAPIWindow::QuitRequested()
 void
 MacOSXAPIWindow::SetTitle(const char* title)
 {
-    [window setTitle: ConvertFromChar(title)];
+    //[window setTitle: ConvertFromChar(title)];
 };
 
 
