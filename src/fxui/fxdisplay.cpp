@@ -223,9 +223,9 @@ bool FX::FXDisplay::Init()
 	//	{
         //            standaloneApp = false;
 	//	}
-        id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
+        /*id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
         msg(app, sel("setActivationPolicy:"), NSApplicationActivationPolicyRegular);
-        msg(app, sel("activateIgnoringOtherApps:"), true);
+        msg(app, sel("activateIgnoringOtherApps:"), true);*/
         
     /*
     // Create main menu bar
@@ -279,7 +279,7 @@ bool FX::FXDisplay::Init()
     msg(mainMenuBar, sel("release"));*/
 
 
-        msg(app, sel("run"));
+        //msg(app, sel("run"));
         return true;
     #elif defined(BACKEND_X11)
         //display = XOpenDisplay(nullptr);
