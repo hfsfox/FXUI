@@ -15,6 +15,7 @@ class MacOSXAPIWindow
     public:
         MacOSXAPIWindow(FX::FXRect frame, const char* title);
         virtual bool QuitRequested();
+        virtual void SetTitle(const char* title);
         bool ShouldClose() const { return fShouldClose; }
     public:
         volatile bool fShouldClose;
@@ -22,7 +23,7 @@ class MacOSXAPIWindow
         //NSString*
         void* cocoaWindowTitle = nullptr;
         // CocoaAPIWindow*
-        void* window = nullptr;
+        id window;
         // CocoaAPIView*
 	    void* view = nullptr;
 };
@@ -36,6 +37,8 @@ class MacOSXAPIMenuBar
 {
     public:
         MacOSXAPIMenuBar(const char* _label);
+        ~MacOSXAPIMenuBar();
+    public:
         id MainMenuBar() { return menubar; }
     public:
         id menubar;

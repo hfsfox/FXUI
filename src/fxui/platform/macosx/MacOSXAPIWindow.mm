@@ -132,6 +132,12 @@ MacOSXAPIMenuBar::MacOSXAPIMenuBar(const char* _label)
     [menubar setAutoenablesItems:NO];
 };
 
+MacOSXAPIMenuBar::~MacOSXAPIMenuBar()
+{
+    //NSMenu *menubar=(NSMenu *)CocoaAPIMenuBar;
+    [menubar release];
+}
+
 /*NSMenu*
 MacOSXAPIMenuBar::MacOSXAPIMenuBar()
 {
@@ -268,6 +274,12 @@ MacOSXAPIWindow::QuitRequested()
 {
 };
 
+
+void
+MacOSXAPIWindow::setTitle(const char* title)
+{
+    [window setTitle: ConvertFromChar(title)];
+};
 
 
 #endif

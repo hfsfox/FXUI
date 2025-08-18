@@ -316,6 +316,8 @@ namespace
         //int haikuView::frameCount = 0;
     #elif defined (BACKEND_WINAPI)
         ::HWND hWindow;
+    #elif defined (BACKEND_COCOA)
+        MacOSXAPIWindow* macwindow;
     #endif
 }
 
@@ -492,7 +494,8 @@ FX::FXWindow::Create()
         //display->
         return true;
     #elif defined (BACKEND_COCOA)
-        MacOSXAPIWindow* win = new MacOSXAPIWindow(FX::FXRect(rect.x,rect.y,rect.x + rect.width,rect.y + rect.height), title);
+        //MacOSXAPIWindow*
+        macwindow = new MacOSXAPIWindow(FX::FXRect(rect.x,rect.y,rect.x + rect.width,rect.y + rect.height), title);
         //struct CGRect frameRect = {static_cast<CGFloat>(rect.x), static_cast<CGFloat>(rect.y), static_cast<CGFloat>(rect.x + rect.width), static_cast<CGFloat>(rect.y + rect.height)};
         //id window = msg(cls_msg(cls("NSWindow"), sel("alloc")),
         //struct CGRect frameRect = {(CGFloat)rect.x, (CGFloat)rect.y, (CGFloat)rect.x + rect.width, (CGFloat)rect.y + rect.height};
@@ -730,6 +733,8 @@ FX::FXWindow::SetTitle(const char* title)
         xdg_toplevel_set_title(xdg_toplevel, title);
         //wl_surface_commit(surface);
         //wl_display_flush(wDisplay);
+    #elif defined (BACKEND_COCOA)
+        macwindow->SetTitle(title);
     #endif
 }
 
