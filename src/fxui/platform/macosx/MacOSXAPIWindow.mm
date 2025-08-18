@@ -57,18 +57,86 @@ namespace
     {
         return [[NSString stringWithUTF8String: char_str]autorelease];
     };
+
+    NSMenu*
+    CreateMenuBar(const char* init_label)
+    {
+        CocoaAPIMenuBar* mainMenuBar;
+        NSString* label = (NSString *)ConvertFromChar(init_label);
+        mainMenuBar=[[CocoaAPIMenuBar alloc] initWithTitle:label];
+        [label release];
+        mainMenuBar=[[CocoaAPIMenuBar alloc] init];
+        [mainMenuBar setAutoenablesItems:NO];
+        return mainMenuBar;
+    };
+
 }
 
 
 MacOSXAPIMenuBar::MacOSXAPIMenuBar(const char* _label)
 {
-    CocoaAPIMenuBar* menubar;
+    CocoaAPIMenuBar* mainMenuBar;
     NSString* label = (NSString *)ConvertFromChar(_label);
-    menubar=[[CocoaAPIMenuBar alloc] initWithTitle:label];
-    [laebl release];
-    menubar=[[CocoaAPIMenuBar alloc] init];
+    mainMenuBar=[[CocoaAPIMenuBar alloc] initWithTitle:label];
+    [label release];
+    //
+
+    /*id appMenuItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")), sel("init"));
+    
+    // Add application menu item to main menu bar
+    msg(mainMenuBar, sel("addItem:"), appMenuItem);
+    
+    // Create application submenu
+    id appTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "Application");
+    id appMenu = msg(cls_msg(cls("NSMenu"), sel("alloc")), sel("initWithTitle:"), appTitle);
+    
+    // Set the submenu for the application menu item
+    msg(appMenuItem, sel("setSubmenu:"), appMenu);
+    
+    // Add some common application menu items
+    
+    // About menu item
+    id aboutTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "About");
+    id aboutItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")), 
+                      sel("initWithTitle:action:keyEquivalent:"), 
+                      aboutTitle, sel("orderFrontStandardAboutPanel:"), 
+                      cls_msg(cls("NSString"), sel("string")));
+    //msg(aboutItem, sel("setTarget:"), app);
+    msg(appMenu, sel("addItem:"), aboutItem);
+    
+    // Separator
+    id separator = cls_msg(cls("NSMenuItem"), sel("separatorItem"));
+    msg(appMenu, sel("addItem:"), separator);
+    
+    // Quit menu item
+    id quitTitle = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "Quit");
+    id quitKeyEquiv = cls_msg(cls("NSString"), sel("stringWithUTF8String:"), "q");
+    id quitItem = msg(cls_msg(cls("NSMenuItem"), sel("alloc")),
+                     sel("initWithTitle:action:keyEquivalent:"),
+                     quitTitle, sel("terminate:"), quitKeyEquiv);
+    //msg(quitItem, sel("setTarget:"), app);
+    msg(appMenu, sel("addItem:"), quitItem);
+    
+    // Set the main menu
+    //msg(app, sel("setMainMenu:"), mainMenuBar);
+    
+    // Clean up (release objects)
+    msg(appMenuItem, sel("release"));
+    msg(appMenu, sel("release"));
+    msg(aboutItem, sel("release"));
+    msg(quitItem, sel("release"));
+    msg(mainMenuBar, sel("release"));
+    */
+    //
+    mainMenuBar=[[CocoaAPIMenuBar alloc] init];
     [menubar setAutoenablesItems:NO];
 };
+
+/*NSMenu*
+MacOSXAPIMenuBar::MacOSXAPIMenuBar()
+{
+    retunr menu
+}*/
 
 //MacOSXAPIMenuBar::
 
@@ -113,12 +181,19 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
 
     [window setTitle: ConvertFromChar(title)];
 
+    [app setMainMenu: CreateMenuBar("File")];
+
     [window makeKeyAndOrderFront:nil];
     
-    MacOSXAPIMenuBar* mb = new MacOSXAPIMenuBar("File");
+    //MacOSXAPIMenuBar* mb = new MacOSXAPIMenuBar("File");
 
     //
     //
+    //msg(app, sel("setMainMenu:"), mb->MainMenuBar());
+    //[app setMainMenu: mb->menubar];
+
+    //[app setMainMenu: CreateMenuBar("File")];
+
     [app run];
 
     /*id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));

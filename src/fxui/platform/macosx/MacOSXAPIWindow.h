@@ -35,9 +35,10 @@ class MacOSAPIView
 class MacOSXAPIMenuBar
 {
     public:
-        MacOSXAPIMenuBar();
+        MacOSXAPIMenuBar(const char* _label);
+        id MainMenuBar() { return menubar; }
     public:
-        void* menubar;
+        id menubar;
 };
 
 #endif
