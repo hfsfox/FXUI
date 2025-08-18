@@ -192,7 +192,7 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
 
     [app setMainMenu: CreateMenuBar("File")];
 
-    [window makeKeyAndOrderFront:nil];
+    //[window makeKeyAndOrderFront:nil];
     
     //MacOSXAPIMenuBar* mb = new MacOSXAPIMenuBar("File");
 
@@ -202,6 +202,9 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //[app setMainMenu: mb->menubar];
 
     //[app setMainMenu: CreateMenuBar("File")];
+
+    //[app ]
+    [window makeKeyAndOrderFront: NSApp];
 
     [app run];
 
