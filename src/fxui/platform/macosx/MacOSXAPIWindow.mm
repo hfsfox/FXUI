@@ -38,10 +38,16 @@
 @implementation CocoaAPIMenuBar: NSMenu
 @end
 
-MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect frame, const char* title)
+MacOSXAPIApplication::MacOSXAPIApplication()
 {
     [NSApplication sharedApplication];
     [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+};
+
+MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect frame, const char* title)
+{
+    //[NSApplication sharedApplication];
+    //[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
 };
 
 bool

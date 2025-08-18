@@ -3,6 +3,12 @@
 
 //NSApplication       *NSApplicationInstance;
 
+class MacOSXAPIApplication
+{
+    public:
+        MacOSXAPIApplication();
+};
+
 class MacOSXAPIWindow
 {
     public:
