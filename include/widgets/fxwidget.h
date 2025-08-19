@@ -11,15 +11,19 @@
 
 #ifndef __FXWIDGET_H__
 #define __FXWIDGET_H__
+
+#include <fxdisplay.h>
+#include <fxrect.h>
+
 namespace FX
 {
     class FXWidget
     {
         public:
-            FXWidget();
+            FXWidget(FX::FXRect widget_rect);
             ~FXWidget();
         public:
-            void Draw();
+            virtual void Draw();
         private:
     };
 }
