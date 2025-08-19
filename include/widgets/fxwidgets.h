@@ -33,5 +33,7 @@
 #include <layout/fxlayout.h>
 //notifications
 #include <notifications/fxnotification.h>
+//themes
+#include <theme/fxtheme.h>
 
 #endif

@@ -9,18 +9,20 @@
 // © 2025, , All Rights Reserved
 //-----------------------------------------------------------------------------
 
-#ifndef __FXWIDGET_H__
-#define __FXWIDGET_H__
+#ifndef     __FXTHEME__
+#define     __FXTHEME__
+
+#include <cstdint>
+
 namespace FX
 {
-    class FXWidget
+    class FXTheme
     {
         public:
-            FXWidget();
-            ~FXWidget();
+         FXTheme();
+         ~FXTheme();
         public:
-            void Draw();
-        private:
+        uint32_t SetTheme();
     };
 }
 
