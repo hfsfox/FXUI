@@ -12,6 +12,7 @@
 #ifndef     __fxgui__
 #define     __fxgui__
 
+#include <fxapplication.h>
 #include <fxsystypes.h>
 #include <fxcompilerdefs.h>
 #include <fxplatformdefs.h>
@@ -25,6 +26,8 @@
 #include <fxwindow.h>
 #include <fxview.h>
 #include <fxuidefs.h>
+#include <fxclipboard.h>
+#include <fxcursor.h>
 
 #include <cstdint>
 

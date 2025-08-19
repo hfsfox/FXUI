@@ -15,6 +15,7 @@
 #include <fxdisplay.h>
 #include <fxrect.h>
 #include <fxpoint.h>
+#include <fxuidefs.h>
 
 namespace FX
 {
@@ -22,7 +23,7 @@ namespace FX
     {
         public:
             FXSlider();
-            FXSlider(const char* progressbar_caption, FX::FXRect progressbar_r, FX::FXDisplay* display);
+            FXSlider(const char* progressbar_caption, FX::FXRect progressbar_r, FX::FXDisplay* display, ui_direction direction);
             ~FXSlider();
         public:
             void SetLimits(unsigned int _begin, unsigned int _end);

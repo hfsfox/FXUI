@@ -1,9 +1,10 @@
+#include "fxuidefs.h"
 #include <fxslider.h>
 
 FX::FXSlider::FXSlider()
 {
 }
-FX::FXSlider::FXSlider(const char* progressbar_caption, FX::FXRect progressbar_r, FX::FXDisplay* display)
+FX::FXSlider::FXSlider(const char* progressbar_caption, FX::FXRect progressbar_r, FX::FXDisplay* display, ui_direction direction)
     :
     d(display),
     rect(progressbar_r),
@@ -24,6 +25,7 @@ FX::FXSlider::FXSlider(const char* progressbar_caption, FX::FXRect progressbar_r
                 //selected = false;
                 //if(!selected)
                 //{
+            if(direction == FX_HORIZONTAL){
                     int slider_height = 15;
                     // draw background
                     d->FillRect(rect.x, rect.y, rect.width, slider_height, background_color);
@@ -34,6 +36,10 @@ FX::FXSlider::FXSlider(const char* progressbar_caption, FX::FXRect progressbar_r
                     d->FillRect(rect.x+slider_height+42/*rect.width-slider_height*/, rect.y+rect.height-slider_height, 40/*len*/, slider_height, thumb_color);
                     // draw frame
                     d->DrawRect(rect.x, rect.y, rect.width, rect.height, bg_color);
+            }
+            if (direction == FX_VERTICAL)
+            {
+            }
     }
 FX::FXSlider::~FXSlider()
 {

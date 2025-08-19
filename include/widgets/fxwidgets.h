@@ -14,6 +14,7 @@
 
 #include <fxwidget.h>
 //
+#include <fxlistview.h>
 #include <fxslider.h>
 #include <fxbutton.h>
 #include <fxmenubar.h>
@@ -23,6 +24,7 @@
 #include <fxcheckbox.h>
 #include <fxprogressbar.h>
 #include <fxradiobutton.h>
+#include <fxcolumlistview.h>
 // dialogs
 #include <dialogs/fxmessagebox.h>
 #include <dialogs/fxfiledialog.h>

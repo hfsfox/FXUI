@@ -4,6 +4,7 @@
 
 #include <Cocoa/Cocoa.h>
 #include <Foundation/Foundation.h>
+#include <Foundation/NSString.h>
 #include <Carbon/Carbon.h>
 #include <objc/message.h>
 #include <objc/runtime.h>

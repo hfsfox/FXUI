@@ -1,4 +1,3 @@
-#include "fxdisplay.h"
 #include <fxui.h>
 #include <fxwidgets.h>
 #include <iostream>
@@ -64,6 +63,12 @@ main()
 
     #elif defined(PLATFORM_HAIKU)
         std::cout << "Haiku OS" << std::endl;
+
+    #elif defined(PLATFORM_WINDOWS)
+        std::cout << "Widnows" << std::endl;
+
+    #elif defined(PLATFORM_MACOSX)
+        std::cout << "macOS X" << std::endl;
     #endif
 
     window.SetTitle("FXWindow");
@@ -77,7 +82,7 @@ main()
     //}
     //messagebox->Show();
 
-    FX::FXRect examplecontainer = {0+50, 20+50, 80, 100};
+    FX::FXRect examplecontainer = {0+40, 10+40, 80, 100};
 
     FX::FXRect button_1_rect(examplecontainer.x+50, examplecontainer.y+40, 70, 25);
     FX::FXRect button_2_rect(button_1_rect.x+button_1_rect.width+10, button_1_rect.y, 70, 25);
@@ -137,7 +142,7 @@ main()
         pb->SetLimits(0, 10);
         pb->SetProgress(45);
 
-        FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),display);
+        FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),display, FX_HORIZONTAL);
 
         display->Present();
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
