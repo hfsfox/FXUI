@@ -14,19 +14,24 @@
 
 #include <fxwidget.h>
 //
-#include <fxlistview.h>
-#include <fxslider.h>
 #include <fxbutton.h>
-#include <fxmenubar.h>
-#include <fxtextview.h>
-#include <fxtextfield.h>
-#include <fxtoolbar.h>
 #include <fxcheckbox.h>
+#include <fxcolumlistview.h>
+#include <fxlistview.h>
+#include <fxmenubar.h>
 #include <fxprogressbar.h>
 #include <fxradiobutton.h>
-#include <fxcolumlistview.h>
+#include <fxslider.h>
+#include <fxtextfield.h>
+#include <fxtextview.h>
+#include <fxthrobber.h>
+#include <fxtoolbar.h>
 // dialogs
-#include <dialogs/fxmessagebox.h>
 #include <dialogs/fxfiledialog.h>
+#include <dialogs/fxmessagebox.h>
+// layouts
+#include <layout/fxlayout.h>
+//notifications
+#include <notifications/fxnotification.h>
 
 #endif

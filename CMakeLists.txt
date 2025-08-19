@@ -94,10 +94,14 @@ include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     )
 
 set(FXUI_BASE_SOURCES
+    src/fxui/fxapplication.cpp
     src/fxui/fxdisplay.cpp
     src/fxui/fxwindow.cpp
     src/fxui/fxbitmap.cpp
     src/fxui/fxfont.cpp
+)
+
+set(FXUI_LAYOUT_SOURCES
 )
 
 set(FXUI_WIDGET_SOURCES
@@ -117,6 +121,7 @@ set(FXUI_WIDGET_DIALOG_SOURCES
 
 set(FXUI_SOURCES
     ${FXUI_BASE_SOURCES}
+    ${FXUI_LAYOUT_SOURCES}
     ${FXUI_WIDGET_SOURCES}
     ${FXUI_WIDGET_DIALOG_SOURCES}
 )
