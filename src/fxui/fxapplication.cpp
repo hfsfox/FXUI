@@ -4,9 +4,9 @@
 #if defined (BACKEND_X11)
 #elif defined (BACKEND_WAYLAND)
 #elif defined (BACKEND_COCOA)
-    #include <Cocoa/Cocoa.h>
-    #include <Foundation/Foundation.h>
-    #include <Foundation/NSString.h>
+    //#include <Cocoa/Cocoa.h>
+    //#include <Foundation/Foundation.h>
+    //#include <Foundation/NSString.h>
     #include <Carbon/Carbon.h>
     #include <objc/message.h>
     #include <objc/runtime.h>
