@@ -1,5 +1,3 @@
-#include "fxbutton.h"
-#include "fxdisplay.h"
 #include <fxui.h>
 #include <fxwidgets.h>
 #include <iostream>
@@ -12,6 +10,8 @@
 int
 main()
 {
+    FX::FXApplication app;
+
     FX::FXDisplay* display = new FX::FXDisplay();
     if (!display->Init()) {
         std::cerr << "Failed to initialize display" << std::endl;
@@ -46,5 +46,5 @@ main()
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
 
-    return 0;
+    return app.Run();
 }

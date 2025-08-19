@@ -20,6 +20,7 @@ namespace FX
     {
         public:
          FXApplication();
+         FXApplication(const char* vendor_descriptor);
          ~FXApplication();
         public:
         uint32_t Run();

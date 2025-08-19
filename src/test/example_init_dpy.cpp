@@ -14,6 +14,9 @@ main()
         return -1;
     }*/
 
+    //FX::FXApplication* app = new FX::FXApplication();
+    FX::FXApplication app;
+
     FX::FXDisplay* display = new FX::FXDisplay();
 
     if(!display->Init())
@@ -148,5 +151,5 @@ main()
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
 
-    return 0;
+    return app.Run();
 }

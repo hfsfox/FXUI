@@ -1,5 +1,3 @@
-#include "fxbutton.h"
-#include "fxwindow.h"
 #ifdef PLATFORM_HAIKU
 #include <InterfaceDefs.h>
 #endif
@@ -16,8 +14,10 @@
 // Example usage
 int main()
 {
+    FX::FXApplication app;
 
     FX::FXDisplay display;
+
     if (!display.Init()) {
         std::cerr << "Failed to initialize display" << std::endl;
         return -1;
@@ -121,5 +121,5 @@ int main()
     }
 
     std::cout << "Window closed" << std::endl;
-    return 0;
+    return app.Run();
 }
