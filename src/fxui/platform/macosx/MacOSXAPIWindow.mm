@@ -2,6 +2,7 @@
 
 #if defined (BACKEND_COCOA)
 
+#include <AppKit/AppKit.h>
 #include <Cocoa/Cocoa.h>
 #include <Foundation/Foundation.h>
 #include <Foundation/NSString.h>
@@ -170,6 +171,8 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //[app run];
     //struct CGRect frameRect = {0, 0, 500, 300};
 
+    id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));
+
     NSApplication* app = NSApplication.sharedApplication;
     app.ActivationPolicy = NSApplicationActivationPolicyRegular;
     //id app = [NSApplication sharedApplication];
@@ -187,7 +190,7 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
         fprintf(stderr, "Failed to create NSWindow\n");
     }
 
-    [window setStyleMask: NSResizableWindowMask | NSClosableWindowMask | NSTitledWindowMask];
+    //[window setStyleMask: NSResizableWindowMask | NSClosableWindowMask | NSTitledWindowMask];
 
     //msg(window, sel("setTitle:"), cls_msg(cls("NSString"), sel("stringWithUTF8String:"), title));
 
@@ -218,14 +221,19 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     [view setWantsLayer:YES];
     //NSColor* bg_color = [[NSColor alloc] init: CGColor{static_cast<CGFloat>(0),static_cast<CGFloat>(0),static_cast<CGFloat>(0),static_cast<CGFloat>(255)}];
     view.layer.backgroundColor = [[NSColor grayColor] CGColor];
+    //CGColor* graycolor = { .red= 160, .green= 160, .blue= 160, .alpha= 1.0};
+    //NSColor* bg_color = [[NSColor alloc] init: CGColor.init(red:160, green:160, blue:160, alpha: 1.0)];
     //view.layer.backgroundColor = bg_color;
     //NSRect viewFrameInWindowCoords = [view convertRect: [view bounds] toView: nil];
 
     [window.contentView addSubview:view];
 
     //[app ]
+    msg(pool, sel("drain"));
 
     [app run];
+
+    //msg(pool, sel("drain"));
 
     /*id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));
     // Create main menu bar
@@ -322,9 +330,9 @@ MacOSXAPIWindow::SetTitle(const char* title)
 */
 
 
-CocoaApplication::CocoaApplication(int argc, char** argv)
+CocoaApplication::CocoaApplication(int _argc, char** _argv)
 {
-    //return NSApplicationMain(argc, argv);
+    /*return*/ NSApplicationMain(0, 0/*(const char*)_argv*/);
 };
 
 int

@@ -225,9 +225,9 @@ bool FX::FXDisplay::Init()
 	//	}
         /*id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
         msg(app, sel("setActivationPolicy:"), NSApplicationActivationPolicyRegular);
-        msg(app, sel("activateIgnoringOtherApps:"), true);*/
+        msg(app, sel("activateIgnoringOtherApps:"), true);
         
-    /*
+    
     // Create main menu bar
     id mainMenuBar = msg(cls_msg(cls("NSMenu"), sel("alloc")), sel("init"));
     

@@ -23,7 +23,7 @@ class MacOSXAPIWindow
         //NSString*
         void* cocoaWindowTitle = nullptr;
         // CocoaAPIWindow*
-        id window;
+        void* window;
         // CocoaAPIView*
 	    void* view = nullptr;
 };
@@ -39,9 +39,9 @@ class MacOSXAPIMenuBar
         MacOSXAPIMenuBar(const char* _label);
         ~MacOSXAPIMenuBar();
     public:
-        id MainMenuBar() { return menubar; }
+        void* MainMenuBar() { return menubar; }
     public:
-        id menubar;
+        void* menubar;
 };
 
 class CocoaApplication
@@ -49,6 +49,9 @@ class CocoaApplication
     public:
         CocoaApplication(int argc, char** argv);
         int Return();
+    private:
+       int _argc;
+       char** _argv;
 };
 
 #endif

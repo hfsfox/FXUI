@@ -82,7 +82,7 @@ FX::FXApplication::Run()
     #elif defined (BACKEND_WAYLAND)
     return 0;
     #elif defined (BACKEND_COCOA)
-    СocoaApplication app;
+    CocoaApplication app(argc_state, argv_state);
     return 0;
     //return NSApplicationMain (argc_state, argv_state);
     #elif defined (BACKEND_BEAPI)
