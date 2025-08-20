@@ -212,13 +212,13 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //NSRect viewFrameInWindowCoords = [myView convertRect: [myView bounds] toView: nil];
     //NSRect contentRect = NSMakeRect (0, 0, config.size.x, config.size.y);
 
-    NSRect contentRect = NSMakeRect (0, 0, config.size.x, config.size.y);
+    //NSRect contentRect = NSMakeRect (0, 0, config.size.x, config.size.y);
 
-    NSView *view = [[NSView alloc] initWithFrame: /*frameRect*/ NSMakeRect(0, 0, frameRect.width/*100*/, frameRect.height/*100*/)];
+    NSView *view = [[NSView alloc] initWithFrame: /*frameRect*/ NSMakeRect(0, 0, frameRect.size.width/*100*/, frameRect.size.height/*100*/)];
     [view setWantsLayer:YES];
-    NSColor* bg_color = [[NSColor alloc] init: CGColor{static_cast<CGFloat>(0),static_cast<CGFloat>(0),static_cast<CGFloat>(0),static_cast<CGFloat>(255)}];
-    //view.layer.backgroundColor = [[NSColor yellowColor] CGColor];
-    view.layer.backgroundColor = bg_color;
+    //NSColor* bg_color = [[NSColor alloc] init: CGColor{static_cast<CGFloat>(0),static_cast<CGFloat>(0),static_cast<CGFloat>(0),static_cast<CGFloat>(255)}];
+    view.layer.backgroundColor = [[NSColor grayColor] CGColor];
+    //view.layer.backgroundColor = bg_color;
     //NSRect viewFrameInWindowCoords = [view convertRect: [view bounds] toView: nil];
 
     [window.contentView addSubview:view];
