@@ -49,7 +49,7 @@ FX::FXBitmap::FXBitmap()
 {
 }
 
-FX::FXBitmap::FXBitmap(int width, int height, color_space colorspace)
+FX::FXBitmap::FXBitmap(int width, int height, colorspace colorspace)
 {
 }
 

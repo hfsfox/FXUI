@@ -15,15 +15,35 @@
     #define msg ((id(*)(id, SEL, ...))objc_msgSend)
     #define cls_msg ((id(*)(Class, SEL, ...))objc_msgSend)
 #elif defined (BACKEND_BEAPI)
+    #include "platform/haiku/BApplicationInstance.h"
 #elif defined (BACKEND_WINAPI)
+#endif
+
+#if defined(BACKEND_BEAPI)
+    static BApplication* app = nullptr;
 #endif
 
 FX::FXApplication::FXApplication()
 {
+	/*#if defined(BACKEND_BEAPI)
+	if (!app)
+	{
+        //app = new BApplication("application/x-vnd.FWindow");
+        app = BApplicationInstance::GetInstance();
+    }
+    #endif*/
+    FXApplication("");
 }
 
 FX::FXApplication::FXApplication(const char* vendor_descriptor)
 {
+	#if defined(BACKEND_BEAPI)
+	if (!app)
+	{
+        //app = new BApplication("application/x-vnd.FWindow");
+        app = BApplicationInstance::GetInstance();
+    }
+    #endif
 }
 
 FX::FXApplication::~FXApplication()

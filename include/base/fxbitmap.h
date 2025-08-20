@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-enum color_space
+enum colorspace
 {
     FX_RGB = 0,
     FX_RGBA,
@@ -17,7 +17,7 @@ namespace FX
         public:
             FXBitmap();
             FXBitmap(uint32_t resourceID);
-            FXBitmap(int width, int height, color_space colorspace);
+            FXBitmap(int width, int height, colorspace colorspace);
             ~FXBitmap();
         public:
             uint32_t GetWidth(void) { return width; }
