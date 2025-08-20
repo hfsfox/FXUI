@@ -170,8 +170,10 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //[app run];
     //struct CGRect frameRect = {0, 0, 500, 300};
 
-    id app = [NSApplication sharedApplication];
-    [app setActivationPolicy:NSApplicationActivationPolicyRegular];
+    NSApplication* app = NSApplication.sharedApplication;
+    app.ActivationPolicy = NSApplicationActivationPolicyRegular;
+    //id app = [NSApplication sharedApplication];
+    //[app setActivationPolicy:NSApplicationActivationPolicyRegular];
     [app activateIgnoringOtherApps:YES];
 
     struct CGRect frameRect = {static_cast<CGFloat>(rect.x), static_cast<CGFloat>(rect.y), static_cast<CGFloat>(rect.x + rect.width), static_cast<CGFloat>(rect.y + rect.height)};

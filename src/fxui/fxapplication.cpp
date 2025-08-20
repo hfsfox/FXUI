@@ -9,8 +9,8 @@
     //#include <Cocoa/Cocoa.h>
     //#include <Foundation/Foundation.h>
     //#include <Foundation/NSString.h>
-    #include "platform/macosx/MacOSXAPIWindow.h"
-    #include <AppKit/AppKit.h>
+    //#include "platform/macosx/MacOSXAPIWindow.h"
+    //#include <AppKit/AppKit.h>
     #include <Carbon/Carbon.h>
     #include <objc/message.h>
     #include <objc/runtime.h>
@@ -81,8 +81,8 @@ FX::FXApplication::Run()
     #elif defined (BACKEND_WAYLAND)
     return 0;
     #elif defined (BACKEND_COCOA)
-    //return 0;
-    return NSApplicationMain (argc_state, argv_state);
+    return 0;
+    //return NSApplicationMain (argc_state, argv_state);
     #elif defined (BACKEND_BEAPI)
     return 0;
     #elif defined (BACKEND_WINAPI)
