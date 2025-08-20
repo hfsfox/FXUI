@@ -197,6 +197,7 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
 
     //[window makeKeyAndOrderFront:nil];
     [window makeKeyAndOrderFront: app];
+    [window setOpaque:NO];
     
     //MacOSXAPIMenuBar* mb = new MacOSXAPIMenuBar("File");
 
@@ -209,10 +210,15 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
 
     //NSPoint windowOrigin = [[window contentView] convertPoint:NSMakePoint(0,0) fromView:myView];
     //NSRect viewFrameInWindowCoords = [myView convertRect: [myView bounds] toView: nil];
+    //NSRect contentRect = NSMakeRect (0, 0, config.size.x, config.size.y);
 
-    NSView *view = [[NSView alloc] initWithFrame: /*frameRect*/ NSMakeRect(0, 0, 100, 100)];
+    NSRect contentRect = NSMakeRect (0, 0, config.size.x, config.size.y);
+
+    NSView *view = [[NSView alloc] initWithFrame: /*frameRect*/ NSMakeRect(0, 0, frameRect.width/*100*/, frameRect.height/*100*/)];
     [view setWantsLayer:YES];
-    view.layer.backgroundColor = [[NSColor yellowColor] CGColor];
+    NSColor* bg_color = [[NSColor alloc] init: CGColor{static_cast<CGFloat>(0),static_cast<CGFloat>(0),static_cast<CGFloat>(0),static_cast<CGFloat>(255)}];
+    //view.layer.backgroundColor = [[NSColor yellowColor] CGColor];
+    view.layer.backgroundColor = bg_color;
     //NSRect viewFrameInWindowCoords = [view convertRect: [view bounds] toView: nil];
 
     [window.contentView addSubview:view];
