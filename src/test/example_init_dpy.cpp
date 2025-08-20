@@ -6,7 +6,7 @@
 #include <chrono>
 
 int
-main()
+main(int argc, char** argv)
 {
     /*FX::FXDisplay display;
     if (!display.Init()) {
@@ -15,7 +15,7 @@ main()
     }*/
 
     //FX::FXApplication* app = new FX::FXApplication();
-    FX::FXApplication app;
+    FX::FXApplication app(argc, argv);
 
     FX::FXDisplay* display = new FX::FXDisplay();
 

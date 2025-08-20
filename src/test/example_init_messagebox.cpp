@@ -8,9 +8,9 @@
 #include <chrono>
 
 int
-main()
+main(int argc, char** argv)
 {
-    FX::FXApplication app;
+    FX::FXApplication app(argc, argv);
 
     FX::FXDisplay* display = new FX::FXDisplay();
     if (!display->Init()) {

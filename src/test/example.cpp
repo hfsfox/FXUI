@@ -12,9 +12,9 @@
 //#include <vector>
 
 // Example usage
-int main()
+int main(int argc, char** argv)
 {
-    FX::FXApplication app;
+    FX::FXApplication app(argc, argv);
 
     FX::FXDisplay display;
 
