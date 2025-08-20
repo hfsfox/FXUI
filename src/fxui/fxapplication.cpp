@@ -9,7 +9,7 @@
     //#include <Cocoa/Cocoa.h>
     //#include <Foundation/Foundation.h>
     //#include <Foundation/NSString.h>
-    //#include "platform/macosx/MacOSXAPIWindow.h"
+    #include "platform/macosx/MacOSXAPIWindow.h"
     //#include <AppKit/AppKit.h>
     #include <Carbon/Carbon.h>
     #include <objc/message.h>
@@ -25,6 +25,8 @@
 
 #if defined(BACKEND_BEAPI)
     static BApplication* app = nullptr;
+#elif defined (BACKEND_COCOA)
+    //СocoaApplication app;
 #endif
 
 FX::FXApplication::FXApplication()
@@ -66,7 +68,6 @@ FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descr
     argc_state(argc),
     argv_state(argv)
     {
-
     }
 
 FX::FXApplication::~FXApplication()
@@ -81,6 +82,7 @@ FX::FXApplication::Run()
     #elif defined (BACKEND_WAYLAND)
     return 0;
     #elif defined (BACKEND_COCOA)
+    СocoaApplication app;
     return 0;
     //return NSApplicationMain (argc_state, argv_state);
     #elif defined (BACKEND_BEAPI)

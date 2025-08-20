@@ -322,6 +322,17 @@ MacOSXAPIWindow::SetTitle(const char* title)
 */
 
 
+CocoaApplication::CocoaApplication(int argc, char** argv)
+{
+    //return NSApplicationMain(argc, argv);
+};
+
+int
+CocoaApplication::Return()
+{
+    //return NSApplicationMain(_argc, _argv);
+};
+
 #endif
 
 

@@ -44,4 +44,11 @@ class MacOSXAPIMenuBar
         id menubar;
 };
 
+class CocoaApplication
+{
+    public:
+        CocoaApplication(int argc, char** argv);
+        int Return();
+};
+
 #endif
