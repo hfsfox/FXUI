@@ -207,6 +207,9 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
 
     //[app setMainMenu: CreateMenuBar("File")];
 
+    //NSPoint windowOrigin = [[window contentView] convertPoint:NSMakePoint(0,0) fromView:myView];
+    //NSRect viewFrameInWindowCoords = [myView convertRect: [myView bounds] toView: nil];
+
     NSView *view = [[NSView alloc] initWithFrame:frameRect/*NSMakeRect(100, 100, 100, 100)*/];
     [view setWantsLayer:YES];
     view.layer.backgroundColor = [[NSColor yellowColor] CGColor];
