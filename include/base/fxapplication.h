@@ -26,6 +26,7 @@ namespace FX
             ~FXApplication();
         public:
             uint32_t Run();
+            const char* GetAppLocation();
         private:
             int argc_state;
             char** argv_state;

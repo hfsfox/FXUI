@@ -1,6 +1,8 @@
 #include <fxapplication.h>
 #include <fxplatformuidefs.h>
 
+#include <stddef.h>
+
 #if defined (BACKEND_X11)
 #elif defined (BACKEND_WAYLAND)
 #elif defined (BACKEND_COCOA)
@@ -87,4 +89,12 @@ FX::FXApplication::Run()
     return 0;
     #endif
     //return 0;
+}
+
+const char*
+FX::FXApplication::GetAppLocation()
+{
+    const char* path;
+    path = NULL;
+    return path;
 }
