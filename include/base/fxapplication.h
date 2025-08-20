@@ -19,11 +19,16 @@ namespace FX
     class FXApplication
     {
         public:
-         FXApplication();
-         FXApplication(const char* vendor_descriptor);
-         ~FXApplication();
+            FXApplication();
+            FXApplication(const char* vendor_descriptor);
+            FXApplication(int argc, char** argv);
+            FXApplication(int argc, char** argv, const char* vendor_descriptor);
+            ~FXApplication();
         public:
-        uint32_t Run();
+            uint32_t Run();
+        private:
+            int argc_state;
+            char** argv_state;
     };
 }
 

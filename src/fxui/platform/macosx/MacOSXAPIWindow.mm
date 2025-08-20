@@ -290,6 +290,19 @@ MacOSXAPIWindow::SetTitle(const char* title)
     //[window setTitle: ConvertFromChar(title)];
 };
 
+/*
+   NSApplication* app = NSApplication.sharedApplication;
+    app.ActivationPolicy = NSApplicationActivationPolicyRegular;
+    NSMenuItem* item = [NSMenuItem new];
+    NSApp.mainMenu = [NSMenu new];
+    item.submenu = [NSMenu new];
+    [app.mainMenu addItem: item];
+    [item.submenu addItem: [[NSMenuItem alloc] initWithTitle: [@"Quit " stringByAppendingString: NSProcessInfo.processInfo.processName] action:@selector(terminate:) keyEquivalent:@"q"]];
+    AppDelegate* appDelegate = [AppDelegate new]; // cannot collapse this and next line because .delegate is weak
+    app.delegate = appDelegate;
+    [app run];
+*/
+
 
 #endif
 

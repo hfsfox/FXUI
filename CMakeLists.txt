@@ -33,6 +33,10 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
+set(CMAKE_MODULE_PATH "${${PROJECT_NAME}_SOURCE_DIR}/CMakeModules")
+
+include(FXUIBuildApp)
+
 message(STATUS "Target platform:        ${CMAKE_SYSTEM_NAME}")
 message(STATUS "Compiler:               ${CMAKE_CXX_COMPILER_ID}")
 message(STATUS "Target arch:            ${CMAKE_SYSTEM_PROCESSOR}")
@@ -69,12 +73,12 @@ if(HAIKU)
     )
 endif()
 
-if(LINUX)
+if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU)
     find_package(PkgConfig REQUIRED)
     find_package(X11 REQUIRED)
     find_package(Freetype REQUIRED)
 endif()
-if(LINUX)
+if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU)
     set(FXUI_FREETYPE_INCLUDE
         ${FREETYPE_INCLUDE_DIRS}
         /usr/include/freetype2

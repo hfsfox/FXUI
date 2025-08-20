@@ -7,6 +7,8 @@
     //#include <Cocoa/Cocoa.h>
     //#include <Foundation/Foundation.h>
     //#include <Foundation/NSString.h>
+    #include "platform/macosx/MacOSXAPIWindow.h"
+    #include <AppKit/AppKit.h>
     #include <Carbon/Carbon.h>
     #include <objc/message.h>
     #include <objc/runtime.h>
@@ -24,16 +26,19 @@
 #endif
 
 FX::FXApplication::FXApplication()
-{
-	/*#if defined(BACKEND_BEAPI)
-	if (!app)
-	{
-        //app = new BApplication("application/x-vnd.FWindow");
-        app = BApplicationInstance::GetInstance();
+    :
+    argc_state(0),
+    argv_state(0)
+    {
+        /*#if defined(BACKEND_BEAPI)
+        if (!app)
+        {
+            //app = new BApplication("application/x-vnd.FWindow");
+            app = BApplicationInstance::GetInstance();
+        }
+        #endif*/
+        FXApplication(argc_state, argv_state,"");
     }
-    #endif*/
-    FXApplication("");
-}
 
 FX::FXApplication::FXApplication(const char* vendor_descriptor)
 {
@@ -45,6 +50,22 @@ FX::FXApplication::FXApplication(const char* vendor_descriptor)
     }
     #endif
 }
+
+FX::FXApplication::FXApplication(int argc, char** argv)
+    :
+    argc_state(argc),
+    argv_state(argv)
+    {
+
+    }
+
+FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descriptor)
+    :
+    argc_state(argc),
+    argv_state(argv)
+    {
+
+    }
 
 FX::FXApplication::~FXApplication()
 {
@@ -58,7 +79,8 @@ FX::FXApplication::Run()
     #elif defined (BACKEND_WAYLAND)
     return 0;
     #elif defined (BACKEND_COCOA)
-    return 0;
+    //return 0;
+    return NSApplicationMain (argc_state, argv_state);
     #elif defined (BACKEND_BEAPI)
     return 0;
     #elif defined (BACKEND_WINAPI)
