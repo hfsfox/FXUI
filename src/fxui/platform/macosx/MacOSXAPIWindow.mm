@@ -210,9 +210,10 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //NSPoint windowOrigin = [[window contentView] convertPoint:NSMakePoint(0,0) fromView:myView];
     //NSRect viewFrameInWindowCoords = [myView convertRect: [myView bounds] toView: nil];
 
-    NSView *view = [[NSView alloc] initWithFrame:frameRect/*NSMakeRect(100, 100, 100, 100)*/];
+    NSView *view = [[NSView alloc] initWithFrame: /*frameRect*/ NSMakeRect(0, 0, 100, 100)];
     [view setWantsLayer:YES];
     view.layer.backgroundColor = [[NSColor yellowColor] CGColor];
+    //NSRect viewFrameInWindowCoords = [view convertRect: [view bounds] toView: nil];
 
     [window.contentView addSubview:view];
 
