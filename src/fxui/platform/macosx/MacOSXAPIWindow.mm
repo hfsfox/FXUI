@@ -171,7 +171,8 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //[app run];
     //struct CGRect frameRect = {0, 0, 500, 300};
 
-    id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));
+    //id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
     NSApplication* app = NSApplication.sharedApplication;
     app.ActivationPolicy = NSApplicationActivationPolicyRegular;
@@ -226,12 +227,18 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //view.layer.backgroundColor = bg_color;
     //NSRect viewFrameInWindowCoords = [view convertRect: [view bounds] toView: nil];
 
+    //[[NSColor redColor] setFill];
+    //NSRect rectToDraw = NSMakeRect(20, 20, 100, 50);
+    //NSRectFill(rectToDraw);
+
     [window.contentView addSubview:view];
 
     //[app ]
-    msg(pool, sel("drain"));
+    //msg(pool, sel("drain"));
 
     [app run];
+
+    [pool drain]; //or, even older, [pool release];
 
     //msg(pool, sel("drain"));
 
