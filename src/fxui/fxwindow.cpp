@@ -333,7 +333,7 @@ FX::FXWindow::FXWindow(FX::FXDisplay* display, const FX::FXRect& rect, const cha
             haikuWindow = nullptr; haikuView = nullptr;
         #elif defined (BACKEND_COCOA)
 
-            id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));
+            //id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));
 
             id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
             msg(app, sel("setActivationPolicy:"), NSApplicationActivationPolicyRegular);
@@ -405,7 +405,7 @@ FX::FXWindow::FXWindow(FX::FXDisplay* display, const FX::FXRect& rect, const cha
             msg(aboutItem, sel("release"));
             msg(quitItem, sel("release"));
             msg(mainMenuBar, sel("release"));*/
-            msg(pool, sel("drain"));
+           //msg(pool, sel("drain"));
         #endif
     }
 

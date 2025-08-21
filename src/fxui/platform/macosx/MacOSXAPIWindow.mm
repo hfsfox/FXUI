@@ -9,11 +9,18 @@
 #include <Carbon/Carbon.h>
 #include <objc/message.h>
 #include <objc/runtime.h>
+#include <objc/objc-runtime.h>
 
 #define cls objc_getClass
 #define sel sel_getUid
 #define msg ((id(*)(id, SEL, ...))objc_msgSend)
 #define cls_msg ((id(*)(Class, SEL, ...))objc_msgSend)
+
+extern "C"
+{
+    void* objc_autoreleasePoolPush(void);
+    void objc_autoreleasePoolPop(void* pool);
+}
 
 @interface CocoaAPIWindow : NSWindow
 {
@@ -322,7 +329,7 @@ void
 MacOSXAPIWindow::SetTitle(const char* title)
 {
     //CocoaAPIWindow* window = (NSWindow*)[CocoaAPIWindow setTitle: ConvertFromChar(title)];
-    //[window setTitle: ConvertFromChar(title)];
+    [window setTitle: ConvertFromChar(title)];
 };
 
 /*
@@ -352,7 +359,7 @@ CocoaApplication::Return()
 
 
 FXCocoaAutoreleasePool::FXCocoaAutoreleasePool()
-:
+//:
 //pool(objc_autoreleasePoolPush())
 {
     autorelease_pool = objc_autoreleasePoolPush();
