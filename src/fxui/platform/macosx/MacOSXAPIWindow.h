@@ -60,7 +60,7 @@ class FXCocoaAutoreleasePool
         FXCocoaAutoreleasePool();
         ~FXCocoaAutoreleasePool();
     private:
-        void* pool;
+        void* autorelease_pool;
 };
 
 #endif

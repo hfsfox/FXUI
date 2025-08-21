@@ -355,12 +355,12 @@ FXCocoaAutoreleasePool::FXCocoaAutoreleasePool()
 :
 //pool(objc_autoreleasePoolPush())
 {
-    pool = objc_autoreleasePoolPush();
+    autorelease_pool = objc_autoreleasePoolPush();
 };
 
 FXCocoaAutoreleasePool::~FXCocoaAutoreleasePool()
 {
-    objc_autoreleasePoolPop(pool);
+    objc_autoreleasePoolPop(autorelease_pool);
 };
 
 #endif
