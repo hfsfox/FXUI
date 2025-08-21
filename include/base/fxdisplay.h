@@ -104,6 +104,7 @@ namespace FX
             ::Display* display;
             ::Window window;
             ::GC gc;
+            ::Visual *visual;
             int screen;
         #elif defined (BACKEND_WAYLAND)
             struct wl_display* display;

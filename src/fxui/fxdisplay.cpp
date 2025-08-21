@@ -290,6 +290,7 @@ bool FX::FXDisplay::Init()
         if (!display) return false;
         screen = DefaultScreen(display);
         //screen = dx11->GetPlatformScreen();
+        visual = DefaultVisual(display, screen);
         return true;
     #elif defined (BACKEND_WAYLAND)
         WaylandDisplayInstance* wdi;
