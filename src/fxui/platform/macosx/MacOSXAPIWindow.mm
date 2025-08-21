@@ -172,7 +172,8 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
     //struct CGRect frameRect = {0, 0, 500, 300};
 
     //id pool = cls_msg(cls("NSAutoreleasePool"),sel("new"));
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSAutoreleasePool *pool = msg(cls_msg(cls("NSAutoreleasePool"), sel("alloc")), sel("init"));
 
     NSApplication* app = NSApplication.sharedApplication;
     app.ActivationPolicy = NSApplicationActivationPolicyRegular;
@@ -238,7 +239,8 @@ MacOSXAPIWindow::MacOSXAPIWindow(FX::FXRect rect, const char* title)
 
     [app run];
 
-    [pool drain]; //or, even older, [pool release];
+    [pool release];
+    //[pool drain]; //or, even older, [pool release];
 
     //msg(pool, sel("drain"));
 
