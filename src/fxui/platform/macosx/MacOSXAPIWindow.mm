@@ -353,8 +353,9 @@ CocoaApplication::Return()
 
 FXCocoaAutoreleasePool::FXCocoaAutoreleasePool()
 :
-pool(objc_autoreleasePoolPush())
+//pool(objc_autoreleasePoolPush())
 {
+    pool = objc_autoreleasePoolPush();
 };
 
 FXCocoaAutoreleasePool::~FXCocoaAutoreleasePool()
