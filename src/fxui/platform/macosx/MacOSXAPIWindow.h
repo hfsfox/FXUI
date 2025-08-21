@@ -54,4 +54,13 @@ class CocoaApplication
        char** _argv;
 };
 
+class FXCocoaAutoreleasePool
+{
+    public:
+        FXCocoaAutoreleasePool();
+        ~FXCocoaAutoreleasePool();
+    private:
+        void* pool;
+};
+
 #endif

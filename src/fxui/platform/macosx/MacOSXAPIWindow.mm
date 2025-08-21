@@ -348,6 +348,18 @@ CocoaApplication::Return()
     //return NSApplicationMain(_argc, _argv);
 };
 
+
+FXCocoaAutoreleasePool::FXCocoaAutoreleasePool()
+:
+pool(objc_autoreleasePoolPush())
+{
+};
+
+FXCocoaAutoreleasePool::~FXCocoaAutoreleasePool()
+{
+    objc_autoreleasePoolPop(pool);
+};
+
 #endif
 
 

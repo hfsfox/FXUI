@@ -41,6 +41,9 @@ FX::FXApplication::FXApplication()
             app = BApplicationInstance::GetInstance();
         }
         #endif*/
+        #if defined (BACKEND_COCOA)
+            FXCocoaAutoreleasePool p();
+        #endif
         FXApplication(argc_state, argv_state,"");
     }
 
