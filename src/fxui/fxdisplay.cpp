@@ -291,6 +291,7 @@ bool FX::FXDisplay::Init()
         screen = DefaultScreen(display);
         //screen = dx11->GetPlatformScreen();
         visual = DefaultVisual(display, screen);
+        colormap = DefaultColormap(display,screen);
         return true;
     #elif defined (BACKEND_WAYLAND)
         WaylandDisplayInstance* wdi;
