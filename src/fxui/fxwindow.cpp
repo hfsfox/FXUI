@@ -704,6 +704,9 @@ void
 FX::FXWindow::Hide()
 {
     #if defined(BACKEND_WAYLAND)
+    #elif defined (BACKEND_X11)
+        if (xDisplay && xWindow)
+            XUnmapWindow(xDisplay, xWindow);
     #elif defined(BACKEND_BEAPI)
         if(!haikuWindow->IsHidden())
         {
