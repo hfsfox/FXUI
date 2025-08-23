@@ -4,6 +4,7 @@
 
 #include <thread>
 #include <chrono>
+#include <unistd.h>
 
 int
 main(int argc, char** argv)
@@ -148,7 +149,8 @@ main(int argc, char** argv)
         FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),display, FX_HORIZONTAL);
 
         display->Present();
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        //sleep(1);
     }
 
     return app.Run();

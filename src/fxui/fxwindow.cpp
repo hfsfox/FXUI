@@ -726,6 +726,7 @@ FX::FXWindow::ProcessEvents()
             XNextEvent(xDisplay, &event);
             if (event.type == ClientMessage && event.xclient.data.l[0] == wmDeleteMessage)
             {
+                fprintf(stdout, "close event \n");
                 shouldClose = true;
                 return false;
             }
@@ -733,16 +734,17 @@ FX::FXWindow::ProcessEvents()
             {
                 //display->Clear();
                 //display->Present();
+                fprintf(stdout, "expose event \n");
             }
             if (event.type == ButtonPress)
             {
                 if (event.xbutton.button == 1)
                 {
-                    fprintf(stdout, "right click \n");
+                    fprintf(stdout, "right click event \n");
                 }
                 if (event.xbutton.button == 3)
                 {
-                    fprintf(stdout, "left click \n");
+                    fprintf(stdout, "left click event \n");
                 }
             //exit(0);
             //return NULL;
