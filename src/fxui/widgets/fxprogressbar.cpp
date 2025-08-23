@@ -22,14 +22,14 @@ FX::FXProgressBar::FXProgressBar(const char* progressbar_caption, FX::FXRect pro
                 //float progress_c = (float)progress / 100;
                 //int filled_width = static_cast<int>(rect.width * progress);
 
-                int one_len = (int)(rect.width / 100);
+                //uint one_len = (rect.width / 100);
                 int total = 0;
 
                 //selected = false;
                 //if(!selected)
                 //{
                     d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
-                    d->DrawRect(rect.x, rect.y, rect.width, rect.height, bg_color);
+                    //d->DrawRect(rect.x, rect.y, rect.width, rect.height, bg_color);
 
                     // Progress Bar Length = ( (Current Value - Minimum Value) / (Maximum Value - Minimum Value) ) * Total Available Length
                     //for(int i = 0; i < 64 ; i++)
@@ -39,9 +39,9 @@ FX::FXProgressBar::FXProgressBar(const char* progressbar_caption, FX::FXRect pro
                         //}
 
                         //printf("progress %d", progress);
-                        progress =19;
+                        progress =27;
 
-                        d->FillRect(rect.x, rect.y, (int)(one_len*progress), rect.height+1, progressbar_color);
+                        d->FillRect(rect.x, rect.y, (rect.width*progress/100)/*(one_len*progress)*/, rect.height+1, progressbar_color);
                     //}
                     //d->FillRect(rect.x, rect.y, (int)((progress-0)/(0-100/*end-begin*/)) * rect.width, rect.height, progressbar_color);
 

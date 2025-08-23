@@ -103,7 +103,7 @@ main(int argc, char** argv)
 
     FX::FXRect slider_1_rect(progressbar_rect.x,radio_button_1_rect.y+10+10,progressbar_rect.width,15);
 
-    while (window.ProcessEvents() && !window.ShouldClose() /*|| messagebox->ProcessEvents() && !messagebox->ShouldClose()*/)
+    while (window.ProcessEvents() && !window.ShouldClose() || display->isDirty() /*|| messagebox->ProcessEvents() && !messagebox->ShouldClose()*/)
     {
         /*FX::FXColor text_color = {0,0,0,255};
         display->SetViewColor({250,250,250,255});
@@ -116,6 +116,7 @@ main(int argc, char** argv)
 
         dpy->Present();*/
         //
+        //display->setDirty(false);
         display->SetViewColor(color);
 
         FX::FXRect menubar_r(0, 0, display->GetDisplaySize().width-1, 20);
@@ -149,7 +150,8 @@ main(int argc, char** argv)
         FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),display, FX_HORIZONTAL);
 
         display->Present();
-        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        display->setDirty(false);
+        //std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
         //sleep(1);
     }
 

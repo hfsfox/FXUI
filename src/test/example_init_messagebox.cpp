@@ -43,7 +43,8 @@ main(int argc, char** argv)
         FX::FXButton* ok_btn = new FX::FXButton("OK",FX::FXRect(button_1_rect),display);
 
         display->Present();
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+        display->setDirty(false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
     }
 
     return app.Run();

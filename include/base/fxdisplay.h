@@ -71,35 +71,41 @@ namespace FX
             void Clear();
             //void ClearDisplay();
         public:
-            void DrawText(const char* text, int x, int y, FX::FXColor color);
-            void DrawText(const char* text, FX::FXPoint where, FX::FXColor color);
-            void DrawCircle(int center_x, int center_y, int radius, FX::FXColor color);
-            void DrawCircle(FX::FXPoint where, int radius, FX::FXColor color);
-            void DrawPoint(int center_x, int center_y, FX::FXColor color);
-            void DrawPoint(FX::FXPoint where, FX::FXColor color);
-            void DrawLine(int center_x_begin, int center_y_begin,int center_x_end, int center_y_end, FX::FXColor color);
-            void DrawLine(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
-            void DrawRect(int x_begin, int y_begin, int width, int height, FX::FXColor color);
-            void DrawRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
-            void DrawTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_begin,int x_c_begin, int y_c_begin);
-            void DrawTriangle(FX::FXPoint where_a_begin, FX::FXPoint where_b_begin, FX::FXPoint where_c_begin);
+            virtual void DrawText(const char* text, int x, int y, FX::FXColor color);
+            virtual void DrawText(const char* text, FX::FXPoint where, FX::FXColor color);
+            virtual void DrawCircle(int center_x, int center_y, int radius, FX::FXColor color);
+            virtual void DrawCircle(FX::FXPoint where, int radius, FX::FXColor color);
+            virtual void DrawPoint(int center_x, int center_y, FX::FXColor color);
+            virtual void DrawPoint(FX::FXPoint where, FX::FXColor color);
+            virtual void DrawLine(int center_x_begin, int center_y_begin,int center_x_end, int center_y_end, FX::FXColor color);
+            virtual void DrawLine(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
+            virtual void DrawRect(int x_begin, int y_begin, int width, int height, FX::FXColor color);
+            virtual void DrawRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
+            virtual void DrawTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_begin,int x_c_begin, int y_c_begin);
+            virtual void DrawTriangle(FX::FXPoint where_a_begin, FX::FXPoint where_b_begin, FX::FXPoint where_c_begin);
         public:
-            void FillRect(int x_begin, int y_begin, int width, int height, FX::FXColor color);
-            void FillRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
-            void FillCircle(int center_x, int center_y, int radius, FX::FXColor color);
-            void FillCircle(FX::FXPoint where, int radius, FX::FXColor color);
-            void FillTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_begin,int x_c_begin, int y_c_begin);
-            void FillTriangle(FX::FXPoint where_a_begin, FX::FXPoint where_b_begin, FX::FXPoint where_c_begin);
+            virtual void FillRect(int x_begin, int y_begin, int width, int height, FX::FXColor color);
+            virtual void FillRect(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color);
+            virtual void FillCircle(int center_x, int center_y, int radius, FX::FXColor color);
+            virtual void FillCircle(FX::FXPoint where, int radius, FX::FXColor color);
+            virtual void FillTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_begin,int x_c_begin, int y_c_begin);
+            virtual void FillTriangle(FX::FXPoint where_a_begin, FX::FXPoint where_b_begin, FX::FXPoint where_c_begin);
+        public:
+            virtual bool isDirty () { return dirty; }
+            virtual void setDirty (const bool val = true) { dirty = val; }
         public:
             void SetFont(FX::FXFont);
             void SetViewColor(FX::FXColor color);
             FX::FXColor GetViewColor() const;
 
             FX::FXRect GetDisplaySize() const;
+            unsigned int getHeight() { return GetDisplaySize().height; }
+            unsigned int getWidth()  { return GetDisplaySize().width; }
 
             void Present();
 
         public:
+            bool dirty;
         #if defined (BACKEND_X11)
             ::Display* display;
             ::Window window;

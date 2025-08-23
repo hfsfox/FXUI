@@ -735,6 +735,8 @@ FX::FXWindow::ProcessEvents()
                 //display->Clear();
                 //display->Present();
                 fprintf(stdout, "expose event \n");
+                //setDirty (false);
+                GetDisplay()->setDirty(false);
             }
             if (event.type == ButtonPress)
             {
@@ -750,6 +752,7 @@ FX::FXWindow::ProcessEvents()
             //return NULL;
             }
         }
+        GetDisplay()->setDirty (true);
         return !shouldClose;
     #elif defined (BACKEND_WAYLAND)
     if(!wDisplay) return false;
