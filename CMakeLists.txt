@@ -115,6 +115,7 @@ set(FXUI_WIDGET_SOURCES
     src/fxui/widgets/fxprogressbar.cpp
     src/fxui/widgets/fxradiobutton.cpp
     src/fxui/widgets/fxslider.cpp
+    src/fxui/widgets/fxscrollbar.cpp
     src/fxui/widgets/fxtextfield.cpp
     src/fxui/widgets/fxtextview.cpp
     src/fxui/widgets/fxtoolbar.cpp

@@ -41,7 +41,7 @@ FX::FXProgressBar::FXProgressBar(const char* progressbar_caption, FX::FXRect pro
                         //printf("progress %d", progress);
                         progress =19;
 
-                        d->FillRect(rect.x, rect.y, (int)(one_len*progress), rect.height, progressbar_color);
+                        d->FillRect(rect.x, rect.y, (int)(one_len*progress), rect.height+1, progressbar_color);
                     //}
                     //d->FillRect(rect.x, rect.y, (int)((progress-0)/(0-100/*end-begin*/)) * rect.width, rect.height, progressbar_color);
 

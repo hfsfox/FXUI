@@ -21,6 +21,7 @@
 #include <fxmenubar.h>
 #include <fxprogressbar.h>
 #include <fxradiobutton.h>
+#include <fxscrollbar.h>
 #include <fxslider.h>
 #include <fxtextfield.h>
 #include <fxtextview.h>
