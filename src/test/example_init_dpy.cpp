@@ -147,11 +147,13 @@ main(int argc, char** argv)
         pb->SetLimits(0, 10);
         pb->SetProgress(45);
 
-        FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),display, FX_HORIZONTAL);
+        //FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),display, FX_HORIZONTAL);
+        FX::FXScrollBar* scrollbar = new FX::FXScrollBar("Slider",FX::FXRect(slider_1_rect),display, FX_HORIZONTAL);
 
         display->Present();
         display->setDirty(false);
         //std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         //sleep(1);
     }
 

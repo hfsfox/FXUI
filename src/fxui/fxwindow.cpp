@@ -736,7 +736,7 @@ FX::FXWindow::ProcessEvents()
                 //display->Present();
                 fprintf(stdout, "expose event \n");
                 //setDirty (false);
-                GetDisplay()->setDirty(false);
+                //GetDisplay()->setDirty(false);
             }
             if (event.type == ButtonPress)
             {
