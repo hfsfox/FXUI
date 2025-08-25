@@ -1,3 +1,5 @@
+#include "fxpopupmenu.h"
+#include "fxrect.h"
 #include <fxui.h>
 #include <fxwidgets.h>
 #include <iostream>
@@ -103,6 +105,8 @@ main(int argc, char** argv)
 
     FX::FXRect slider_1_rect(progressbar_rect.x,radio_button_1_rect.y+10+10,progressbar_rect.width,15);
 
+    FX::FXRect slider_2_rect(progressbar_rect.x,slider_1_rect.y+10+10,progressbar_rect.width,20);
+
     while (window.ProcessEvents() && !window.ShouldClose() || display->isDirty() /*|| messagebox->ProcessEvents() && !messagebox->ShouldClose()*/)
     {
         /*FX::FXColor text_color = {0,0,0,255};
@@ -150,10 +154,12 @@ main(int argc, char** argv)
         //FX::FXSlider* slider = new FX::FXSlider("Slider",FX::FXRect(slider_1_rect),display, FX_HORIZONTAL);
         FX::FXScrollBar* scrollbar = new FX::FXScrollBar("Slider",FX::FXRect(slider_1_rect),display, FX_HORIZONTAL);
 
+        FX::FXPopUpMenu* popup = new FX::FXPopUpMenu("Select",FX::FXRect(slider_2_rect), display);
+
         display->Present();
         display->setDirty(false);
         //std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
         //sleep(1);
     }
 
