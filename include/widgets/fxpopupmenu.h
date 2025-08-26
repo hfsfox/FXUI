@@ -26,7 +26,7 @@ namespace FX
             FXPopUpMenu(const char* popup_menu_caption, FX::FXRect progressbar_r, FX::FXDisplay* display);
             ~FXPopUpMenu();
         public:
-
+            void Draw();
         private:
             FX::FXRect rect;
             FX::FXDisplay* d;

@@ -14,8 +14,17 @@ project("FXUI"
         VERSION 0.0.58
         DESCRIPTION "Code for lab works by student ONPU group AT-221"
         HOMEPAGE_URL "http://github.com/hfsfox/fxui/"
-        LANGUAGES OBJC OBJCXX CXX C ASM
+        #LANGUAGES OBJC OBJCXX CXX C ASM
         )
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    project(${CMAKE_PROJECT_NAME} LANGUAGES CXX OBJCXX OBJC C ASM)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR WIN32 OR WIN64)
+    project(${CMAKE_PROJECT_NAME} LANGUAGES C CXX ASM)
+else()
+    # Default languages for other systems
+    project(${CMAKE_PROJECT_NAME} LANGUAGES C CXX ASM)
+endif()
 
 if(CMAKE_C_STANDARD LESS 11)
     message(ERROR "Generated code requires C11 or higher")
@@ -152,7 +161,7 @@ elseif(LINUX)
         src/fxui/platform/unix/x11/X11APIWindow.cpp
         )
     endif()
-elseif(WIN32)
+elseif(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(PLATFORM_SOURCES
     )
 elseif(APPLE)

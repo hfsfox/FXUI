@@ -123,6 +123,7 @@ namespace FX
         #elif defined (BACKEND_WINAPI)
             HDC hdc;
             HWND hwnd;
+            void* winctx;
         #endif
     };
 }

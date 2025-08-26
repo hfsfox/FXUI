@@ -299,6 +299,15 @@ bool FX::FXDisplay::Init()
         return true;
     #elif defined(BACKEND_BEAPI)
         return true;
+    #elif defined (BACKEND_WINAPI)
+        HINSTANCE hInstance;
+        static constexpr auto CLASS_NAME = "XWinWindow";
+        hwnd  = CreateWindowEx(
+			0, CLASS_NAME, "", 0,
+			0, 0, 100,
+			100, NULL, NULL,
+			hInstance, NULL);
+        return true;
     #endif
     //return true;
 }
@@ -326,6 +335,9 @@ FX::FXDisplay::GetNativeContext() const
             //dpy = 1; 
 	    //return static_cast<void*>(dpy);
            return static_cast<void*>(app); 
+        #elif defined (BACKEND_WINAPI)
+           //winctx = 0;
+           return static_cast<void*>(hwnd);
         #endif
 }
 

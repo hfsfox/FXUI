@@ -686,6 +686,8 @@ FX::FXWindow::Create()
     //msg(pool, sel("drain"));
     */
     return true;
+    #elif defined (BACKEND_WINAPI)
+    return true;
     #endif
 }
 
