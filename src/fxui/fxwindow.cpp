@@ -5,38 +5,22 @@
     #include "platform/unix/x11/X11APIWindow.h"
 #elif defined BACKEND_WAYLAND && !defined BACKEND_BEAPI
     #include "platform/unix/wayland/WaylandAPIWindow.h"
-    //#include "platform/unix/wayland/protocols/xdg-shell-client-protocol.h"
-    //#include "platform/unix/wayland/protocols/xdg-decoration-unstable-v1.h"
     #include <wayland-client-protocol.h>
-    //#include <sys/mman.h>
-    //#include <sys/stat.h>
-    //#include <errno.h>
-    //#include <fcntl.h>
-    //#include <unistd.h>
 #elif defined BACKEND_BEAPI
     #include <app/Application.h>
-    //#include <interface/Window.h>
     #include <game/DirectWindow.h>
     #include <interface/View.h>
-    //#include <support/String.h>
-    //#include <interface/Font.h>
-    //#include <app/Cursor.h>
     #include <interface/Bitmap.h>
     #include <translation/TranslationUtils.h>
     #include <storage/Resources.h>
     #include <GraphicsDefs.h>
     #include <InterfaceDefs.h>
-    //#include <iostream>
     #include "platform/haiku/BApplicationInstance.h"
     #include "platform/haiku/BeAPIWindow.h"
     #include "platform/haiku/BeAPIView.h"
 #elif defined BACKEND_WINAPI
     #include <windows.h>
 #elif defined (BACKEND_COCOA)
-    //#include <Cocoa/Cocoa.h>
-    //#include <Carbon/Carbon.h>
-    //#include <objc/message.h>
-    //#include <objc/runtime.h>
     #include "platform/macosx/MacOSXAPIWindow.h"
 #endif
 
@@ -550,23 +534,11 @@ FX::FXWindow::Create()
     return true;
 
     #elif defined(BACKEND_BEAPI)
-        // Create BApplication only once
-        if (!app) {
-            //app = new BApplication("application/x-vnd.FWindow");
-            app = BApplicationInstance::GetInstance();
-        }
-
         BRect windowRect(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
-        //haikuWindow = new FHaikuWindow(windowRect, title);
         haikuWindow = new BeAPIWindow(windowRect, title);
-
         haikuView = new BeAPIView(haikuWindow->Bounds(), display);
         haikuWindow->AddChild(haikuView);
-        //haikuView->EnableDirectMode(false);
-        //haikuWindow
-
         display->view = haikuView;
-        //display->
         return true;
     #elif defined (BACKEND_COCOA)
         //MacOSXAPIWindow*
@@ -695,7 +667,7 @@ void
 FX::FXWindow::Show()
 {
     #if defined (BACKEND_X11)
-        if (xDisplay && xWindow) //XMapWindow(xDisplay, xWindow);
+        if (xDisplay && xWindow)
             XMapRaised(xDisplay, xWindow);
     #elif defined(PLATFORM_HAIKU)
         if (haikuWindow) haikuWindow->Show();
@@ -786,7 +758,7 @@ FX::FXWindow::ProcessEvents()
 
     #elif defined(PLATFORM_HAIKU)
         // Process events without blocking
-        if (app) {
+        //if (app) {
             //BMessage* msg = app->MessageQueue()->NextMessage(0); // Non-blocking
             //app->MessageQueue();
             /*BMessage* msg = app->CurrentMessage();
@@ -794,7 +766,7 @@ FX::FXWindow::ProcessEvents()
                 app->DispatchMessage(msg, app);
                 delete msg;
             }*/
-        }
+        //}
 
         // Check window close status without locking issues
         if (haikuWindow) {
@@ -816,8 +788,6 @@ FX::FXWindow::SetTitle(const char* title)
         XStoreName(xDisplay, xWindow, title_buffer);
     #elif defined (BACKEND_WAYLAND)
         xdg_toplevel_set_title(xdg_toplevel, title);
-        //wl_surface_commit(surface);
-        //wl_display_flush(wDisplay);
     #elif defined (BACKEND_COCOA)
         macwindow->SetTitle(title);
     #endif

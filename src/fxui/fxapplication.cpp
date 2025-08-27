@@ -34,13 +34,6 @@ FX::FXApplication::FXApplication()
     argc_state(0),
     argv_state(0)
     {
-        /*#if defined(BACKEND_BEAPI)
-        if (!app)
-        {
-            //app = new BApplication("application/x-vnd.FWindow");
-            app = BApplicationInstance::GetInstance();
-        }
-        #endif*/
         #if defined (BACKEND_COCOA)
             FXCocoaAutoreleasePool p();
         #endif
@@ -49,7 +42,9 @@ FX::FXApplication::FXApplication()
 
 FX::FXApplication::FXApplication(const char* vendor_descriptor)
 {
-	#if defined(BACKEND_BEAPI)
+	#if defined (BACKEND_COCOA)
+            FXCocoaAutoreleasePool p();
+	#elif defined(BACKEND_BEAPI)
 	if (!app)
 	{
         //app = new BApplication("application/x-vnd.FWindow");
@@ -63,7 +58,14 @@ FX::FXApplication::FXApplication(int argc, char** argv)
     argc_state(argc),
     argv_state(argv)
     {
-
+    	#if defined (BACKEND_COCOA)
+            FXCocoaAutoreleasePool p();
+    	#elif defined(BACKEND_BEAPI)
+			if (!app)
+			{
+        		app = BApplicationInstance::GetInstance();
+    		}
+    	#endif
     }
 
 FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descriptor)
@@ -71,6 +73,14 @@ FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descr
     argc_state(argc),
     argv_state(argv)
     {
+    	#if defined (BACKEND_COCOA)
+            FXCocoaAutoreleasePool p();
+    	#elif defined(BACKEND_BEAPI)
+			if (!app)
+			{
+        		app = BApplicationInstance::GetInstance();
+    		}
+    	#endif
     }
 
 FX::FXApplication::~FXApplication()
@@ -89,7 +99,7 @@ FX::FXApplication::Run()
     return 0;
     //return NSApplicationMain (argc_state, argv_state);
     #elif defined (BACKEND_BEAPI)
-    return 0;
+    return app->Run();
     #elif defined (BACKEND_WINAPI)
     return 0;
     #endif

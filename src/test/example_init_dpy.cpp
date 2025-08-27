@@ -158,8 +158,8 @@ main(int argc, char** argv)
 
         display->Present();
         display->setDirty(false);
-        //std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
-        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
+        //std::this_thread::sleep_for(std::chrono::milliseconds(800));
         //sleep(1);
     }
 
