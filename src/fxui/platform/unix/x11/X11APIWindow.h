@@ -1,7 +1,7 @@
 #include <fxwindow.h>
 #include <fxplatformuidefs.h>
 
-#if defined BACKEND_X11 && !defined BACKEND_BEAPI
+#if defined BACKEND_X11
     #include <X11/Xlib.h>
     #include <X11/Xutil.h>
     #include <X11/xpm.h>
@@ -28,6 +28,41 @@ class X11DisplayInstance
         static std::once_flag initialized;
     	static std::unique_ptr<::Display*> instance;
 };
+
+class X11APIObject
+{
+    public:
+        X11APIObject()
+        {
+            XInitThreads();
+            display = XOpenDisplay(0);
+        };
+        ~X11APIObject()
+        {
+        };
+        ::Display* GetDisplay() const { return display;}
+        ::Window GetWindow() const {return window;}
+    private:
+        ::Display* display;
+        ::Window window;
+};
+
+/*
+class X11Window
+{
+    public:
+        X11Window()
+        {
+            window =
+        }
+        ~X11Window()
+        {
+        };
+        ::Window GetWindow() const {return window;}
+    private:
+        ::Window window;
+};
+*/
 
 /*struct X11Platform
 {

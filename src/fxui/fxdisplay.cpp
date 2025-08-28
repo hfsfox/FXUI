@@ -1,7 +1,3 @@
-//#include "fxwindow.h"
-/*#include <X11/Xft/Xft.h>
-#include <X11/Xlib.h>
-#include <X11/extensions/Xrender.h>*/
 #include <fxpoint.h>
 #include <fxdisplay.h>
 #include <fxfont.h>
@@ -283,8 +279,10 @@ bool FX::FXDisplay::Init()
         return true;
     #elif defined(BACKEND_X11)
         //display = XOpenDisplay(nullptr);
-        X11DisplayInstance* xdi;
-        display = xdi->GetDisplayInstance();
+        //X11DisplayInstance* xdi;
+        //display = xdi->GetDisplayInstance();
+        X11APIObject dpy;
+        display = dpy.GetDisplay();
         //dx11->OpenPlatformDisplay();
         //display = dx11->GetPlatformDisplay();
         if (!display) return false;
@@ -673,6 +671,19 @@ FX::FXDisplay::GetDisplaySize() const
         view->UnlockLooper();
         return {0,0,(int)frame.Width(),(int)frame.Height()};
     #endif
+}
+
+FX::FXPoint
+FX::FXDisplay::GetPointerPosition() const
+{
+    FX::FXPoint point(0,0);
+    #if defined(BACKEND_X11)
+        ::Window drop_wnd;
+        int x, y;
+        unsigned mask;
+        ::XQueryPointer(display, window, &drop_wnd, &drop_wnd,  &point.x, &point.y, &x, &y, &mask);
+    #endif
+    return point;
 }
 
 void

@@ -102,6 +102,8 @@ namespace FX
             unsigned int getHeight() { return GetDisplaySize().height; }
             unsigned int getWidth()  { return GetDisplaySize().width; }
 
+            FX::FXPoint GetPointerPosition() const;
+
             void Present();
 
         public:

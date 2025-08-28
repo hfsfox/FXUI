@@ -22,6 +22,8 @@ main(int argc, char** argv)
 
     FX::FXDisplay* display = new FX::FXDisplay();
 
+    FX::FXDisplay* dpy = new FX::FXDisplay();
+
     if(!display->Init())
     {
         std::cerr << "Failed to initialize display" << std::endl;
@@ -37,16 +39,16 @@ main(int argc, char** argv)
     }
     */
 
-    /*
-    FX::FXRect msgbox_r(100,100,600,200);
+
+    /*FX::FXRect msgbox_r(100,100,600,200);
     FX::FXMessageBox* messagebox = new FX::FXMessageBox(display, msgbox_r, "Message box", "This is example message box");
 
     if (!messagebox->Create()) {
         std::cerr << "Failed to create window" << std::endl;
         return -1;
-    }
-    messagebox->Show();
-    */
+    }*/
+    //messagebox->Show();
+
 
     FX::FXRect windowRect(100, 100, 500, 400);
     FX::FXWindow window(display, windowRect, "Cross-Platform FXWindow Demo");
@@ -121,6 +123,7 @@ main(int argc, char** argv)
         dpy->Present();*/
         //
         //display->setDirty(false);
+        //dpy->Present();
         display->SetViewColor(color);
 
         FX::FXRect menubar_r(0, 0, display->GetDisplaySize().width-1, 20);

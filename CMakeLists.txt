@@ -12,7 +12,7 @@ cmake_minimum_required(VERSION 3.30)
 
 project("FXUI"
         VERSION 0.0.58
-        DESCRIPTION "Code for lab works by student ONPU group AT-221"
+        DESCRIPTION "FXUI: Graphical User Interface Framework"
         HOMEPAGE_URL "http://github.com/hfsfox/fxui/"
         #LANGUAGES OBJC OBJCXX CXX C ASM
         )
@@ -101,9 +101,7 @@ include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     include/base
     include/widgets
     include/widgets/dialogs
-    #src/platform/haiku
     ${FXUI_FREETYPE_INCLUDE}
-    #/usr/include/freetype2
     )
 
 set(FXUI_BASE_SOURCES

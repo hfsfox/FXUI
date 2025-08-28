@@ -450,9 +450,8 @@ FX::FXWindow::Create()
     fprintf(stdout, "try to create window\n");
     #if defined(BACKEND_X11)
         if (!display->display) return false;
-        //xDisplay = display->display;
-        X11DisplayInstance* xdi;
-        xDisplay = xdi->GetDisplayInstance();
+        X11APIObject dpy;
+        xDisplay = dpy.GetDisplay();
 
         xWindow = XCreateSimpleWindow(xDisplay, RootWindow(xDisplay, display->screen),
                                      rect.x, rect.y, rect.width, rect.height, 1,
