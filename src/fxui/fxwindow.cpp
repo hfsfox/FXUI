@@ -703,6 +703,14 @@ FX::FXWindow::ProcessEvents()
                 shouldClose = true;
                 return false;
             }
+            if (event.type == KeyPress)
+            {
+                KeySym key = XLookupKeysym(&event.xkey, 0);
+                    if (key == XK_q)
+                       shouldClose = true;
+                    return false;
+                    //break;
+            }
             if (event.type == Expose)
             {
                 //display->Clear();
