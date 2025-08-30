@@ -283,6 +283,13 @@ bool FX::FXDisplay::Init()
         //display = xdi->GetDisplayInstance();
         X11APIObject dpy;
         display = dpy.GetDisplay();
+        Visual* visual;
+        visual = dpy.GetVisual();
+        if(visual->c_class!=TrueColor)
+        {
+            fprintf(stderr, "Cannot handle non true color visual ...\n");
+            exit(1);
+        }
         //dx11->OpenPlatformDisplay();
         //display = dx11->GetPlatformDisplay();
         if (!display) return false;

@@ -6,11 +6,6 @@
 #include <fxrect.h>
 #include <fxpoint.h>
 
-/*namespace FX
-{
-    typedef struct FXRect FXRect;
-}*/
-
 // Window class
 namespace FX
 {

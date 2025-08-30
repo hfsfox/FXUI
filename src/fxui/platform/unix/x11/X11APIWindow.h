@@ -36,15 +36,58 @@ class X11APIObject
         {
             XInitThreads();
             display = XOpenDisplay(0);
+            InitVisual();
+            InitScreen();
+            InitGC();
+
         };
         ~X11APIObject()
         {
         };
         ::Display* GetDisplay() const { return display;}
         ::Window GetWindow() const {return window;}
+        ::Visual* GetVisual() const {return visual;}
+        ::GC GetGC() const {return gc;}
+        ::Cursor GetCursor() const {return cursor;}
+        int GetScreen() const {return screen;}
+    private:
+        void InitVisual()
+        {
+            visual = DefaultVisual(display, 0);
+        }
+        void InitGC()
+        {
+            gc = DefaultGC(display, screen);
+        }
+        void InitScreen()
+        {
+            screen = DefaultScreen(display);
+        }
+        void InitWindow(int x, int y, int widht, int height, const char title)
+        {
+            /*window = XCreateWindow(
+                    display,
+                    defaultRootWindow,
+                    //posX, posY,
+                    x,y,
+                    width, height,
+                    0,
+                    depth,
+                    InputOutput,
+                    visual,
+                    CWBackPixel | CWBorderPixel | CWBackingStore,
+                    &windowAttributes);*/
+        }
     private:
         ::Display* display;
         ::Window window;
+        ::Visual* visual;
+        ::GC gc;
+        ::Window defaultRootWindow;
+        ::XGCValues gcvalues;
+        ::Cursor cursor;
+        int screen;
+        int bitdepth;
 };
 
 /*

@@ -66,26 +66,38 @@ endif()
 if(UNIX AND NOT APPLE AND NOT HAIKU)
     if(BACKEND_WAYLAND)
         add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
-	BACKEND_WAYLAND
+	BACKEND_WAYLAND=1
     )
+    message("Build for Wayland backend.")
     endif()
     if(BACKEND_X11)
         add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
-	BACKEND_X11
+	BACKEND_X11=1
     )
+    message("Build for X11 backend.")
     endif()
 endif()
 
 if(HAIKU)
     add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
-	BACKEND_BEAPI
+	BACKEND_BEAPI=1
     )
 endif()
 
 if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU)
     find_package(PkgConfig REQUIRED)
     find_package(X11 REQUIRED)
+    find_package(OpenGL REQUIRED)
     find_package(Freetype REQUIRED)
+
+    message("Found X11 Libraries.")
+    message("X11 includes: ${X11_INCLUDE_DIR}")
+    message("X11 Libraries: ${X11_LIBRARIES}")
+    message("XPM includes: ${X11_Xpm_INCLUDE_PATH}")
+    message("XPM Libraries: ${X11_Xpm_LIB}")
+    message("Found OpenGL Libraries.")
+    message("OpenGL includes: ${OPENGL_INCLUDE_DIR}")
+    message("OpenGL Libraries: ${OPENGL_LIBRARIES}")
 endif()
 if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU)
     set(FXUI_FREETYPE_INCLUDE
@@ -98,6 +110,7 @@ else()
 endif()
 
 include_directories(${CMAKE_PROJECT_NAME} PUBLIC
+    include
     include/base
     include/widgets
     include/widgets/dialogs
@@ -188,9 +201,9 @@ add_executable(${CMAKE_PROJECT_NAME}_init_messagebox
 
 if(LINUX)
     if (BACKEND_X11)
-        target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
-        target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
-        target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC Xext X11 Xpm GL GLU GLX Xft ${FREETYPE_LIBRARIES})
+        target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
+        target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
+        target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
     endif()
     if (BACKEND_WAYLAND)
         target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
