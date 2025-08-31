@@ -35,9 +35,15 @@ class X11APIObject
         X11APIObject()
         {
             XInitThreads();
+            if (!XInitThreads())
+            {
+                fprintf(stderr, "Xlib threads support unavailable\n");
+                return;
+            }
             display = XOpenDisplay(0);
             InitVisual();
             InitScreen();
+            InitDepth();
             InitGC();
 
         };
@@ -50,6 +56,7 @@ class X11APIObject
         ::GC GetGC() const {return gc;}
         ::Cursor GetCursor() const {return cursor;}
         int GetScreen() const {return screen;}
+        int GetDepth() const {return bitdepth;}
     private:
         void InitVisual()
         {
@@ -62,6 +69,10 @@ class X11APIObject
         void InitScreen()
         {
             screen = DefaultScreen(display);
+        }
+        void InitDepth()
+        {
+            bitdepth = DefaultDepth(display, screen);
         }
         void InitWindow(int x, int y, int widht, int height, const char title)
         {
@@ -86,6 +97,7 @@ class X11APIObject
         ::Window defaultRootWindow;
         ::XGCValues gcvalues;
         ::Cursor cursor;
+        
         int screen;
         int bitdepth;
 };

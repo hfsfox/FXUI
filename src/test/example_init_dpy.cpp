@@ -109,7 +109,7 @@ main(int argc, char** argv)
 
     FX::FXRect slider_2_rect(progressbar_rect.x,slider_1_rect.y+10+10,progressbar_rect.width,20);
 
-    while (window.ProcessEvents() && !window.ShouldClose() || display->isDirty() /*|| messagebox->ProcessEvents() && !messagebox->ShouldClose()*/)
+    while (window.ProcessEvents() && !window.ShouldClose() /*|| display->isDirty()*/ /*|| messagebox->ProcessEvents() && !messagebox->ShouldClose()*/)
     {
         /*FX::FXColor text_color = {0,0,0,255};
         display->SetViewColor({250,250,250,255});
