@@ -196,7 +196,7 @@
 #endif /* __os2__ */
 
 #if defined(__WINDOWS__) || defined(__WIN32__) || defined(__WIN64__) || defined(_WIN64) || defined(_WIN32) \
-|| defined(__WINNT) || defined(__WINNT__)
+|| defined(__WINNT) || defined(__WINNT__) || defined (__NT__)
     #define PLATFORM_WINDOWS
 #endif /* __windows__ */
 

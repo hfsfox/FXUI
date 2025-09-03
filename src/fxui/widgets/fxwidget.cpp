@@ -9,25 +9,31 @@
 // © 2025, , All Rights Reserved
 //-----------------------------------------------------------------------------
 
-#ifndef __FXWIDGET_H__
-#define __FXWIDGET_H__
-
 #include <fxdisplay.h>
 #include <fxrect.h>
+#include <fxwidget.h>
 
-namespace FX
+FX::FXWidget::FXWidget(FX::FXRect widget_rect)
 {
-    class FXWidget
-    {
-        public:
-            FXWidget(FX::FXRect widget_rect);
-            ~FXWidget();
-        public:
-            virtual void Draw();
-            virtual void Show();
-            virtual void Hide();
-        private:
-    };
 }
 
-#endif
+FX::FXWidget::~FXWidget()
+{
+}
+
+void
+FX::FXWidget::Draw()
+{
+}
+
+void
+FX::FXWidget::Show()
+{
+}
+
+void
+FX::FXWidget::Hide()
+{
+}
+
+

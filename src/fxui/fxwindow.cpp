@@ -658,7 +658,9 @@ FX::FXWindow::Create()
     */
     return true;
     #elif defined (BACKEND_WINAPI)
-    return true;
+        return true;
+    #else
+        return true;
     #endif
 }
 
@@ -781,6 +783,8 @@ FX::FXWindow::ProcessEvents()
         }
 
         return !shouldClose;
+    #else
+        return shouldClose;
     #endif
 }
 

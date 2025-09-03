@@ -129,6 +129,7 @@ set(FXUI_LAYOUT_SOURCES
 )
 
 set(FXUI_WIDGET_SOURCES
+    src/fxui/widgets/fxwidget.cpp
     src/fxui/widgets/fxbutton.cpp
     src/fxui/widgets/fxcheckbox.cpp
     src/fxui/widgets/fxmenubar.cpp

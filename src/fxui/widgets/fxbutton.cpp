@@ -1,14 +1,19 @@
+#include "fxwidget.h"
 #include <fxbutton.h>
 #include <cstring>
 
 FX::FXButton::FXButton()
+:
+FX::FXWidget(rect)
 {
 }
+
 FX::FXButton::FXButton(const char* button_caption, FX::FXRect button_r, FX::FXDisplay* display)
     :
     d(display),
     rect(button_r),
-    caption(button_caption)
+    caption(button_caption),
+    FX::FXWidget(button_r)
     {
         FX::FXColor button_bg_color = {200,200,200,255};
         FX::FXColor textColor = {0,0,0,255};
@@ -23,7 +28,9 @@ FX::FXButton::FXButton(const char* button_caption, FX::FXRect button_r, FX::FXDi
 FX::FXButton::~FXButton()
 {
 }
+
 void
 FX::FXButton::OnClick()
 {
 };
+

@@ -15,10 +15,11 @@
 #include <fxdisplay.h>
 #include <fxrect.h>
 #include <fxpoint.h>
+#include <fxwidget.h>
 
 namespace FX
 {
-    class FXButton
+    class FXButton: public FX::FXWidget
     {
         public:
             FXButton();

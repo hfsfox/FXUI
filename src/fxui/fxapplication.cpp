@@ -6,11 +6,7 @@
 #if defined (BACKEND_X11)
 #elif defined (BACKEND_WAYLAND)
 #elif defined (BACKEND_COCOA)
-    //#include <Cocoa/Cocoa.h>
-    //#include <Foundation/Foundation.h>
-    //#include <Foundation/NSString.h>
     #include "platform/macosx/MacOSXAPIWindow.h"
-    //#include <AppKit/AppKit.h>
     #include <Carbon/Carbon.h>
     #include <objc/message.h>
     #include <objc/runtime.h>
@@ -26,7 +22,6 @@
 #if defined(BACKEND_BEAPI)
     static BApplication* app = nullptr;
 #elif defined (BACKEND_COCOA)
-    //СocoaApplication app;
 #endif
 
 FX::FXApplication::FXApplication()
@@ -102,8 +97,9 @@ FX::FXApplication::Run()
     return app->Run();
     #elif defined (BACKEND_WINAPI)
     return 0;
+    #else
+    return 0;
     #endif
-    //return 0;
 }
 
 const char*
