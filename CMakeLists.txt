@@ -90,6 +90,12 @@ if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     )
 endif()
 
+if (MSVC)
+    add_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC
+    )
+    #set_property(${CMAKE_PROJECT_NAME} PUBLIC STRING "/Ox /Ob2 /Oi /Ot /GF /Zc:wchar_t /MT")
+endif()
+
 if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU)
     find_package(PkgConfig REQUIRED)
     find_package(X11 REQUIRED)

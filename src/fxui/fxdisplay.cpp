@@ -306,7 +306,7 @@ bool FX::FXDisplay::Init()
     #elif defined(BACKEND_BEAPI)
         return true;
     #elif defined (BACKEND_WINAPI)
-        HINSTANCE hInstance;
+        HINSTANCE hInstance = 0;
         static constexpr auto CLASS_NAME = "XWinWindow";
         hwnd  = CreateWindowEx(
 			0, CLASS_NAME, "", 0,
@@ -663,6 +663,9 @@ FX::FXDisplay::GetViewColor() const
         FXColor viewcolor = {view->ViewColor().red, view->ViewColor().green, view->ViewColor().blue, 255};
         view->UnlockLooper();
         return viewcolor;
+    #elif defined(BACKEND_WINAPI)
+        FXColor viewcolor = { 0, 0, 0, 255 };
+        return viewcolor;
     #endif
 }
 
@@ -678,6 +681,8 @@ FX::FXDisplay::GetDisplaySize() const
         BRect frame = view->Frame();
         view->UnlockLooper();
         return {0,0,(int)frame.Width(),(int)frame.Height()};
+    #elif defined (BACKEND_WINAPI)
+        return {0,0,10,10};
     #endif
 }
 

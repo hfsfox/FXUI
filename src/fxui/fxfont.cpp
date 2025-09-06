@@ -10,6 +10,10 @@
     #include <X11/extensions/Xrender.h>
 #endif
 
+#if defined BACKEND_WINAPI
+    #include <windows.h>
+#endif
+
 //#include <iostream>
 
 namespace
@@ -70,6 +74,10 @@ const void*
 FX::FXFont::GetPlatformFont() const
 {
     #if defined BACKEND_X11
+        return static_cast<void*>(font);
+    #endif
+    #if defined(BACKEND_WINAPI)
+        HFONT font = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
         return static_cast<void*>(font);
     #endif
 }
