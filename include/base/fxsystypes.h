@@ -59,6 +59,7 @@
 #warning "Unsupported architecture!"
 #endif
 
+#ifndef _WIN32
 #if defined(__WORDSIZE) && (__WORDSIZE == 128)
     #define ARCH_128BIT
 #elif defined(__SIZE_WIDTH__) && (__SIZE_WIDTH__ == 128)
@@ -74,3 +75,4 @@
 #else
 #warning "Unsupported architecture bitness"
 #endif /* __WORDSIZE, __SIZE_WIDTH__ */
+#endif

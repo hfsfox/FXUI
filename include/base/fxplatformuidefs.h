@@ -9,6 +9,8 @@
 // © 2025, , All Rights Reserved
 //-----------------------------------------------------------------------------
 
+#pragma once
+
 #include "fxplatformdefs.h"
 
 #ifndef __FXPLATFORMUIDEFS_H__

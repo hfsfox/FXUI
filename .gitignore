@@ -45,6 +45,8 @@ CMakeUserPresets.json
 /build*
 /objects*
 /.cache*
+/.vs*
+/out*
 # Kate backup files
 *.kate-swp
 # DS_Store

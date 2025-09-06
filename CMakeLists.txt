@@ -84,6 +84,12 @@ if(HAIKU)
     )
 endif()
 
+if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
+	BACKEND_WINAPI=1
+    )
+endif()
+
 if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU)
     find_package(PkgConfig REQUIRED)
     find_package(X11 REQUIRED)

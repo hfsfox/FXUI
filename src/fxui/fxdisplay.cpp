@@ -192,6 +192,7 @@ FX::FXDisplay::FXDisplay()
         display = nullptr;
     #elif defined(BACKEND_BEAPI)
         view = nullptr;
+    #elif defined (BACKEND_WINAPI)
     #endif
 }
 
