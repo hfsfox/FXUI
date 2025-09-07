@@ -123,9 +123,10 @@ namespace FX
             //NSView* view;
             id app;
         #elif defined (BACKEND_WINAPI)
-            HDC hdc;
-            HWND hwnd;
-            void* winctx;
+            //HDC hdc;
+            //HWND hwnd;
+            //void* winctx;
+            HINSTANCE hInstance;
         #endif
     };
 }

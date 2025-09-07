@@ -20,6 +20,7 @@
     #include "platform/haiku/BeAPIView.h"
 #elif defined BACKEND_WINAPI
     #include <windows.h>
+    #include <cstdint>
 #elif defined (BACKEND_COCOA)
     #include "platform/macosx/MacOSXAPIWindow.h"
 #endif
@@ -300,6 +301,24 @@ namespace
         //int haikuView::frameCount = 0;
     #elif defined (BACKEND_WINAPI)
         ::HWND hWindow;
+        ::MSG msg;
+
+        LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+            switch (uMsg)
+            {
+                case WM_CLOSE:
+                    DestroyWindow(hwnd);
+                    //shouldClose = true;
+                    //PostQuitMessage(0);
+                    break;
+                case WM_DESTROY:
+                    PostQuitMessage(0);
+                    break;
+                default:
+                    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+            }
+            return 0;
+        };
     #elif defined (BACKEND_COCOA)
         MacOSXAPIWindow* macwindow;
     #endif
@@ -658,6 +677,53 @@ FX::FXWindow::Create()
     */
     return true;
     #elif defined (BACKEND_WINAPI)
+        wchar_t title_wtext[255];
+        mbstowcs(title_wtext, title, strlen(title) + 1);//Plus null
+        LPWSTR ptr = title_wtext;
+
+        uint16_t WND_CLASS_ID = 0;
+        LPWSTR CLASS_NAME = L"FXUIWindow";
+        WNDCLASSEX wx = {0};
+
+        wx.hInstance = (HINSTANCE)GetModuleHandle(NULL)/*display->GetNativeContext() */;
+        wx.lpfnWndProc = WindowProc;
+        wx.cbSize = sizeof(WNDCLASSEX);
+        wx.lpszClassName = CLASS_NAME;
+        wx.lpszMenuName = NULL;
+        wx.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+        wx.hCursor = LoadCursor(NULL, IDC_ARROW);
+        wx.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+        wx.style = 0;
+        wx.cbClsExtra = 0;
+        wx.cbWndExtra = 0;
+
+        if (!RegisterClassEx(&wx))
+        {
+            //EXIT("WNDCLASS CREATION", NULL_AFTER_CREATION); // exit with error macro
+            //std::cout << "failed to create wndclassex" << std::endl;
+            fprintf(stderr, "Failed to create WNDCLASSEX struct\n\n");
+            return false;
+        }
+
+        //LPWSTR CLASS_NAME = L"FXUIWindow";
+        hWindow = CreateWindowExW(
+            WS_EX_OVERLAPPEDWINDOW,
+            CLASS_NAME, 
+            ptr, 
+            0,
+            rect.x, 
+            rect.y, 
+            rect.width,
+            rect.height, 
+            NULL, 
+            NULL,
+            (HINSTANCE)GetModuleHandle(NULL)/*display->GetNativeContext()*/,
+            NULL);
+        if (hWindow == NULL)
+        {
+            return false;
+        }
+        //ShowWindow(hWindow, SW_SHOW);
         return true;
     #else
         return true;
@@ -670,8 +736,10 @@ FX::FXWindow::Show()
     #if defined (BACKEND_X11)
         if (xDisplay && xWindow)
             XMapRaised(xDisplay, xWindow);
-    #elif defined(PLATFORM_HAIKU)
+    #elif defined(BACKEND_BEAPI)
         if (haikuWindow) haikuWindow->Show();
+    #elif defined(BACKEND_WINAPI)
+    ShowWindow(hWindow, SW_SHOW);
     #endif
 }
 
@@ -780,6 +848,14 @@ FX::FXWindow::ProcessEvents()
         // Check window close status without locking issues
         if (haikuWindow) {
             shouldClose = haikuWindow->ShouldClose();
+        }
+
+        return !shouldClose;
+    #elif defined (BACKEND_WINAPI)
+        while (GetMessage(&msg, NULL, 0, 0) > 0) 
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
         }
 
         return !shouldClose;

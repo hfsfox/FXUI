@@ -193,6 +193,7 @@ FX::FXDisplay::FXDisplay()
     #elif defined(BACKEND_BEAPI)
         view = nullptr;
     #elif defined (BACKEND_WINAPI)
+    hInstance = nullptr;
     #endif
 }
 
@@ -306,13 +307,13 @@ bool FX::FXDisplay::Init()
     #elif defined(BACKEND_BEAPI)
         return true;
     #elif defined (BACKEND_WINAPI)
-        HINSTANCE hInstance = 0;
-        static constexpr auto CLASS_NAME = "XWinWindow";
-        hwnd  = CreateWindowEx(
-			0, CLASS_NAME, "", 0,
+        hInstance = GetModuleHandle(NULL);
+        /*LPWSTR CLASS_NAME = L"FXUIWindow";
+        hwnd  = CreateWindowExW(
+            WS_EX_OVERLAPPEDWINDOW, CLASS_NAME, L"", 0,
 			0, 0, 100,
 			100, NULL, NULL,
-			hInstance, NULL);
+			hInstance, NULL);*/
         return true;
     #endif
     //return true;
@@ -343,7 +344,7 @@ FX::FXDisplay::GetNativeContext() const
            return static_cast<void*>(app); 
         #elif defined (BACKEND_WINAPI)
            //winctx = 0;
-           return static_cast<void*>(hwnd);
+           return static_cast<void*>(hInstance);
         #endif
 }
 

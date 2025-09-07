@@ -56,7 +56,11 @@
 #elif defined(__AVR__) || defined(__AVR_ARCH__)
     #define ARCH_AVR
 #else
-#warning "Unsupported architecture!"
+    #if !defined (_WIN32)
+        #warning "Unsupported architecture!"
+    #else
+        #pragma message("Unsupported architecture!")
+    #endif
 #endif
 
 #ifndef _WIN32
@@ -73,6 +77,10 @@
 #elif defined(__SIZE_WIDTH__) && (__SIZE_WIDTH__ == 32)
     #define ARCH_32BIT
 #else
-#warning "Unsupported architecture bitness"
+    #if !defined (_WIN32)
+        #warning "Unsupported architecture!"
+    #else
+        #pragma message("Unsupported architecture!")
+    #endif
 #endif /* __WORDSIZE, __SIZE_WIDTH__ */
 #endif

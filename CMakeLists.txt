@@ -46,14 +46,6 @@ set(CMAKE_MODULE_PATH "${${PROJECT_NAME}_SOURCE_DIR}/CMakeModules")
 
 include(FXUIBuildApp)
 
-message(STATUS "Target platform:        ${CMAKE_SYSTEM_NAME}")
-message(STATUS "Compiler:               ${CMAKE_CXX_COMPILER_ID}")
-message(STATUS "Target arch:            ${CMAKE_SYSTEM_PROCESSOR}")
-message(STATUS "Build type:             ${CMAKE_BUILD_TYPE}")
-message(STATUS "Build C flags:          ${CMAKE_C_FLAGS}")
-message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
-message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
-
 if(APPLE)
     add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
 	BACKEND_COCOA
@@ -88,12 +80,19 @@ if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
 	BACKEND_WINAPI=1
     )
-endif()
-
-if (MSVC)
-    add_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC
-    )
+    if (MSVC)
+        add_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC
+        UNICODE=1
+        )
+        #add_compile_options(/MT)
+        add_compile_options(/MP)
+        add_compile_options(/nologo)
+        add_compile_options(/std:c++14)
+        add_compile_options(/subsystem:windows)
+        add_compile_options("$<$<CONFIG:Release>:/O2>")
+        #target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE /W4)
     #set_property(${CMAKE_PROJECT_NAME} PUBLIC STRING "/Ox /Ob2 /Oi /Ot /GF /Zc:wchar_t /MT")
+    endif()
 endif()
 
 if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU)
@@ -193,6 +192,14 @@ elseif(APPLE)
     src/fxui/platform/macosx/MacOSXAPIWindow.mm
     )
 endif()
+
+message(STATUS "Target platform:        ${CMAKE_SYSTEM_NAME}")
+message(STATUS "Compiler:               ${CMAKE_CXX_COMPILER_ID}")
+message(STATUS "Target arch:            ${CMAKE_SYSTEM_PROCESSOR}")
+message(STATUS "Build type:             ${CMAKE_BUILD_TYPE}")
+message(STATUS "Build C flags:          ${CMAKE_C_FLAGS}")
+message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
+message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
 add_executable(${CMAKE_PROJECT_NAME}_example
     src/test/example.cpp
