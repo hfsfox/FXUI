@@ -92,7 +92,9 @@ if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
         add_compile_options(/subsystem:windows)
         add_compile_options("$<$<CONFIG:Release>:/O2>")
         #target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE /W4)
-    #set_property(${CMAKE_PROJECT_NAME} PUBLIC STRING "/Ox /Ob2 /Oi /Ot /GF /Zc:wchar_t /MT")
+        #set_property(${CMAKE_PROJECT_NAME} PUBLIC STRING "/Ox /Ob2 /Oi /Ot /GF /Zc:wchar_t /MT")
+        #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /subsystem:windows")
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
     else()
         add_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC
         UNICODE=1
@@ -208,12 +210,14 @@ message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
 message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
 add_executable(${CMAKE_PROJECT_NAME}_example
+    #WIN32
     src/test/example.cpp
    ${FXUI_SOURCES}
    ${PLATFORM_SOURCES}
     )
 
 add_executable(${CMAKE_PROJECT_NAME}_init_dpy
+    #WIN32
     src/test/example_init_dpy.cpp
    ${FXUI_SOURCES}
    ${PLATFORM_SOURCES}

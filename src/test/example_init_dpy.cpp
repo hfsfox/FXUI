@@ -79,7 +79,7 @@ main(int argc, char** argv)
         std::cout << "macOS X" << std::endl;
     #endif
 
-    window.SetTitle("FXWindow");
+    window.SetTitle("FXWindow with widgets");
     FX::FXColor color = {216, 216, 216, 255};
 
     //FX::FXMessageBox* messagebox = new FX::FXMessageBox(&display, {100,100,600,200}, "Message box");

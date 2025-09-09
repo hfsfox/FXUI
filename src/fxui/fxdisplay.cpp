@@ -308,6 +308,7 @@ bool FX::FXDisplay::Init()
         return true;
     #elif defined (BACKEND_WINAPI)
         hInstance = GetModuleHandle(NULL);
+        //FreeConsole();
         /*LPWSTR CLASS_NAME = L"FXUIWindow";
         hwnd  = CreateWindowExW(
             WS_EX_OVERLAPPEDWINDOW, CLASS_NAME, L"", 0,

@@ -19,6 +19,9 @@
 
 #if defined (PLATFORM_WINDOWS)
     #define BACKEND_WINAPI 1
+        //#ifdef _MSC_VER
+            //#pragma comment(linker, "/subsystem:windows")
+        //#endif
     #if defined MULTITOUCH
         #define HAS_MULTITOUCH
         //#define HAS_SCREEN_KBD

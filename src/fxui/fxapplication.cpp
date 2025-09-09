@@ -17,6 +17,8 @@
 #elif defined (BACKEND_BEAPI)
     #include "platform/haiku/BApplicationInstance.h"
 #elif defined (BACKEND_WINAPI)
+    #include <windows.h>
+    //#include "platform/windows/WindowsApiWindow.h"
 #endif
 
 #if defined(BACKEND_BEAPI)
@@ -31,6 +33,8 @@ FX::FXApplication::FXApplication()
     {
         #if defined (BACKEND_COCOA)
             FXCocoaAutoreleasePool p();
+        #elif defined (BACKEND_WINAPI)
+        FreeConsole();
         #endif
         FXApplication(argc_state, argv_state,"");
     }
@@ -38,13 +42,15 @@ FX::FXApplication::FXApplication()
 FX::FXApplication::FXApplication(const char* vendor_descriptor)
 {
 	#if defined (BACKEND_COCOA)
-            FXCocoaAutoreleasePool p();
+        FXCocoaAutoreleasePool p();
 	#elif defined(BACKEND_BEAPI)
-	if (!app)
-	{
-        //app = new BApplication("application/x-vnd.FWindow");
-        app = BApplicationInstance::GetInstance();
-    }
+	    if (!app)
+	    {
+            //app = new BApplication("application/x-vnd.FWindow");
+            app = BApplicationInstance::GetInstance();
+        }
+    #elif defined (BACKEND_WINAPI)
+       FreeConsole();
     #endif
 }
 
@@ -60,6 +66,8 @@ FX::FXApplication::FXApplication(int argc, char** argv)
 			{
         		app = BApplicationInstance::GetInstance();
     		}
+        #elif defined (BACKEND_WINAPI)
+            FreeConsole();
     	#endif
     }
 
@@ -75,6 +83,8 @@ FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descr
 			{
         		app = BApplicationInstance::GetInstance();
     		}
+        #elif defined (BACKEND_WINAPI)
+            FreeConsole();
     	#endif
     }
 

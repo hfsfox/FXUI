@@ -303,6 +303,7 @@ namespace
         ::HWND hWindow;
         ::MSG msg;
         ::HDC hdc;
+        ::HACCEL hAccel;
 
         LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             switch (uMsg)
@@ -698,7 +699,7 @@ FX::FXWindow::Create()
         LPWSTR CLASS_NAME = L"FXUIWindow";
         WNDCLASSEX wx = {0};
 
-        wx.hInstance = (HINSTANCE)GetModuleHandle(NULL)/*display->GetNativeContext() */;
+        wx.hInstance = (HINSTANCE)display->GetNativeContext();
         wx.lpfnWndProc = WindowProc;
         wx.cbSize = sizeof(WNDCLASSEX);
         wx.lpszClassName = CLASS_NAME;
@@ -731,7 +732,7 @@ FX::FXWindow::Create()
                 rect.height,
                 0,
                 0,
-                (HINSTANCE)GetModuleHandle(NULL),
+                (HINSTANCE)display->GetNativeContext(),
                 NULL
             );
             /*CreateWindowExW(
@@ -772,6 +773,10 @@ FX::FXWindow::Create()
 
         //SetWindowLong(hWindow, GWL_STYLE, style);
 
+        hdc = GetDC(hWindow);
+
+        hAccel = LoadAcceleratorsW((HINSTANCE)display->GetNativeContext(), MAKEINTRESOURCEW(NULL));
+
         return true;
     #else
         return true;
@@ -803,6 +808,8 @@ FX::FXWindow::Hide()
         {
             haikuWindow->Hide();
         }
+    #elif defined(BACKEND_WINAPI)
+    ShowWindow(hWindow, WM_SHOWWINDOW);
     #endif
 }
 
@@ -900,15 +907,29 @@ FX::FXWindow::ProcessEvents()
 
         return !shouldClose;
     #elif defined (BACKEND_WINAPI)
-        while (GetMessage(&msg, NULL, 0, 0) > 0) 
+        /*while (GetMessage(&msg, NULL, 0, 0) > 0)
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
+        }*/
+
+        //return msg.wParam;
+        BOOL bRet = 0;
+        while (bRet = GetMessage(&msg, nullptr, 0, 0))
+        {
+            if (-1 == bRet) 
+                //return !shouldClose;
+                break;
+            if (!TranslateAccelerator(msg.hwnd, hAccel, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
 
         return msg.wParam;
 
-        return !shouldClose;
+        //return !shouldClose;
     #else
         return shouldClose;
     #endif
