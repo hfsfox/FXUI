@@ -93,6 +93,11 @@ if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
         add_compile_options("$<$<CONFIG:Release>:/O2>")
         #target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE /W4)
     #set_property(${CMAKE_PROJECT_NAME} PUBLIC STRING "/Ox /Ob2 /Oi /Ot /GF /Zc:wchar_t /MT")
+    else()
+        add_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC
+        UNICODE=1
+        _UNICODE=1
+        )
     endif()
 endif()
 
