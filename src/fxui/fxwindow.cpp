@@ -302,10 +302,23 @@ namespace
     #elif defined (BACKEND_WINAPI)
         ::HWND hWindow;
         ::MSG msg;
+        ::HDC hdc;
 
         LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             switch (uMsg)
             {
+                case WM_SIZE:
+                {
+                    int newWidth = LOWORD(lParam);
+                    int newHeight = HIWORD(lParam);
+
+                    // Handle resizing of child controls here, e.g.,
+                    // MoveWindow(hChildControl, 0, 0, newWidth, newHeight, TRUE);
+
+                    // Invalidate the client area to trigger a repaint if necessary
+                    InvalidateRect(hWindow, NULL, TRUE);
+                    break;
+                }
                 case WM_CLOSE:
                     DestroyWindow(hwnd);
                     //shouldClose = true;
@@ -693,20 +706,35 @@ FX::FXWindow::Create()
         wx.hIcon = LoadIcon(NULL, IDI_APPLICATION);
         wx.hCursor = LoadCursor(NULL, IDC_ARROW);
         wx.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+        wx.hbrBackground = (HBRUSH)(COLOR_WINDOW);
         wx.style = 0;
         wx.cbClsExtra = 0;
         wx.cbWndExtra = 0;
+        //wx.
 
         if (!RegisterClassEx(&wx))
         {
-            //EXIT("WNDCLASS CREATION", NULL_AFTER_CREATION); // exit with error macro
-            //std::cout << "failed to create wndclassex" << std::endl;
             fprintf(stderr, "Failed to create WNDCLASSEX struct\n\n");
             return false;
         }
 
         //LPWSTR CLASS_NAME = L"FXUIWindow";
-        hWindow = CreateWindowExW(
+        hWindow = 
+            CreateWindowW
+            (
+                CLASS_NAME,
+                ptr,
+                WS_SYSMENU | WS_CAPTION | WS_MINIMIZEBOX | WS_THICKFRAME,
+                rect.x,
+                rect.y,
+                rect.width,
+                rect.height,
+                0,
+                0,
+                (HINSTANCE)GetModuleHandle(NULL),
+                NULL
+            );
+            /*CreateWindowExW(
             WS_EX_OVERLAPPEDWINDOW,
             CLASS_NAME, 
             ptr, 
@@ -715,15 +743,35 @@ FX::FXWindow::Create()
             rect.y, 
             rect.width,
             rect.height, 
-            NULL, 
+            HWND_DESKTOP,
             NULL,
-            (HINSTANCE)GetModuleHandle(NULL)/*display->GetNativeContext()*/,
+            (HINSTANCE)GetModuleHandle(NULL),
             NULL);
+            */
+            
+            /*CreateWindowEx(0,
+                CLASS_NAME,
+                ptr,
+                WS_OVERLAPPED, 
+                CW_USEDEFAULT,
+                CW_USEDEFAULT, 
+                CW_USEDEFAULT,
+                CW_USEDEFAULT, 
+                HWND_DESKTOP, 
+                NULL,
+                (HINSTANCE)GetModuleHandle(NULL),
+                NULL);*/
         if (hWindow == NULL)
         {
             return false;
         }
         //ShowWindow(hWindow, SW_SHOW);
+        //LONG style = GetWindowLong(hWindow, GWL_STYLE);
+        //style |= WS_MINIMIZEBOX;
+        //style |= WS_BORDER;
+
+        //SetWindowLong(hWindow, GWL_STYLE, style);
+
         return true;
     #else
         return true;
@@ -858,6 +906,8 @@ FX::FXWindow::ProcessEvents()
             DispatchMessage(&msg);
         }
 
+        return msg.wParam;
+
         return !shouldClose;
     #else
         return shouldClose;
@@ -877,6 +927,11 @@ FX::FXWindow::SetTitle(const char* title)
         xdg_toplevel_set_title(xdg_toplevel, title);
     #elif defined (BACKEND_COCOA)
         macwindow->SetTitle(title);
+    #elif defined (BACKEND_WINAPI)
+        wchar_t title_wtext[255];
+        mbstowcs(title_wtext, title, strlen(title) + 1);//Plus null
+        LPWSTR ptr = title_wtext;
+        SetWindowText(hWindow, ptr);
     #endif
 }
 

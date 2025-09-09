@@ -83,6 +83,7 @@ if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     if (MSVC)
         add_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC
         UNICODE=1
+        _UNICODE=1
         )
         #add_compile_options(/MT)
         add_compile_options(/MP)
