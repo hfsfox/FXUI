@@ -18,7 +18,7 @@
     #include "platform/haiku/BApplicationInstance.h"
 #elif defined (BACKEND_WINAPI)
     #include <windows.h>
-    //#include "platform/windows/WindowsApiWindow.h"
+    #include "platform/windows/WindowsApiWindow.h"
 #endif
 
 #if defined(BACKEND_BEAPI)

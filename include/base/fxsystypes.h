@@ -12,6 +12,7 @@
 // © 2025, , All Rights Reserved
 //-----------------------------------------------------------------------------
 
+#include <fxcompilerdefs.h>
 #include <sys/types.h>
 #include <stddef.h>
 
@@ -56,14 +57,14 @@
 #elif defined(__AVR__) || defined(__AVR_ARCH__)
     #define ARCH_AVR
 #else
-    #if !defined (_WIN32)
+    #if !defined (COMPILER_MSVC)
         #warning "Unsupported architecture!"
     #else
         #pragma message("Unsupported architecture!")
     #endif
 #endif
 
-#ifndef _WIN32
+#ifndef COMPILER_MSVC
 #if defined(__WORDSIZE) && (__WORDSIZE == 128)
     #define ARCH_128BIT
 #elif defined(__SIZE_WIDTH__) && (__SIZE_WIDTH__ == 128)
@@ -77,7 +78,7 @@
 #elif defined(__SIZE_WIDTH__) && (__SIZE_WIDTH__ == 32)
     #define ARCH_32BIT
 #else
-    #if !defined (_WIN32)
+    #if !defined (COMPILER_MSVC)
         #warning "Unsupported architecture!"
     #else
         #pragma message("Unsupported architecture!")

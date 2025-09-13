@@ -308,6 +308,13 @@ namespace
         LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             switch (uMsg)
             {
+                case WM_KEYDOWN:
+                case WM_SYSKEYDOWN:
+                case WM_KEYUP:
+                case WM_SYSKEYUP:
+                {
+                    break;
+                }
                 case WM_SIZE:
                 {
                     int newWidth = LOWORD(lParam);
@@ -327,6 +334,15 @@ namespace
                     break;
                 case WM_DESTROY:
                     PostQuitMessage(0);
+                    break;
+                //case WM_SETCURSOR:
+                    /*if (hWindow->cursor != NULL)
+                    {
+                        SetCursor(window->cursor);
+                        return TRUE;
+                    }*/
+                    //break;
+                case WM_SETICON:
                     break;
                 default:
                     return DefWindowProc(hwnd, uMsg, wParam, lParam);
