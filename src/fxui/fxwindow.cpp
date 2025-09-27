@@ -21,12 +21,17 @@
 #elif defined BACKEND_WINAPI
     #include <windows.h>
     #include <cstdint>
+    // dwm
+    #include <dwmapi.h>
+    //#define DWMWA_WINDOW_CORNER_PREFERENCE DWORD(33);
 #elif defined (BACKEND_COCOA)
     #include "platform/macosx/MacOSXAPIWindow.h"
 #endif
 
 #include <cstdio>
 #include <cstring>
+
+#define UNIMPLEMENTED printf("%s (%s %d) UNIMPLEMENTED\n",__func__,__FILE__,__LINE__);
 
 #if defined(BACKEND_BEAPI)
     static BApplication* app = nullptr;
@@ -304,6 +309,10 @@ namespace
         ::MSG msg;
         ::HDC hdc;
         ::HACCEL hAccel;
+
+        const auto DWMWCP_DONOTROUND = 1;		// Rectangular
+        const auto DWMWCP_ROUND = 2;				// Default
+        const auto DWMWCP_ROUNDSMALL = 3;		// Semi-rounded
 
         LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             switch (uMsg)
@@ -793,8 +802,16 @@ FX::FXWindow::Create()
 
         hAccel = LoadAcceleratorsW((HINSTANCE)display->GetNativeContext(), MAKEINTRESOURCEW(NULL));
 
+
+        //DwmSetWindowAttribute(hWindow,DWMWA_WINDOW_CORNER_PREFERENCE, &DWMWCP_DONOTROUND, sizeof(int));
+        //DWM_WINDOW_CORNER_PREFERENCE pef = DWMWCP_DONOTROUND;
+        //DwmSetWindowAttribite(hWindow, /*pef*/ DWMWA_WINDOW_CORNER_PREFERENCE, DWMWCP_DONOTROUND, sizeof(int));
+        // 
+        //DwmSetWindowAttribute(hWindow, DWMWA_WINDOW_CORNER_PREFERENCE, NULL, sizeof(int));
+
         return true;
     #else
+        UNIMPLEMENTED;
         return true;
     #endif
 }
@@ -809,6 +826,8 @@ FX::FXWindow::Show()
         if (haikuWindow) haikuWindow->Show();
     #elif defined(BACKEND_WINAPI)
     ShowWindow(hWindow, SW_SHOW);
+    #else
+    UNIMPLEMENTED;
     #endif
 }
 
@@ -825,7 +844,9 @@ FX::FXWindow::Hide()
             haikuWindow->Hide();
         }
     #elif defined(BACKEND_WINAPI)
-    ShowWindow(hWindow, WM_SHOWWINDOW);
+    ShowWindow(hWindow, SW_HIDE);
+    #else
+    UNIMPLEMENTED;
     #endif
 }
 
@@ -941,6 +962,11 @@ FX::FXWindow::ProcessEvents()
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
             }
+            /*if (!HandleAccelArray(GetActiveWindow(), msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }*/
         }
 
         return msg.wParam;
@@ -969,6 +995,8 @@ FX::FXWindow::SetTitle(const char* title)
         mbstowcs(title_wtext, title, strlen(title) + 1);//Plus null
         LPWSTR ptr = title_wtext;
         SetWindowText(hWindow, ptr);
+    #else
+        UNIMPLEMENTED;
     #endif
 }
 
@@ -978,6 +1006,8 @@ FX::FXWindow::MoveTo(FX::FXPoint where)
 {
     #if defined(BACKEND_WAYLAND)
     #elif defined(PLATFORM_HAIKU)
+    #else
+     UNIMPLEMENTED;
     #endif
 }
 
@@ -986,5 +1016,7 @@ FX::FXWindow::ResizeTo(FX::FXRect& newSize)
 {
     #if defined(BACKEND_WAYLAND)
     #elif defined(PLATFORM_HAIKU)
+    #else
+        UNIMPLEMENTED;
     #endif
 }

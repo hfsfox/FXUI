@@ -19,6 +19,7 @@
 #elif defined (BACKEND_WINAPI)
     #include <windows.h>
     #include <winuser.h>
+    #include "platform/windows/WindowsApiWindow.h"
 #elif defined (BACKEND_COCOA)
     #include <Carbon/Carbon.h>
     #include <objc/message.h>
@@ -179,7 +180,8 @@ typedef enum NSWindowStyleMask
         NSBackingStoreBuffered = 2,
     } NSBackingStoreType;
 
-
+    #elif defined(BACKEND_WINAPI)
+    HDC DC;
     #endif
 }
 
@@ -308,13 +310,6 @@ bool FX::FXDisplay::Init()
         return true;
     #elif defined (BACKEND_WINAPI)
         hInstance = GetModuleHandle(NULL);
-        //FreeConsole();
-        /*LPWSTR CLASS_NAME = L"FXUIWindow";
-        hwnd  = CreateWindowExW(
-            WS_EX_OVERLAPPEDWINDOW, CLASS_NAME, L"", 0,
-			0, 0, 100,
-			100, NULL, NULL,
-			hInstance, NULL);*/
         return true;
     #endif
     //return true;
@@ -365,6 +360,7 @@ FX::FXDisplay::Clear()
             view->Invalidate();
             view->UnlockLooper();
         }
+    #elif defined (BACKEND_WINAPI)
     #endif
 }
 
@@ -410,6 +406,7 @@ FX::FXDisplay::DrawText(const char* text, int x, int y, FX::FXColor color)
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->DrawString(text, BPoint(x, y));
         view->UnlockLooper();
+    #elif defined (BACKEND_WINAPI)
     #endif
 }
 
@@ -436,6 +433,7 @@ FX::FXDisplay::DrawCircle(int center_x, int center_y, int radius, FX::FXColor co
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XDrawArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
         XFlush(display);
+    #elif defined (BACKEND_WINAPI)
     #endif
     //}
 }
@@ -456,6 +454,7 @@ FX::FXDisplay::DrawPoint(int center_x, int center_y, FX::FXColor color)
     //{
     #if defined(BACKEND_BEAPI)
     #elif defined (BACKEND_X11)
+    #elif defined (BACKEND_WINAPI)
     #endif
     //}
 }
@@ -483,6 +482,7 @@ FX::FXDisplay::DrawLine(int center_x_begin, int center_y_begin,int center_x_end,
     #elif defined (BACKEND_X11)
         XDrawLine(display, window, gc, center_x_begin, center_y_begin, center_x_end, center_y_end);
         XFlush(display);
+    #elif defined (BACKEND_WINAPI)
     #endif
     //}
 }
@@ -509,6 +509,7 @@ FX::FXDisplay::DrawRect(int x_begin, int y_begin,int width, int height, FX::FXCo
         view->SetHighColor(color.red, color.green, color.blue, color.alpha);
         view->StrokeRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
         view->UnlockLooper();
+    #elif defined (BACKEND_WINAPI)
     #endif
     //}
 }
@@ -535,6 +536,7 @@ FX::FXDisplay::FillRect(int x_begin, int y_begin, int width, int height, FX::FXC
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XFillRectangle(display,window, gc, x_begin, y_begin, width, height);
         XFlush(display);
+    #elif defined (BACKEND_WINAPI)
     #endif
     //}
 }
@@ -561,6 +563,7 @@ FX::FXDisplay::FillCircle(int center_x, int center_y, int radius, FX::FXColor co
         XSetForeground(display, gc, _RGB(color.red,color.green,color.blue));
         XFillArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
         XFlush(display);
+    #elif defined (BACKEND_WINAPI)
     #endif
     //}
 }
@@ -650,6 +653,7 @@ FX::FXDisplay::SetViewColor(FX::FXColor color)
         //attr->height/
         XFillRectangle(display,window,gc,0, 0, attr.width, attr.height);
         XFlush(display);
+    #elif defined (BACKEND_WINAPI)
     #endif
     //}
 }
@@ -708,5 +712,6 @@ FX::FXDisplay::Present()
         //if (display) XFlush(display);
     #elif defined(BACKEND_BEAPI)
         // Presentation handled automatically by Haiku
+    #elif defined (BACKEND_WINAPI)
     #endif
 }
