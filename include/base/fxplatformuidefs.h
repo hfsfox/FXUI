@@ -69,7 +69,7 @@
     #define HAS_SCREEN_KBD
 #elif defined (PLATFORM_FUCHSIA)
     #define BACKEND_SCENIC 1
-#elif defined (PLATFORM_QNX)
+#elif defined (PLATFORM_QNX) || defined (PLATFORM_BBOS10)
     #define BACKEND_PHOTON 1
 #elif defined (PLATFORM_HAIKU) || defined(PLATFORM_BEOS)
     #define BACKEND_BEAPI 1

@@ -96,6 +96,9 @@
 
 #if defined (__QNX__) || defined (__QNXNTO__) || defined (BBNDK_VERSION_CURRENT)
     #define PLATFORM_QNX
+    #if defined(__BLACKBERRY10__)
+        #define PLATFORM_BBOS10
+    #endif
 #endif
 
 #if defined (__VXWORKS__) || defined (__vxworks) || defined (__VXWORKS)
