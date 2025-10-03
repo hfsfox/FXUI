@@ -88,6 +88,11 @@ namespace FX
             void SetViewSize(FX::FXRect size);
 
             void Present();
+        /*public:
+            virtual void SetMouseableRect(const FX::FXRect rect) const { return mousableRect = rect; }
+        */
+        private:
+            const FX::FXRect mousableRect;
     };
 }
 

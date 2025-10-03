@@ -31,6 +31,11 @@ struct FXRect
             height = new_h;
             return *this;
         }
+        inline FXRect&
+        operator=(FX::FXRect otherRect)
+        {
+            return SetTo(otherRect.x, otherRect.y, otherRect.width, otherRect.height);
+        }
     };
 }
 
