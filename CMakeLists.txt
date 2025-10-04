@@ -76,6 +76,12 @@ if(HAIKU)
     )
 endif()
 
+if(QNX)
+    add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
+    BACKEND_PHOTON=1
+    )
+endif()
+
 if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     add_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC
 	BACKEND_WINAPI=1
@@ -103,7 +109,7 @@ if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     endif()
 endif()
 
-if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU)
+if(LINUX OR UNIX AND NOT APPLE AND NOT HAIKU AND NOT QNX)
     find_package(PkgConfig REQUIRED)
     find_package(X11 REQUIRED)
     find_package(OpenGL REQUIRED)
@@ -198,6 +204,10 @@ elseif(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
 elseif(APPLE)
     set(PLATFORM_SOURCES
     src/fxui/platform/macosx/MacOSXAPIWindow.mm
+    )
+elseif(QNX)
+    set(PLATFORM_SOURCES
+    src/fxui/plaform/qnx/QNXAPIWindow.cpp
     )
 endif()
 
