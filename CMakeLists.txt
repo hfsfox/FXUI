@@ -148,6 +148,7 @@ set(FXUI_BASE_SOURCES
     src/fxui/fxwindow.cpp
     src/fxui/fxbitmap.cpp
     src/fxui/fxfont.cpp
+    src/fxui/fxview.cpp
 )
 
 set(FXUI_LAYOUT_SOURCES

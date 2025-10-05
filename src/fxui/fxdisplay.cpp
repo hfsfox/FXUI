@@ -182,6 +182,7 @@ typedef enum NSWindowStyleMask
 
     #elif defined(BACKEND_WINAPI)
     HDC DC;
+    static PAINTSTRUCT ps;
     #endif
 }
 

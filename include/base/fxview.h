@@ -11,20 +11,22 @@
 
 #ifndef __FXVIEW_H__
 #define __FXVIEW_H__
-
+/*
 #include <fxplatformdefs.h>
 #include <fxplatformuidefs.h>
+*/
 #include <fxuicolor.h>
 #include <fxpoint.h>
 #include <fxrect.h>
+#include <fxfont.h>
 
 #include <cstdint>
 
-namespace FX
+/*namespace FX
 {
     typedef struct FXColor FXColor;
     class FXFont;
-}
+}*/
 
 namespace FX
 {
@@ -48,7 +50,7 @@ namespace FX
             virtual void DrawText(const char* text, int x, int y, FX::FXColor color);
             virtual void DrawText(const char* text, FX::FXPoint where, FX::FXColor color);
             virtual void DrawCircle(int center_x, int center_y, int radius, FX::FXColor color);
-            virtual void DrawCircle(FX::FXPoint where, int radius, FX::FXColor color);
+            virtual void DrawCircle(FX::FXPoint where, int radius, FX::FXColor color); 
             virtual void DrawArc(int center_x, int center_y, int begin_angle, int end_angle, FX::FXColor color);
             virtual void DrawArc(FX::FXPoint where, int begin_angle, int end_angle, FX::FXColor color);
             virtual void DrawPoint(int center_x, int center_y, FX::FXColor color);
@@ -93,6 +95,8 @@ namespace FX
         */
         private:
             const FX::FXRect mousableRect;
+            const bool visibility;
+            const FX::FXRect viewRect;
     };
 }
 

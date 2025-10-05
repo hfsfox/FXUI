@@ -309,6 +309,7 @@ namespace
         ::MSG msg;
         ::HDC hdc;
         ::HACCEL hAccel;
+        static ::PAINTSTRUCT ps;
 
         const auto DWMWCP_DONOTROUND = 1;		// Rectangular
         const auto DWMWCP_ROUND = 2;				// Default
@@ -351,6 +352,18 @@ namespace
                         return TRUE;
                     }*/
                     //break;
+                case WM_PAINT:
+                    {
+                        BeginPaint(hWindow, &ps);
+
+                        RECT r;
+                        SetRect(&r, 10, 10, 50, 50);
+                        FillRect(GetDC(hWindow), &r, (HBRUSH)GetStockObject(BLACK_BRUSH));
+
+                        EndPaint(hWindow, &ps);
+                        return 0;
+                    }
+                    break;
                 case WM_SETICON:
                     break;
                 default:
