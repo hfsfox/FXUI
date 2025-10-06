@@ -45,3 +45,8 @@ FX::FXMenuBar::AddMenuItem(const char* item)
 FX::FXMenuBar::~FXMenuBar()
 {
 }
+
+void
+FX::FXMenuBar::MakeNativeMenuBar()
+{
+}

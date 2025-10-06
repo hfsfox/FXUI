@@ -15,6 +15,8 @@
 #include <fxdisplay.h>
 #include <fxrect.h>
 
+#include <stdint.h>
+
 namespace FX
 {
     class FXWidget
@@ -26,7 +28,10 @@ namespace FX
             virtual void Draw();
             virtual void Show();
             virtual void Hide();
+            FX::FXRect GetWidgetSize(void) const { return size; }
+            void SetWidgetSize(FX::FXRect newSize) { size = newSize; }
         private:
+            FX::FXRect size;
     };
 }
 

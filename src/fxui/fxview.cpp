@@ -62,8 +62,9 @@ FX::FXView::DrawCircle(int center_x, int center_y, int radius, FX::FXColor color
 {
 }
 void
-FX::FXView::DrawCircle(FX::FXPoint where, int radius, FX::FXColor color)
+FX::FXView::DrawCircle(FX::FXPoint point, int radius, FX::FXColor color)
 {
+    FXView::DrawCircle(point.x, point.y, radius, color);
 }
 void
 FX::FXView::DrawArc(int center_x, int center_y, int begin_angle, int end_angle, FX::FXColor color)
@@ -80,6 +81,7 @@ FX::FXView::DrawPoint(int center_x, int center_y, FX::FXColor color)
 void
 FX::FXView::DrawPoint(FX::FXPoint where, FX::FXColor color)
 {
+    FXView::DrawPoint(where.x, where.y, color);
 }
 void
 FX::FXView::DrawLine(int center_x_begin, int center_y_begin,int center_x_end, int center_y_end, FX::FXColor color)
@@ -88,6 +90,7 @@ FX::FXView::DrawLine(int center_x_begin, int center_y_begin,int center_x_end, in
 void
 FX::FXView::DrawLine(FX::FXPoint where_begin, FX::FXPoint where_end, FX::FXColor color)
 {
+    FXView::DrawLine(where_begin.x, where_begin.y, where_end.x, where_end.y, color);
 }
 void
 FX::FXView::DrawRect(int x_begin, int y_begin, int width, int height, FX::FXColor color)
@@ -135,8 +138,9 @@ FX::FXView::FillCircle(int center_x, int center_y, int radius, FX::FXColor color
 {
 }
 void
-FX::FXView::FillCircle(FX::FXPoint where, int radius, FX::FXColor color)
+FX::FXView::FillCircle(FX::FXPoint point, int radius, FX::FXColor color)
 {
+    FXView::FillCircle(point.x, point.y, radius, color);
 }
 void
 FX::FXView::FillArc(int center_x, int center_y, int begin_angle, int end_angle, FX::FXColor color)

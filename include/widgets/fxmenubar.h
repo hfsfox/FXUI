@@ -37,15 +37,19 @@ namespace FX
         public:
             FXMenuBar();
             FXMenuBar(FX::FXRect menubar_r, FX::FXDisplay* display);
+            ~FXMenuBar();
+        public:
             void AddMenu(const char* menu);
             void AddMenuItem(const char* item);
-            ~FXMenuBar();
+            bool IsNativeMenuBar() const { return isNative; }
+            void MakeNativeMenuBar();
         private:
             uint32_t menu_counter;
             uint32_t word_gap;
             FX::FXRect rect;
             FX::FXDisplay* d;
             bool selected;
+            bool isNative;
     };
 }
 

@@ -327,12 +327,17 @@ namespace
                 }
                 case WM_SIZE:
                 {
+                    int newX = 0;
+                    int newY = 0;
+                    ::RECT r;
+                    GetWindowRect(hWindow, &r);
+
                     int newWidth = LOWORD(lParam);
                     int newHeight = HIWORD(lParam);
 
                     // Handle resizing of child controls here, e.g.,
                     // MoveWindow(hChildControl, 0, 0, newWidth, newHeight, TRUE);
-
+                    //MoveWindow(hWindow, 0, 0, newWidth, newHeight, TRUE);
                     // Invalidate the client area to trigger a repaint if necessary
                     InvalidateRect(hWindow, NULL, TRUE);
                     break;
@@ -356,9 +361,9 @@ namespace
                     {
                         BeginPaint(hWindow, &ps);
 
-                        RECT r;
-                        SetRect(&r, 10, 10, 50, 50);
-                        FillRect(GetDC(hWindow), &r, (HBRUSH)GetStockObject(BLACK_BRUSH));
+                        //RECT r;
+                        //SetRect(&r, 10, 10, 50, 50);
+                        //FillRect(GetDC(hWindow), &r, (HBRUSH)GetStockObject(BLACK_BRUSH));
 
                         EndPaint(hWindow, &ps);
                         return 0;
