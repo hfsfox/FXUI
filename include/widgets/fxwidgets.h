@@ -27,6 +27,8 @@
 #include <fxtextview.h>
 #include <fxthrobber.h>
 #include <fxtoolbar.h>
+#include <fxtooltip.h>
+#include <fxstringview.h>
 // dialogs
 #include <dialogs/fxfiledialog.h>
 #include <dialogs/fxmessagebox.h>

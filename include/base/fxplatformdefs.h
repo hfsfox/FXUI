@@ -122,6 +122,8 @@
         #define PLATFORM_IOS
     #elif TARGET_OS_MAC == 1
         #define PLATFORM_MACOSX
+    #elif TARGET_OS_SIMULATOR
+        #define PLATFORM_IOS_SIMULATOR
     #else
     #   warning "Unknown Apple platform"
     #endif

@@ -167,6 +167,7 @@ set(FXUI_WIDGET_SOURCES
     src/fxui/widgets/fxtextfield.cpp
     src/fxui/widgets/fxtextview.cpp
     src/fxui/widgets/fxtoolbar.cpp
+    src/fxui/widgets/fxstringview.cpp
 )
 
 set(FXUI_WIDGET_DIALOG_SOURCES

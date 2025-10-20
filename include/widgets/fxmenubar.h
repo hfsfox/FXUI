@@ -15,6 +15,7 @@
 #include <fxdisplay.h>
 #include <fxrect.h>
 #include <fxpoint.h>
+#include <fxwidget.h>
 
 #include <cstdint>
 #include <vector>
@@ -32,7 +33,7 @@ namespace
 
 namespace FX
 {
-    class FXMenuBar
+    class FXMenuBar/* : public FX::FXWidget*/
     {
         public:
             FXMenuBar();

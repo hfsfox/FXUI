@@ -117,5 +117,12 @@ FX::FXApplication::GetAppLocation()
 {
     const char* path;
     path = NULL;
+
+    #if defined (PLATFORM_WINDOWS)
+    #elif defined(PLATFORM_HAIKU)
+    #elif defined(PLATFORM_LINUX)
+    #elif defined (PLATFORM_MACOSX)
+    #endif
+
     return path;
 }
