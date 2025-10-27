@@ -39,7 +39,7 @@ namespace FX
             void SetFontStyle(uint32_t newStyle);
             //void SetSize ( FX::FXCoord newSize);
         public:
-        virtual const void* GetPlatformFont () const;
+        //virtual const void* GetPlatformFont () const;
         public:
             const char* font_name;
             int32_t font_style;

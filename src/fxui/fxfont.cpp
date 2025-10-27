@@ -70,7 +70,7 @@ FX::FXFont::SetFontStyle(uint32_t newFontStyle)
 {
 }
 
-const void*
+/*const void*
 FX::FXFont::GetPlatformFont() const
 {
     #if defined BACKEND_X11
@@ -80,4 +80,4 @@ FX::FXFont::GetPlatformFont() const
         HFONT font = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
         return static_cast<void*>(font);
     #endif
-}
+}*/
