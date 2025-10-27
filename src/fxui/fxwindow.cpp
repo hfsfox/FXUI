@@ -1054,3 +1054,10 @@ FX::FXWindow::ResizeTo(FX::FXRect& newSize)
         UNIMPLEMENTED;
     #endif
 }
+
+/*
+void
+FX::FXWindow::SetSystemCursor()
+{
+}
+*/

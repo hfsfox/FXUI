@@ -26,6 +26,7 @@ namespace FX
             bool ShouldClose() { return shouldClose; }
             FX::FXDisplay* GetDisplay() const { return display; }
             const FX::FXRect& GetRect() const { return rect; }
+            //void SetSystemCursor();
         private:
             FX::FXDisplay* display;
             FX::FXRect rect;
