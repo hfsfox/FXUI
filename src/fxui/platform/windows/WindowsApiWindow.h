@@ -40,6 +40,9 @@ class WinAPIObject
 		::HWND GetHWindow() const { return hwnd; }
 		::HDC GetHDC() const { return hdc; }
 		::HFONT GetHFont() const {return hfont; }
+
+	public:
+		::POINT MousePosition;
 	private:
 		::HINSTANCE hinstance;
 		::HWND hwnd;

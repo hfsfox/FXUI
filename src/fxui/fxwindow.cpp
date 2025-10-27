@@ -21,6 +21,10 @@
 #elif defined BACKEND_WINAPI
     #include <windows.h>
     #include <cstdint>
+    #if defined(_MSC_VER)
+        #include <BaseTsd.h>
+        typedef SSIZE_T ssize_t;
+    #endif
     // dwm
     #include <dwmapi.h>
     //#define DWMWA_WINDOW_CORNER_PREFERENCE DWORD(33);
@@ -318,6 +322,15 @@ namespace
         LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             switch (uMsg)
             {
+                case WM_GETMINMAXINFO:
+                {
+                    MINMAXINFO* info = reinterpret_cast<MINMAXINFO*>(lParam);
+
+                    // Get extra padding
+                    ssize_t hborder = GetSystemMetrics(SM_CXSIZEFRAME);
+                    ssize_t vborder = GetSystemMetrics(SM_CYSIZEFRAME);
+                    ssize_t vcaption = GetSystemMetrics(SM_CYCAPTION);
+                }
                 case WM_KEYDOWN:
                 case WM_SYSKEYDOWN:
                 case WM_KEYUP:
@@ -371,6 +384,9 @@ namespace
                     break;
                 case WM_SETICON:
                     break;
+                /*case WM_SETCURSOR:
+                    SetCursor(LoadCursorW(NULL, IDC_ARROW));
+                    break;*/
                 default:
                     return DefWindowProc(hwnd, uMsg, wParam, lParam);
             }

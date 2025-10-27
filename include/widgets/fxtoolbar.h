@@ -15,14 +15,15 @@
 #include <fxdisplay.h>
 #include <fxrect.h>
 #include <fxpoint.h>
+#include <fxuidefs.h>
 
 namespace FX
 {
     class FXToolBar
     {
         public:
-            FXToolBar();
-            FXToolBar(FX::FXRect menubar_r, FX::FXDisplay* display);
+            FXToolBar(/*ui_direction direction = FX_HORIZONTAL */ );
+            FXToolBar(FX::FXRect menubar_r, FX::FXDisplay* display, ui_direction direction = FX_HORIZONTAL);
             /*
             void AddMenu(const char* menu)
             {
@@ -34,8 +35,6 @@ namespace FX
             ~FXToolBar();
             void AddItemSeparator();
         private:
-            //uint32_t menu_counter;
-            //uint32_t word_gap;
             FX::FXDisplay* d;
             FX::FXRect rect;
     };

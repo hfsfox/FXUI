@@ -129,7 +129,7 @@ main(int argc, char** argv)
         FX::FXRect menubar_r(0, 0, display->GetDisplaySize().width-1, 20);
         FX::FXMenuBar m(menubar_r, display);
         FX::FXRect toolbar_r(0, 20, display->GetDisplaySize().width-1, 40);
-        FX::FXToolBar* t = new FX::FXToolBar(toolbar_r, display);
+        FX::FXToolBar* t = new FX::FXToolBar(toolbar_r, display, FX_HORIZONTAL);
 
         FX::FXButton* button1 = new FX::FXButton("Button 1",FX::FXRect(button_1_rect),display);
 

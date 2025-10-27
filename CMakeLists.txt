@@ -270,10 +270,39 @@ if(LINUX)
     dwmapi
     uxtheme
     )
-    target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC user32 gdi32 opengl32 ${DWMAPI_LIBS})
-    target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC ${CMAKE_PROJECT_NAME} user32 gdi32 opengl32 ${DWMAPI_LIBS})
-    target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC ${CMAKE_PROJECT_NAME} user32 gdi32 opengl32 ${DWMAPI_LIBS})
-    target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC ${CMAKE_PROJECT_NAME} user32 gdi32 opengl32 ${DWMAPI_LIBS})
+    target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC 
+     user32 
+     gdi32 
+     opengl32 
+     ${DWMAPI_LIBS}
+     )
+    target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC 
+     #${CMAKE_PROJECT_NAME} 
+     user32 
+     gdi32 
+     opengl32 
+     ${DWMAPI_LIBS}
+     )
+    target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC 
+    ${CMAKE_PROJECT_NAME} 
+     user32 
+     gdi32 
+     opengl32 
+     ${DWMAPI_LIBS}
+     )
+    target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC 
+     ${CMAKE_PROJECT_NAME} 
+     user32 
+     gdi32 
+     opengl32 
+     ${DWMAPI_LIBS}
+     )
+     target_link_libraries( test_create_window PUBLIC
+     user32 
+     gdi32 
+     opengl32 
+     ${DWMAPI_LIBS}
+     )
 elseif(HAIKU)
    target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
     #${CMAKE_PROJECT_NAME}

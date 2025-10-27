@@ -11,9 +11,6 @@ FX::FXProgressBar::FXProgressBar(const char* progressbar_caption, FX::FXRect pro
     d(display),
     rect(progressbar_r),
     caption(progressbar_caption)
-    //progress(0),
-    //begin(0),
-    //end(100)
     {
                 FX::FXColor bg_color = {200,200,200,255};
                 FX::FXColor textColor = {0,0,0,255};
