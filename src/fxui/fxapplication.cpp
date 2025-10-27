@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+#include <iostream>
+
 #if defined (BACKEND_X11)
 #elif defined (BACKEND_WAYLAND)
 #elif defined (BACKEND_COCOA)
@@ -31,6 +33,7 @@ FX::FXApplication::FXApplication()
     argc_state(0),
     argv_state(0)
     {
+        std::cerr << "FXApplication" << std::endl;
         #if defined (BACKEND_COCOA)
             FXCocoaAutoreleasePool p();
         #elif defined (BACKEND_WINAPI)
@@ -41,6 +44,7 @@ FX::FXApplication::FXApplication()
 
 FX::FXApplication::FXApplication(const char* vendor_descriptor)
 {
+    std::cerr << "FXApplication" << std::endl;
 	#if defined (BACKEND_COCOA)
         FXCocoaAutoreleasePool p();
 	#elif defined(BACKEND_BEAPI)
@@ -59,6 +63,7 @@ FX::FXApplication::FXApplication(int argc, char** argv)
     argc_state(argc),
     argv_state(argv)
     {
+        std::cerr << "FXApplication" << std::endl;
     	#if defined (BACKEND_COCOA)
             FXCocoaAutoreleasePool p();
     	#elif defined(BACKEND_BEAPI)
@@ -76,6 +81,7 @@ FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descr
     argc_state(argc),
     argv_state(argv)
     {
+        std::cerr << "FXApplication" << std::endl;
     	#if defined (BACKEND_COCOA)
             FXCocoaAutoreleasePool p();
     	#elif defined(BACKEND_BEAPI)
@@ -95,6 +101,7 @@ FX::FXApplication::~FXApplication()
 uint32_t
 FX::FXApplication::Run()
 {
+    std::cerr << "Run()" << std::endl;
     #if defined (BACKEND_X11)
     return 0;
     #elif defined (BACKEND_WAYLAND)
@@ -104,7 +111,8 @@ FX::FXApplication::Run()
     return 0;
     //return NSApplicationMain (argc_state, argv_state);
     #elif defined (BACKEND_BEAPI)
-    return app->Run();
+    //return app->Run();
+    return 0;
     #elif defined (BACKEND_WINAPI)
     return 0;
     #else

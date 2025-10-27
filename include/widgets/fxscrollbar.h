@@ -23,10 +23,12 @@ namespace FX
     {
         public:
             FXScrollBar();
-            FXScrollBar(const char* progressbar_caption, FX::FXRect progressbar_r, FX::FXDisplay* display, ui_direction direction);
+            FXScrollBar(const char* scrollbar_caption, FX::FXRect progressbar_r, FX::FXDisplay* display, ui_direction direction);
             ~FXScrollBar();
         public:
             void SetLimits(unsigned int _begin, unsigned int _end);
+            //void GetLimits(unsigned int _begin, unsigned int _end) const;
+            void SetOrientation(ui_direction direction);
         private:
             FX::FXRect rect;
             FX::FXDisplay* d;
@@ -35,6 +37,7 @@ namespace FX
             //unsigned int progress;
             unsigned int begin;
             unsigned int end;
+            ui_direction _direction;
     };
 }
 

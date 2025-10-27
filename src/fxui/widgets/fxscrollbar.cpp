@@ -4,14 +4,15 @@
 FX::FXScrollBar::FXScrollBar()
 {
 }
-FX::FXScrollBar::FXScrollBar(const char* progressbar_caption, FX::FXRect progressbar_r, FX::FXDisplay* display, ui_direction direction)
+FX::FXScrollBar::FXScrollBar(const char* scrollbar_caption, FX::FXRect progressbar_r, FX::FXDisplay* display, ui_direction direction)
     :
     d(display),
     rect(progressbar_r),
-    caption(progressbar_caption),
+    caption(scrollbar_caption),
     //progress(0),
     begin(0),
-    end(100)
+    end(100),
+    _direction(direction)
     {
                 FX::FXColor bg_color = {200,200,200,255};
                 FX::FXColor textColor = {0,0,0,255};
@@ -25,7 +26,7 @@ FX::FXScrollBar::FXScrollBar(const char* progressbar_caption, FX::FXRect progres
                 //selected = false;
                 //if(!selected)
                 //{
-            if(direction == FX_HORIZONTAL){
+            if(_direction == FX_HORIZONTAL){
                     int slider_height = 15;
                     // draw background
                     d->FillRect(rect.x, rect.y, rect.width, slider_height, background_color);
@@ -37,7 +38,7 @@ FX::FXScrollBar::FXScrollBar(const char* progressbar_caption, FX::FXRect progres
                     // draw frame
                     d->DrawRect(rect.x, rect.y, rect.width, rect.height, bg_color);
             }
-            if (direction == FX_VERTICAL)
+            if (_direction == FX_VERTICAL)
             {
             }
     }
@@ -50,4 +51,10 @@ FX::FXScrollBar::SetLimits(unsigned int _begin, unsigned int _end)
 {
     begin = _begin;
     end = _end;
+};
+
+void
+FX::FXScrollBar::SetOrientation(ui_direction direction)
+{
+    direction = _direction;
 };

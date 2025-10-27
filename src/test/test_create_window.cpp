@@ -6,7 +6,7 @@
 int
 main(int argc, char** argv)
 {
-	FX::FXApplication* app = new FX::FXApplication(argc, argv);
+	FX::FXApplication app /*= new FX::FXApplication*/(argc, argv);
 	FX::FXDisplay* display = new FX::FXDisplay();
 	if(!display->Init())
    	 {
@@ -27,9 +27,9 @@ main(int argc, char** argv)
 	while (window->ProcessEvents() && !window->ShouldClose())
 	{
 		//display->Present();
-		display->Present();
-		display->setDirty(false);
+		//display->Present();
+		//display->setDirty(false);
 		std::this_thread::sleep_for(std::chrono::milliseconds(800));
 	}
-	return app->Run();
+	return app.Run();
 }
