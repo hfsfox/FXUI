@@ -246,6 +246,12 @@ add_executable(${CMAKE_PROJECT_NAME}_init_messagebox
    ${PLATFORM_SOURCES}
     )
 
+add_executable(test_create_window
+    src/test/test_create_window.cpp
+    ${FXUI_SOURCES}
+    ${PLATFORM_SOURCES}
+    )
+
 if(LINUX)
     if (BACKEND_X11)
     target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
@@ -269,8 +275,59 @@ if(LINUX)
     target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC ${CMAKE_PROJECT_NAME} user32 gdi32 opengl32 ${DWMAPI_LIBS})
     target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC ${CMAKE_PROJECT_NAME} user32 gdi32 opengl32 ${DWMAPI_LIBS})
 elseif(HAIKU)
-   target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_PROJECT_NAME} be root game tracker textencoding GL stdc++ supc++)
-   target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC ${CMAKE_PROJECT_NAME} be root game tracker textencoding GL stdc++ supc++)
-   target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC ${CMAKE_PROJECT_NAME} be root game tracker textencoding GL stdc++ supc++)
-   target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC ${CMAKE_PROJECT_NAME} be root game tracker textencoding GL stdc++ supc++)
+   target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
+    #${CMAKE_PROJECT_NAME}
+    be
+    root
+    game
+    tracker
+    textencoding
+    GL
+    stdc++
+    supc++
+    )
+   target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC
+    #${CMAKE_PROJECT_NAME}
+    be
+    root
+    game
+    tracker
+    textencoding
+    GL
+    stdc++
+    supc++
+    )
+   target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC
+    #${CMAKE_PROJECT_NAME}
+    be
+    root
+    game
+    tracker
+    textencoding
+    GL
+    stdc++
+    supc++
+    )
+   target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC
+    #${CMAKE_PROJECT_NAME}
+    be
+    root
+    game
+    tracker
+    textencoding
+    GL
+    stdc++
+    supc++
+    )
+   target_link_libraries( test_create_window PUBLIC
+    #${CMAKE_PROJECT_NAME}
+    be
+    root
+    game
+    tracker
+    textencoding
+    GL
+    stdc++
+    supc++
+    )
 endif()
