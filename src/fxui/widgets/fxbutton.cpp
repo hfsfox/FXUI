@@ -34,3 +34,15 @@ FX::FXButton::OnClick()
 {
 };
 
+int
+FX::FXButton::GetHeight() const
+{
+	return rect.y;
+}
+
+int
+FX::FXButton::GetWidth() const
+{
+	return rect.width;
+}
+

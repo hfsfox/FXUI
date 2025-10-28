@@ -27,6 +27,8 @@ namespace FX
         public:
             void SetProgress(unsigned int _progress);
             void SetLimits(unsigned int _begin, unsigned int _end);
+            int GetHeight() const;
+			int GetWidth() const;
         private:
             FX::FXRect rect;
             FX::FXDisplay* d;

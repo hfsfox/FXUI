@@ -252,6 +252,12 @@ add_executable(test_create_window
     ${PLATFORM_SOURCES}
     )
 
+add_executable(test_menubar
+    src/test/widgets/test_menubar.cpp
+    ${FXUI_SOURCES}
+    ${PLATFORM_SOURCES}
+    )
+
 if(LINUX)
     if (BACKEND_X11)
     target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
@@ -349,6 +355,17 @@ elseif(HAIKU)
     supc++
     )
    target_link_libraries( test_create_window PUBLIC
+    #${CMAKE_PROJECT_NAME}
+    be
+    root
+    game
+    tracker
+    textencoding
+    GL
+    stdc++
+    supc++
+    )
+    target_link_libraries( test_menubar PUBLIC
     #${CMAKE_PROJECT_NAME}
     be
     root

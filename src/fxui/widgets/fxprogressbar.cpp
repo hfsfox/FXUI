@@ -63,3 +63,15 @@ FX::FXProgressBar::SetLimits(unsigned int _begin, unsigned int _end)
     begin = _begin;
     end = _end;
 };
+
+int
+FX::FXProgressBar::GetHeight() const
+{
+	return rect.y;
+}
+
+int
+FX::FXProgressBar::GetWidth() const
+{
+	return rect.width;
+}

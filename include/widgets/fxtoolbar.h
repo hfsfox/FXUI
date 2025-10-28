@@ -34,6 +34,9 @@ namespace FX
             */
             ~FXToolBar();
             void AddItemSeparator();
+        public:
+        	int GetHeight() const;
+			int GetWidth() const;
         private:
             FX::FXDisplay* d;
             FX::FXRect rect;

@@ -20,10 +20,19 @@ FX::FXMenuBar::FXMenuBar(FX::FXRect menubar_r, FX::FXDisplay* display)
         {
             //for(uint i = 0; i < rect.height; i++)
             //{
+            #ifdef BACKEND_BEAPI
+                d->FillRect(rect.x, rect.y, rect.width, rect.height, {210,210,210,255});
+            #else
             d->FillRect(rect.x, rect.y, rect.width, rect.height, {255,255,255,255});
+            #endif
             //d->FillRect(rect.x, rect.y, rect.width, rect.height, {(165/255)-i,(165/255)-i,(165/255)-i,255});
             //}
-            d->DrawRect(rect.x, rect.y, rect.width, rect.height, menubar_color);
+            //d->DrawRect(rect.x, rect.y, rect.width, rect.height, menubar_color);
+            #ifdef BACKEND_BEAPI
+                d->DrawLine(rect.x, rect.height, rect.width, rect.height, {160,160,160,255});
+            #else
+                d->DrawRect(rect.x, rect.y, rect.width, rect.height, menubar_color);
+            #endif
             //
             d->DrawText("File", rect.x+5, rect.y+15, textColor);
             d->DrawText("Edit", rect.x+word_gap+5, rect.y+15, textColor);
@@ -49,4 +58,16 @@ FX::FXMenuBar::~FXMenuBar()
 void
 FX::FXMenuBar::MakeNativeMenuBar()
 {
+}
+
+int
+FX::FXMenuBar::GetHeight() const
+{
+	return rect.y;
+}
+
+int
+FX::FXMenuBar::GetWidth() const
+{
+	return rect.width;
 }

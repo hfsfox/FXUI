@@ -27,6 +27,9 @@ namespace FX
             ~FXButton();
         public:
             void OnClick();
+        public:
+        	int GetHeight() const;
+			int GetWidth() const;
         private:
             FX::FXRect rect;
             FX::FXDisplay* d;

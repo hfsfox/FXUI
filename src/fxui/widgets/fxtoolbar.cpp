@@ -35,3 +35,15 @@ FX::FXToolBar::AddItemSeparator()
 FX::FXToolBar::~FXToolBar()
 {
 }
+
+int
+FX::FXToolBar::GetHeight() const
+{
+	return rect.y;
+}
+
+int
+FX::FXToolBar::GetWidth() const
+{
+	return rect.width;
+}

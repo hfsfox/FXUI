@@ -44,6 +44,8 @@ namespace FX
             void AddMenuItem(const char* item);
             bool IsNativeMenuBar() const { return isNative; }
             void MakeNativeMenuBar();
+            int GetHeight() const;
+			int GetWidth() const;
         private:
             uint32_t menu_counter;
             uint32_t word_gap;
