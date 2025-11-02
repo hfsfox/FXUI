@@ -12,7 +12,7 @@ namespace
 	float GetDPIRatioFromSystem()
 	{
 		typedef UINT(WINAPI* GetDpiForSystem_t)();
-		unsigned int sysval = (unsigned int)GetProcAddress(GetModuleHandleA("User32.dll"), "GetDpiForSystem");
+		unsigned int sysval = (unsigned int)GetProcAddress(GetModuleHandleW((wchar_t*)"User32.dll"), "GetDpiForSystem");
 		if (sysval) {
 			return sysval / 96.f;
 		}
