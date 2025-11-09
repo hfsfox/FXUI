@@ -27,6 +27,9 @@
 #endif
 #include <cstring>
 //#include <iostream>
+#include <cstdlib>
+#include <cstdio>
+#define UNIMPLEMENTED printf("%s (%s %d) UNIMPLEMENTED\n",__func__,__FILE__,__LINE__);
 
 namespace
 {
@@ -408,6 +411,7 @@ FX::FXDisplay::DrawText(const char* text, int x, int y, FX::FXColor color)
         view->DrawString(text, BPoint(x, y));
         view->UnlockLooper();
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
 }
 
@@ -435,6 +439,7 @@ FX::FXDisplay::DrawCircle(int center_x, int center_y, int radius, FX::FXColor co
         XDrawArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
         XFlush(display);
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
     //}
 }
@@ -456,6 +461,7 @@ FX::FXDisplay::DrawPoint(int center_x, int center_y, FX::FXColor color)
     #if defined(BACKEND_BEAPI)
     #elif defined (BACKEND_X11)
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
     //}
 }
@@ -484,6 +490,7 @@ FX::FXDisplay::DrawLine(int center_x_begin, int center_y_begin,int center_x_end,
         XDrawLine(display, window, gc, center_x_begin, center_y_begin, center_x_end, center_y_end);
         XFlush(display);
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
     //}
 }
@@ -511,6 +518,7 @@ FX::FXDisplay::DrawRect(int x_begin, int y_begin,int width, int height, FX::FXCo
         view->StrokeRect(BRect(x_begin,y_begin,width,height),B_SOLID_HIGH);
         view->UnlockLooper();
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
     //}
 }
@@ -538,6 +546,7 @@ FX::FXDisplay::FillRect(int x_begin, int y_begin, int width, int height, FX::FXC
         XFillRectangle(display,window, gc, x_begin, y_begin, width, height);
         XFlush(display);
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
     //}
 }
@@ -565,6 +574,7 @@ FX::FXDisplay::FillCircle(int center_x, int center_y, int radius, FX::FXColor co
         XFillArc(display, window, gc, center_x, center_y, radius*2, radius*2, 0, 360*64);
         XFlush(display);
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
     //}
 }
@@ -584,6 +594,8 @@ FX::FXDisplay::DrawTriangle(int x_a_begin, int y_a_begin,int x_b_begin, int y_b_
     //if(isDirty())
     //{
     #if defined (BACKEND_X11)
+    #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
     //}
 }
@@ -628,6 +640,8 @@ FX::FXDisplay::SetFont(FX::FXFont fxfont)
         //font = XSetFont(display, gc , font_buffer);
         /*font = (XftFont*)fxfont.GetPlatformFont();
         std::cout << font->height << std::endl;*/
+    #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
 }
 
@@ -655,6 +669,7 @@ FX::FXDisplay::SetViewColor(FX::FXColor color)
         XFillRectangle(display,window,gc,0, 0, attr.width, attr.height);
         XFlush(display);
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
     #endif
     //}
 }
@@ -671,6 +686,7 @@ FX::FXDisplay::GetViewColor() const
         view->UnlockLooper();
         return viewcolor;
     #elif defined(BACKEND_WINAPI)
+        UNIMPLEMENTED;
         FXColor viewcolor = { 0, 0, 0, 255 };
         return viewcolor;
     #endif
@@ -689,6 +705,7 @@ FX::FXDisplay::GetDisplaySize() const
         view->UnlockLooper();
         return {0,0,(int)frame.Width(),(int)frame.Height()};
     #elif defined (BACKEND_WINAPI)
+        UNIMPLEMENTED;
         return {0,0,10,10};
     #endif
 }
@@ -702,6 +719,8 @@ FX::FXDisplay::GetPointerPosition() const
         int x, y;
         unsigned mask;
         ::XQueryPointer(display, window, &drop_wnd, &drop_wnd,  &point.x, &point.y, &x, &y, &mask);
+    #else
+        UNIMPLEMENTED;
     #endif
     return point;
 }
@@ -714,5 +733,6 @@ FX::FXDisplay::Present()
     #elif defined(BACKEND_BEAPI)
         // Presentation handled automatically by Haiku
     #elif defined (BACKEND_WINAPI)
+    UNIMPLEMENTED;
     #endif
 }

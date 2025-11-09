@@ -37,7 +37,7 @@ FX::FXApplication::FXApplication()
         #if defined (BACKEND_COCOA)
             FXCocoaAutoreleasePool p();
         #elif defined (BACKEND_WINAPI)
-        FreeConsole();
+        //FreeConsole();
         #endif
         FXApplication(argc_state, argv_state,"");
     }
@@ -54,7 +54,7 @@ FX::FXApplication::FXApplication(const char* vendor_descriptor)
             app = BApplicationInstance::GetInstance();
         }
     #elif defined (BACKEND_WINAPI)
-       FreeConsole();
+       //FreeConsole();
     #endif
 }
 
@@ -72,7 +72,7 @@ FX::FXApplication::FXApplication(int argc, char** argv)
         		app = BApplicationInstance::GetInstance();
     		}
         #elif defined (BACKEND_WINAPI)
-            FreeConsole();
+            //FreeConsole();
     	#endif
     }
 
@@ -90,7 +90,7 @@ FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descr
         		app = BApplicationInstance::GetInstance();
     		}
         #elif defined (BACKEND_WINAPI)
-            FreeConsole();
+            //FreeConsole();
     	#endif
     }
 

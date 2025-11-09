@@ -12,6 +12,7 @@
 #ifndef     __fxgui__
 #define     __fxgui__
 
+#include <fxtimeutils.h>
 #include <fxapplication.h>
 #include <fxsystypes.h>
 #include <fxcompilerdefs.h>
