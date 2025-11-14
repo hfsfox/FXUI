@@ -28,12 +28,20 @@ namespace FX
             virtual void Draw();
             virtual void Show();
             virtual void Hide();
-            bool IsVisible() { return visible; }
+            bool IsVisible() const { return visible; }
+            bool IsEnabled() const { return enabled; }
             FX::FXRect GetWidgetSize(void) const { return size; }
             void SetWidgetSize(FX::FXRect newSize) { size = newSize; }
+            void SetEnabled(bool isenable);
+            void SetVisible(bool isvisible);
         private:
             FX::FXRect size;
             bool visible;
+            bool enabled;
+            unsigned int width;
+            unsigned int height;
+            unsigned int x;
+            unsigned int y;
     };
 }
 

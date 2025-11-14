@@ -15,6 +15,12 @@
 
 FX::FXWidget::FXWidget(FX::FXRect widget_rect)
 {
+    this->x = widget_rect.x;
+    this->y = widget_rect.y;
+    this->width = widget_rect.width;
+    this->height = widget_rect.height;
+    this->visible = true;
+    this->enabled = true;
 }
 
 FX::FXWidget::~FXWidget()
@@ -29,11 +35,23 @@ FX::FXWidget::Draw()
 void
 FX::FXWidget::Show()
 {
+    this->visible = true;
 }
 
 void
 FX::FXWidget::Hide()
 {
+    this->visible = false;
 }
 
+void
+FX::FXWidget::SetEnabled(bool isenabled)
+{
+    this->enabled = isenabled;
+}
 
+void
+FX::FXWidget::SetVisible(bool isvisible)
+{
+    this->visible = isvisible;
+}
