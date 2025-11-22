@@ -15,9 +15,11 @@
 #include <fxplatformdefs.h>
 #include <inttypes.h>
 //#include <unistd.h>
+#if defined PLATFORM_WINDOWS
 #include <time.h>
-
+#else
 #include <sys/time.h>
+#endif
 
 typedef struct _NanosecondsTime
 {
