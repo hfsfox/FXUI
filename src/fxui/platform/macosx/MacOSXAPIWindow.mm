@@ -370,6 +370,8 @@ FXCocoaAutoreleasePool::~FXCocoaAutoreleasePool()
     objc_autoreleasePoolPop(autorelease_pool);
 };
 
+CGColorSpaceRef __GetDisplayColorSpace();
+
 CGColorSpaceRef __GetDisplayColorSpace()
 {
     static CGColorSpaceRef cs;
@@ -380,6 +382,8 @@ CGColorSpaceRef __GetDisplayColorSpace()
     }
     return cs;
 };
+
+
 
 #endif
 
