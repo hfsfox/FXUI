@@ -43,7 +43,11 @@ namespace FX
         gettimeofday(&tm,NULL);
         return (int32_t) (tm.tv_sec*1000 + tm.tv_usec/1000);
         #elif defined PLATFORM_WINDOWS
-        return (int32_t)(GetTickCount64());
+        LARGE_INTEGER freq;
+        QueryPerformanceFrequency(&freq);
+        LARGE_INTEGER now;
+        QueryPerformanceCounter(&now);
+        return (int32_t)(now.QuadPart / freq.QuadPart);
         #elif defined PLATFORM_LINUX
         //
         struct timespec ts={0};

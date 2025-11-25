@@ -13,6 +13,10 @@
 #include <fxrect.h>
 #include <fxwidget.h>
 
+namespace
+{
+};
+
 FX::FXWidget::FXWidget(FX::FXRect widget_rect)
 {
     this->x = widget_rect.x;
@@ -45,13 +49,13 @@ FX::FXWidget::Hide()
 }
 
 void
-FX::FXWidget::SetEnabled(bool isenabled)
+FX::FXWidget::SetEnabled(bool is_enabled)
 {
-    this->enabled = isenabled;
+    this->enabled = is_enabled;
 }
 
 void
-FX::FXWidget::SetVisible(bool isvisible)
+FX::FXWidget::SetVisible(bool is_visible)
 {
-    this->visible = isvisible;
+    this->visible = is_visible;
 }

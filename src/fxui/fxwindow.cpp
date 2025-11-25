@@ -374,9 +374,9 @@ namespace
                     {
                         BeginPaint(hWindow, &ps);
 
-                        //RECT r;
-                        //SetRect(&r, 10, 10, 50, 50);
-                        //FillRect(GetDC(hWindow), &r, (HBRUSH)GetStockObject(BLACK_BRUSH));
+                        RECT r;
+                        SetRect(&r, 10, 10, 50, 50);
+                        FillRect(GetDC(hWindow), &r, (HBRUSH)GetStockObject(GRAY_BRUSH));
 
                         EndPaint(hWindow, &ps);
                         return 0;

@@ -1,6 +1,3 @@
-#ifndef __FXSYSTYPES_H__
-#define __FXSYSTYPES_H__
-#endif
 //-----------------------------------------------------------------------------
 // FXUI SDK
 // FXUI: Graphical User Interface Framework:
@@ -11,6 +8,9 @@
 // MIT
 // © 2025, , All Rights Reserved
 //-----------------------------------------------------------------------------
+
+#ifndef __FXSYSTYPES_H__
+#define __FXSYSTYPES_H__
 
 #include <fxcompilerdefs.h>
 #include <sys/types.h>
@@ -85,3 +85,17 @@
     #endif
 #endif /* __WORDSIZE, __SIZE_WIDTH__ */
 #endif
+
+#if !defined(FX_BIG_ENDIAN) && !defined(FX_LITTLE_ENDIAN)
+#if defined (ARCH_PPC)
+    #define FX_BIG_ENDIAN
+#else
+    #define FX_LITTLE_ENDIAN
+#endif
+#endif
+
+#if defined(FX_BIG_ENDIAN) && defined(FX_LITTLE_ENDIAN)
+#error FX_BIG_ENDIAN and FXL_ITTLE_ENDIAN cant defined both
+#endif
+
+#endif //__FXSYSTYPES_H__
