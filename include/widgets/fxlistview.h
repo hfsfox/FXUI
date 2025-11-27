@@ -8,6 +8,10 @@
 // MIT
 // © 2025, , All Rights Reserved
 //-----------------------------------------------------------------------------
+//
+//	@file: include/widgets/fxlistview.h
+//	@description: the file contains FX::FXListView declaration
+//
 
 #ifndef __FXLISTVIEW__
 #define __FXLISTVIEW__

@@ -101,6 +101,7 @@ if(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
         #set_property(${CMAKE_PROJECT_NAME} PUBLIC STRING "/Ox /Ob2 /Oi /Ot /GF /Zc:wchar_t /MT")
         #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /subsystem:windows")
         #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+        add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     else()
         add_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC
         UNICODE=1
@@ -220,6 +221,8 @@ message(STATUS "Build type:             ${CMAKE_BUILD_TYPE}")
 message(STATUS "Build C flags:          ${CMAKE_C_FLAGS}")
 message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
 message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
+
+#add_subdirectory(src/test/window)
 
 add_library(${CMAKE_PROJECT_NAME}
     ${FXUI_SOURCES}

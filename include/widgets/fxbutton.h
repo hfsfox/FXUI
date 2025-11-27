@@ -8,6 +8,10 @@
 // MIT
 // © 2025, , All Rights Reserved
 //-----------------------------------------------------------------------------
+//
+//	@file: include/widgets/fxbutton.h
+//	@description: the file contains FX::FXButton declaration
+//
 
 #ifndef __FXBUTTON_H__
 #define __FXBUTTON_H__
