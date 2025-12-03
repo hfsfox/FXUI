@@ -222,7 +222,8 @@ message(STATUS "Build C flags:          ${CMAKE_C_FLAGS}")
 message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
 message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
 
-#add_subdirectory(src/test/window)
+add_subdirectory(src/test/window)
+add_subdirectory(src/test/widgets)
 
 add_library(${CMAKE_PROJECT_NAME}
     ${FXUI_SOURCES}
@@ -232,33 +233,27 @@ add_library(${CMAKE_PROJECT_NAME}
 add_executable(${CMAKE_PROJECT_NAME}_example
     ##WIN32
     src/test/example.cpp
-   ${FXUI_SOURCES}
-   ${PLATFORM_SOURCES}
+   #${FXUI_SOURCES}
+   #${PLATFORM_SOURCES}
     )
 
 add_executable(${CMAKE_PROJECT_NAME}_init_dpy
     #WIN32
     src/test/example_init_dpy.cpp
-   ${FXUI_SOURCES}
-   ${PLATFORM_SOURCES}
+   #${FXUI_SOURCES}
+   #${PLATFORM_SOURCES}
     )
 
 add_executable(${CMAKE_PROJECT_NAME}_init_messagebox
     src/test/example_init_messagebox.cpp
-   ${FXUI_SOURCES}
-   ${PLATFORM_SOURCES}
+   #${FXUI_SOURCES}
+   #${PLATFORM_SOURCES}
     )
 
 add_executable(test_create_window
     src/test/test_create_window.cpp
-    ${FXUI_SOURCES}
-    ${PLATFORM_SOURCES}
-    )
-
-add_executable(test_menubar
-    src/test/widgets/test_menubar.cpp
-    ${FXUI_SOURCES}
-    ${PLATFORM_SOURCES}
+    #${FXUI_SOURCES}
+    #${PLATFORM_SOURCES}
     )
 
 if(LINUX)
@@ -286,31 +281,32 @@ if(LINUX)
      ${DWMAPI_LIBS}
      )
     target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC 
-     #${CMAKE_PROJECT_NAME} 
-     user32 
-     gdi32 
-     opengl32 
-     ${DWMAPI_LIBS}
+     ${CMAKE_PROJECT_NAME} 
+     #user32 
+     #gdi32 
+     #opengl32 
+     #${DWMAPI_LIBS}
      )
     target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC 
     ${CMAKE_PROJECT_NAME} 
-     user32 
-     gdi32 
-     opengl32 
-     ${DWMAPI_LIBS}
+     #user32 
+     #gdi32 
+     #opengl32 
+     #${DWMAPI_LIBS}
      )
     target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC 
      ${CMAKE_PROJECT_NAME} 
-     user32 
-     gdi32 
-     opengl32 
-     ${DWMAPI_LIBS}
+     #user32 
+     #gdi32 
+     #opengl32 
+     #${DWMAPI_LIBS}
      )
      target_link_libraries( test_create_window PUBLIC
-     user32 
-     gdi32 
-     opengl32 
-     ${DWMAPI_LIBS}
+     ${CMAKE_PROJECT_NAME}
+     #user32 
+     #gdi32 
+     #opengl32 
+     #${DWMAPI_LIBS}
      )
 elseif(HAIKU)
    target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
@@ -368,15 +364,15 @@ elseif(HAIKU)
     stdc++
     supc++
     )
-    target_link_libraries( test_menubar PUBLIC
-    #${CMAKE_PROJECT_NAME}
-    be
-    root
-    game
-    tracker
-    textencoding
-    GL
-    stdc++
-    supc++
-    )
+  #  target_link_libraries( test_menubar PUBLIC
+  #  #${CMAKE_PROJECT_NAME}
+  #  be
+  #  root
+  #  game
+  #  tracker
+  #  textencoding
+  #  GL
+  #  stdc++
+  #  supc++
+  #  )
 endif()

@@ -16,6 +16,7 @@
 #include <inttypes.h>
 //#include <unistd.h>
 #if defined PLATFORM_WINDOWS
+#include <windows.h>
 #include <time.h>
 #else
 #include <sys/time.h>

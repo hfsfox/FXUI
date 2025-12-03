@@ -36,7 +36,7 @@ main(int argc, char** argv)
 	#if defined (BACKEND_BEAPI)
 		uint h = be_plain_font->Size()*2;
 	#else
-		uint h = 20;
+		unsigned int h = 20;
 	#endif
 	
 	while (window->ProcessEvents() && !window->ShouldClose())
