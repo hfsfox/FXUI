@@ -38,6 +38,8 @@ set(CMAKE_C_EXTENSIONS ON)
 set(CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
+option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" OFF)
+
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
@@ -221,14 +223,29 @@ message(STATUS "Build type:             ${CMAKE_BUILD_TYPE}")
 message(STATUS "Build C flags:          ${CMAKE_C_FLAGS}")
 message(STATUS "Build CXX flags:        ${CMAKE_CXX_FLAGS}")
 message(STATUS "Link flags:             ${CMAKE_C_LINK_FLAGS}")
+message(STATUS "Build shared libraries: ${BUILD_SHARED_LIBS}")
+
+#option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" ON)
 
 add_subdirectory(src/test/window)
 add_subdirectory(src/test/widgets)
 
-add_library(${CMAKE_PROJECT_NAME}
+add_library(${CMAKE_PROJECT_NAME} STATIC
     ${FXUI_SOURCES}
     ${PLATFORM_SOURCES}
     )
+
+#if(BUILD_SHARED_LIBS)
+#  add_library(${CMAKE_PROJECT_NAME} SHARED 
+#  ${FXUI_SOURCES}
+#  ${PLATFORM_SOURCES}
+#  )
+#else()
+#  add_library(${CMAKE_PROJECT_NAME} STATIC 
+#  ${FXUI_SOURCES}
+#  ${PLATFORM_SOURCES}
+#  )
+#endif()
 
 add_executable(${CMAKE_PROJECT_NAME}_example
     ##WIN32
