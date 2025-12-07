@@ -139,3 +139,12 @@ FX::FXApplication::GetAppLocation()
 
     return path;
 }
+
+const char*
+FX::FXApplication::GetAppVersion()
+{
+    static char version[128];
+    //version = "128";
+    snprintf(version, 128, "%s", "1.0");
+    return version;
+}
