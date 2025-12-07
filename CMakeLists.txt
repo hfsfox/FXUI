@@ -227,6 +227,7 @@ message(STATUS "Build shared libraries: ${BUILD_SHARED_LIBS}")
 
 #option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" ON)
 
+add_subdirectory(src/test/app)
 add_subdirectory(src/test/window)
 add_subdirectory(src/test/widgets)
 

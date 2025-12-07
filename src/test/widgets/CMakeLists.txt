@@ -2,6 +2,10 @@ add_executable(test_menubar
     test_menubar.cpp
     )
 
+#target_link_libraries(test_menubar PUBLIC
+#    ${CMAKE_PROJECT_NAME}
+#    )
+
 if(LINUX)
     if (BACKEND_X11)
     target_link_libraries(test_menubar PUBLIC 

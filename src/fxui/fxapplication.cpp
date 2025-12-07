@@ -123,10 +123,15 @@ FX::FXApplication::Run()
 const char*
 FX::FXApplication::GetAppLocation()
 {
-    const char* path;
-    path = NULL;
+    static char path[MAX_PATH];
+    //path = {0};
 
     #if defined (PLATFORM_WINDOWS)
+    wchar_t wpath[MAX_PATH];
+    GetModuleFileNameW(NULL, wpath, MAX_PATH);
+    // Convert wchar_t to UTF-8
+    WideCharToMultiByte(CP_UTF8, 0, wpath, -1, path, MAX_PATH, NULL, NULL);
+    //return buffer;
     #elif defined(PLATFORM_HAIKU)
     #elif defined(PLATFORM_LINUX)
     #elif defined (PLATFORM_MACOSX)

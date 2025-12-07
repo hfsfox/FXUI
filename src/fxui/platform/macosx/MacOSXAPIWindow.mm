@@ -138,7 +138,7 @@ MacOSXAPIMenuBar::MacOSXAPIMenuBar(const char* _label)
     */
     //
     mainMenuBar=[[CocoaAPIMenuBar alloc] init];
-    [menubar setAutoenablesItems:NO];
+    [menubar setAutoenablesItems:YES];
 };
 
 MacOSXAPIMenuBar::~MacOSXAPIMenuBar()

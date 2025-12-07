@@ -25,11 +25,15 @@ namespace FX
         public:
             bool IsLoaded () {return loaded;}
         public:
+            //void* PlatformBitmap(void) const { return platform_bitmap; }
+        public:
             uint32_t resourceID;
             uint32_t width;
             uint32_t height;
             int pixel_format;
             bool loaded;
+            //
+            //void* platform_bitmap;
         private:
     };
 }
