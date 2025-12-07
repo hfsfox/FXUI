@@ -43,8 +43,10 @@ FX::FXApplication::FXApplication()
         //FreeConsole();
         #endif
         FXApplication(argc_state, argv_state,"");
-
-        fxapp = this;
+        if (!fxapp)
+        {
+            fxapp = this;
+        }
     }
 
 FX::FXApplication::FXApplication(const char* vendor_descriptor)
@@ -61,7 +63,10 @@ FX::FXApplication::FXApplication(const char* vendor_descriptor)
     #elif defined (BACKEND_WINAPI)
        //FreeConsole();
     #endif
-    fxapp = this;
+    if (!fxapp)
+    {
+        fxapp = this;
+    }
 }
 
 FX::FXApplication::FXApplication(int argc, char** argv)
@@ -80,10 +85,14 @@ FX::FXApplication::FXApplication(int argc, char** argv)
         #elif defined (BACKEND_WINAPI)
             //FreeConsole();
     	#endif
-        fxapp = this;
+        if (!fxapp)
+        {
+            fxapp = this;
+        }
     }
 
-FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descriptor)
+FX::FXApplication::FXApplication(int argc, char** argv, 
+    const char* vendor_descriptor)
     :
     argc_state(argc),
     argv_state(argv)
@@ -99,7 +108,10 @@ FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descr
         #elif defined (BACKEND_WINAPI)
             //FreeConsole();
     	#endif
-        fxapp = this;
+        if (!fxapp)
+        {
+            fxapp = this;
+        }
     }
 
 FX::FXApplication::~FXApplication()
@@ -109,6 +121,10 @@ FX::FXApplication::~FXApplication()
 uint32_t
 FX::FXApplication::Run()
 {
+    if (!fxapp)
+    {
+        std::cerr << "fxapp create failed" << std::endl;
+    }
     std::cerr << "Run()" << std::endl;
     #if defined (BACKEND_X11)
     return 0;
@@ -127,6 +143,13 @@ FX::FXApplication::Run()
     return 0;
     #endif
 }
+/*
+void
+FX::FXApplication::_Init(int argc, char** argv,
+    const char* vendor_descripto)
+{
+}
+*/
 
 const char*
 FX::FXApplication::GetAppLocation()

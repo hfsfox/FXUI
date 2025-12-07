@@ -251,41 +251,53 @@ add_library(${CMAKE_PROJECT_NAME} STATIC
 add_executable(${CMAKE_PROJECT_NAME}_example
     ##WIN32
     src/test/example.cpp
-   #${FXUI_SOURCES}
-   #${PLATFORM_SOURCES}
     )
 
 add_executable(${CMAKE_PROJECT_NAME}_init_dpy
     #WIN32
     src/test/example_init_dpy.cpp
-   #${FXUI_SOURCES}
-   #${PLATFORM_SOURCES}
     )
 
 add_executable(${CMAKE_PROJECT_NAME}_init_messagebox
     src/test/example_init_messagebox.cpp
-   #${FXUI_SOURCES}
-   #${PLATFORM_SOURCES}
     )
 
 add_executable(test_create_window
     src/test/test_create_window.cpp
-    #${FXUI_SOURCES}
-    #${PLATFORM_SOURCES}
+    )
+
+    target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC
+    ${CMAKE_PROJECT_NAME} 
+    )
+    target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC
+    ${CMAKE_PROJECT_NAME}
+    )
+    target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC
+    ${CMAKE_PROJECT_NAME}
+    )
+    target_link_libraries( test_create_window PUBLIC
+    ${CMAKE_PROJECT_NAME}
     )
 
 if(LINUX)
     if (BACKEND_X11)
-    target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
-        target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC ${CMAKE_PROJECT_NAME} ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
-        target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC ${CMAKE_PROJECT_NAME} ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
-        target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC ${CMAKE_PROJECT_NAME} ${X11_LIBRARIES} ${X11_Xpm_LIB} ${OPENGL_LIBRARIES} Xft ${FREETYPE_LIBRARIES})
+        target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
+        ${X11_LIBRARIES}
+        ${X11_Xpm_LIB}
+        ${OPENGL_LIBRARIES}
+        Xft
+        ${FREETYPE_LIBRARIES}
+        )
     endif()
     if (BACKEND_WAYLAND)
-        target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
-        target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC ${CMAKE_PROJECT_NAME} wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
-        target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC ${CMAKE_PROJECT_NAME} wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
-        target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC ${CMAKE_PROJECT_NAME} wayland-client wayland-cursor Xpm GL GLU ${FREETYPE_LIBRARIES})
+        target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
+        wayland-client 
+        wayland-cursor 
+        Xpm 
+        GL 
+        GLU 
+        ${FREETYPE_LIBRARIES}
+        )
     endif()
  elseif(WIN32)
     set(DWMAPI_LIBS
@@ -297,34 +309,6 @@ if(LINUX)
      gdi32 
      opengl32 
      ${DWMAPI_LIBS}
-     )
-    target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC 
-     ${CMAKE_PROJECT_NAME} 
-     #user32 
-     #gdi32 
-     #opengl32 
-     #${DWMAPI_LIBS}
-     )
-    target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC 
-    ${CMAKE_PROJECT_NAME} 
-     #user32 
-     #gdi32 
-     #opengl32 
-     #${DWMAPI_LIBS}
-     )
-    target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC 
-     ${CMAKE_PROJECT_NAME} 
-     #user32 
-     #gdi32 
-     #opengl32 
-     #${DWMAPI_LIBS}
-     )
-     target_link_libraries( test_create_window PUBLIC
-     ${CMAKE_PROJECT_NAME}
-     #user32 
-     #gdi32 
-     #opengl32 
-     #${DWMAPI_LIBS}
      )
 elseif(HAIKU)
    target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
@@ -338,59 +322,4 @@ elseif(HAIKU)
     stdc++
     supc++
     )
-   target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC
-    #${CMAKE_PROJECT_NAME}
-    be
-    root
-    game
-    tracker
-    textencoding
-    GL
-    stdc++
-    supc++
-    )
-   target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC
-    #${CMAKE_PROJECT_NAME}
-    be
-    root
-    game
-    tracker
-    textencoding
-    GL
-    stdc++
-    supc++
-    )
-   target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC
-    #${CMAKE_PROJECT_NAME}
-    be
-    root
-    game
-    tracker
-    textencoding
-    GL
-    stdc++
-    supc++
-    )
-   target_link_libraries( test_create_window PUBLIC
-    #${CMAKE_PROJECT_NAME}
-    be
-    root
-    game
-    tracker
-    textencoding
-    GL
-    stdc++
-    supc++
-    )
-  #  target_link_libraries( test_menubar PUBLIC
-  #  #${CMAKE_PROJECT_NAME}
-  #  be
-  #  root
-  #  game
-  #  tracker
-  #  textencoding
-  #  GL
-  #  stdc++
-  #  supc++
-  #  )
 endif()
