@@ -18,5 +18,5 @@ main(int argc, char** argv)
 	//FX::FXApplication* app = new FX::FXApplication(argc, argv);
 	std::cout  << "Application path: " << app->GetAppLocation() << std::endl;
 	std::cout << "Application ver: " << app->GetAppVersion() << std::endl;
-	return app->Run();
+	return fxapp->Run();
 }

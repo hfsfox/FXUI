@@ -22,7 +22,8 @@ namespace FX
             FXApplication();
             FXApplication(const char* vendor_descriptor);
             FXApplication(int argc, char** argv);
-            FXApplication(int argc, char** argv, const char* vendor_descriptor);
+            FXApplication(int argc, char** argv, 
+                const char* vendor_descriptor);
             ~FXApplication();
         public:
             uint32_t Run();
@@ -33,5 +34,7 @@ namespace FX
             char** argv_state;
     };
 }
+
+extern FX::FXApplication* fxapp;
 
 #endif

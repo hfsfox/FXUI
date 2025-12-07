@@ -28,6 +28,9 @@
 #elif defined (BACKEND_COCOA)
 #endif
 
+
+FX::FXApplication* fxapp = NULL;
+
 FX::FXApplication::FXApplication()
     :
     argc_state(0),
@@ -40,6 +43,8 @@ FX::FXApplication::FXApplication()
         //FreeConsole();
         #endif
         FXApplication(argc_state, argv_state,"");
+
+        fxapp = this;
     }
 
 FX::FXApplication::FXApplication(const char* vendor_descriptor)
@@ -56,6 +61,7 @@ FX::FXApplication::FXApplication(const char* vendor_descriptor)
     #elif defined (BACKEND_WINAPI)
        //FreeConsole();
     #endif
+    fxapp = this;
 }
 
 FX::FXApplication::FXApplication(int argc, char** argv)
@@ -74,6 +80,7 @@ FX::FXApplication::FXApplication(int argc, char** argv)
         #elif defined (BACKEND_WINAPI)
             //FreeConsole();
     	#endif
+        fxapp = this;
     }
 
 FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descriptor)
@@ -92,6 +99,7 @@ FX::FXApplication::FXApplication(int argc, char** argv, const char* vendor_descr
         #elif defined (BACKEND_WINAPI)
             //FreeConsole();
     	#endif
+        fxapp = this;
     }
 
 FX::FXApplication::~FXApplication()
