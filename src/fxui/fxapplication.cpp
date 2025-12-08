@@ -143,20 +143,21 @@ FX::FXApplication::Run()
     return 0;
     #endif
 }
-/*
+
 void
 FX::FXApplication::_Init(int argc, char** argv,
     const char* vendor_descripto)
 {
 }
-*/
+
 
 const char*
 FX::FXApplication::GetAppLocation()
 {
+#ifndef MAX_PATH
+    #define MAX_PATH 128
+#endif // !MAX_PATH
     static char path[MAX_PATH];
-    //path = {0};
-
     #if defined (PLATFORM_WINDOWS)
     wchar_t wpath[MAX_PATH];
     GetModuleFileNameW(NULL, wpath, MAX_PATH);
@@ -164,8 +165,11 @@ FX::FXApplication::GetAppLocation()
     WideCharToMultiByte(CP_UTF8, 0, wpath, -1, path, MAX_PATH, NULL, NULL);
     //return buffer;
     #elif defined(PLATFORM_HAIKU)
+        snprintf(version, 128, "%s", "unimplemented");
     #elif defined(PLATFORM_LINUX)
+        snprintf(version, 128, "%s", "unimplemented");
     #elif defined (PLATFORM_MACOSX)
+        snprintf(version, 128, "%s", "unimplemented");
     #endif
 
     return path;

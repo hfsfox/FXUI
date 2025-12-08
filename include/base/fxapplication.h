@@ -30,8 +30,8 @@ namespace FX
             const char* GetAppLocation();
             const char* GetAppVersion();
         private:
-            /*void _Init(int argc, char** argv,
-                const char* vendor_descripto);*/
+            void _Init(int argc, char** argv,
+                const char* vendor_descripto);
         private:
             int argc_state;
             char** argv_state;
