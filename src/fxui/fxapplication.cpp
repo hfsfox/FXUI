@@ -165,11 +165,11 @@ FX::FXApplication::GetAppLocation()
     WideCharToMultiByte(CP_UTF8, 0, wpath, -1, path, MAX_PATH, NULL, NULL);
     //return buffer;
     #elif defined(PLATFORM_HAIKU)
-        snprintf(version, 128, "%s", "unimplemented");
+        snprintf(path, 128, "%s", "unimplemented");
     #elif defined(PLATFORM_LINUX)
-        snprintf(version, 128, "%s", "unimplemented");
+        snprintf(path, 128, "%s", "unimplemented");
     #elif defined (PLATFORM_MACOSX)
-        snprintf(version, 128, "%s", "unimplemented");
+        snprintf(path, 128, "%s", "unimplemented");
     #endif
 
     return path;
