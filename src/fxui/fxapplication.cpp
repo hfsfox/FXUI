@@ -169,7 +169,12 @@ FX::FXApplication::GetAppLocation()
     #elif defined(PLATFORM_LINUX)
         snprintf(path, 128, "%s", "unimplemented");
     #elif defined (PLATFORM_MACOSX)
-        snprintf(path, 128, "%s", "unimplemented");
+        uint32_t size = sizeof(path);
+        if (_NSGetExecutablePath(path, &size) == 0)
+            printf("executable path is %s\n", path);
+        else
+        printf("buffer too small; need size %u\n", size);
+        //snprintf(path, 128, "%s", "unimplemented");
     #endif
 
     return path;
