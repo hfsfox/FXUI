@@ -12,6 +12,7 @@
     #include <Carbon/Carbon.h>
     #include <objc/message.h>
     #include <objc/runtime.h>
+    #include <mach-o/dyld.h>
     #define cls objc_getClass
     #define sel sel_getUid
     #define msg ((id(*)(id, SEL, ...))objc_msgSend)
