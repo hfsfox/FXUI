@@ -15,6 +15,8 @@ MacOSXApplication::MacOSXApplication()
     NSApp = [NSApplication sharedApplication];
     // This causes the main window and menubar to raise
     [NSApp activateIgnoringOtherApps: YES];
+
+    this->Run();
 }
 
 MacOSXApplication::~MacOSXApplication()
