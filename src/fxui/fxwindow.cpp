@@ -1011,7 +1011,7 @@ FX::FXWindow::ProcessEvents()
         return msg.wParam;
 
         //return !shouldClose;
-    #elif defined (BACKEND_COCOA)
+    //#elif defined (BACKEND_COCOA)
         //id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
         //
         /*id NSDefaultRunLoopMode;
@@ -1036,6 +1036,7 @@ FX::FXWindow::ProcessEvents()
         return 0;*/
         //
         //msg(app, sel("run"));
+        //return 0;
     #else
         return shouldClose;
     #endif
