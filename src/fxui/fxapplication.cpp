@@ -9,6 +9,7 @@
 #elif defined (BACKEND_WAYLAND)
 #elif defined (BACKEND_COCOA)
     #include "platform/macosx/MacOSXAPIWindow.h"
+    #include "platform/macosx/MacOSXApplication.h"
     #include <Carbon/Carbon.h>
     #include <objc/message.h>
     #include <objc/runtime.h>
@@ -27,6 +28,7 @@
 #if defined(BACKEND_BEAPI)
     static BApplication* app = nullptr;
 #elif defined (BACKEND_COCOA)
+    MacOSXApplication* m = nullptr;
 #endif
 
 
@@ -39,7 +41,9 @@ FX::FXApplication::FXApplication()
     {
         std::cerr << "FXApplication" << std::endl;
         #if defined (BACKEND_COCOA)
-            FXCocoaAutoreleasePool p();
+            //FXCocoaAutoreleasePool p();
+            m = MacOSXApplication::GetMacOSXApplicationInstance();
+            //new MacOSXApplication();
         #elif defined (BACKEND_WINAPI)
         //FreeConsole();
         #endif
@@ -54,7 +58,8 @@ FX::FXApplication::FXApplication(const char* vendor_descriptor)
 {
     std::cerr << "FXApplication" << std::endl;
 	#if defined (BACKEND_COCOA)
-        FXCocoaAutoreleasePool p();
+        //FXCocoaAutoreleasePool p();
+        m = MacOSXApplication::GetMacOSXApplicationInstance();
 	#elif defined(BACKEND_BEAPI)
 	    if (!app)
 	    {
@@ -77,7 +82,8 @@ FX::FXApplication::FXApplication(int argc, char** argv)
     {
         std::cerr << "FXApplication" << std::endl;
     	#if defined (BACKEND_COCOA)
-            FXCocoaAutoreleasePool p();
+            //FXCocoaAutoreleasePool p();
+            m = MacOSXApplication::GetMacOSXApplicationInstance();
     	#elif defined(BACKEND_BEAPI)
 			if (!app)
 			{
@@ -100,7 +106,8 @@ FX::FXApplication::FXApplication(int argc, char** argv,
     {
         std::cerr << "FXApplication" << std::endl;
     	#if defined (BACKEND_COCOA)
-            FXCocoaAutoreleasePool p();
+            //FXCocoaAutoreleasePool p();
+            m = MacOSXApplication::GetMacOSXApplicationInstance();
     	#elif defined(BACKEND_BEAPI)
 			if (!app)
 			{
@@ -132,7 +139,9 @@ FX::FXApplication::Run()
     #elif defined (BACKEND_WAYLAND)
     return 0;
     #elif defined (BACKEND_COCOA)
-    CocoaApplication app(argc_state, argv_state);
+    //CocoaApplication app(argc_state, argv_state);
+    //MacOSXApplication();
+    m->Run();
     return 0;
     //return NSApplicationMain (argc_state, argv_state);
     #elif defined (BACKEND_BEAPI)

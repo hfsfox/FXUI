@@ -20,6 +20,7 @@
 #include <cstdint>
 #include <vector>
 
+/*
 namespace
 {
     class MenuItems
@@ -30,6 +31,7 @@ namespace
 
     std::vector<MenuItems> menus;
 }
+*/
 
 namespace FX
 {
@@ -46,6 +48,15 @@ namespace FX
             void MakeNativeMenuBar();
             int GetHeight() const;
 			int GetWidth() const;
+            //virtual void Show();
+            //virtual void Hide();
+            //virtual void Enable();
+            //virtual void Disable();
+            //
+            //virtual void GetGeometry(int &x, int &y, int &width, int &height);
+            //virtual void SetGeometry(const int &x, const int &y, const int &width, const int &height, const char &mask);
+            //void AddToMenubar(NSMenu *menu);
+            //void AddToMenubar(NSMenu *menu, int index);
         private:
             uint32_t menu_counter;
             uint32_t word_gap;
