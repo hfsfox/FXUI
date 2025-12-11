@@ -1,4 +1,8 @@
 #include "MacOSXApplication.h"
+#include <AppKit/AppKit.h>
+#include <Cocoa/Cocoa.h>
+#include <Foundation/Foundation.h>
+#include <Foundation/NSString.h>
 
 namespace
 {

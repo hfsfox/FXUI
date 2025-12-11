@@ -209,7 +209,7 @@ elseif(WIN32 OR WIN64 OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
 elseif(APPLE)
     set(PLATFORM_SOURCES
     src/fxui/platform/macosx/MacOSXAPIWindow.mm
-    src/fxui/plaform/macosx/MacOSXApplication.mm
+    src/fxui/platform/macosx/MacOSXApplication.mm
     )
 elseif(QNX)
     set(PLATFORM_SOURCES

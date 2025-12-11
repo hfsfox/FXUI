@@ -141,7 +141,7 @@ FX::FXApplication::Run()
     #elif defined (BACKEND_COCOA)
     //CocoaApplication app(argc_state, argv_state);
     //MacOSXApplication();
-    m->Run();
+    //m->Run();
     return 0;
     //return NSApplicationMain (argc_state, argv_state);
     #elif defined (BACKEND_BEAPI)

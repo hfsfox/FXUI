@@ -19,11 +19,14 @@ class MacOSXApplication
     public:
         static MacOSXApplication *GetMacOSXApplicationInstance()
         {
-            static MacOSXApplication *mac_app = NULL;
+            static MacOSXApplication *mac_app = nullptr;
             if (!mac_app)
-                app = new MacOSXApplication(/*int *argc, char *argv[]*/);
+                mac_app = new MacOSXApplication(/*int *argc, char *argv[]*/);
             return mac_app;
         };
+    private:
+        ~MacOSXApplication();
+    public:
         virtual void Run();
         virtual void Shutdown();
     private:
