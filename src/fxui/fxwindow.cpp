@@ -1013,6 +1013,7 @@ FX::FXWindow::ProcessEvents()
         //return !shouldClose;
     #elif defined (BACKEND_COCOA)
         id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
+        id NSDefaultRunLoopMode;
 
         id ev = msg4(id, app,
                      "nextEventMatchingMask:untilDate:inMode:dequeue:", NSUInteger,
