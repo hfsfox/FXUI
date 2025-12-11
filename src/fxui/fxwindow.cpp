@@ -44,6 +44,11 @@
     #define sel sel_getUid
     #define msg ((id(*)(id, SEL, ...))objc_msgSend)
     #define cls_msg ((id(*)(Class, SEL, ...))objc_msgSend)
+    #define msg4(r, o, s, A, a, B, b, C, c, D, d)                             \
+    ((r(*)(id, SEL, A, B, C, D))objc_msgSend)(o, sel_getUid(s), a, b, c, d)
+    #define msg1(r, o, s, A, a)                                               \
+    ((r(*)(id, SEL, A))objc_msgSend)(o, sel_getUid(s), a)
+
 
     // poor man's bindings!
     typedef enum NSApplicationActivationPolicy
@@ -1006,6 +1011,27 @@ FX::FXWindow::ProcessEvents()
         return msg.wParam;
 
         //return !shouldClose;
+    #elif defined (BACKEND_COCOA)
+        id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
+
+        id ev = msg4(id, app,
+                     "nextEventMatchingMask:untilDate:inMode:dequeue:", NSUInteger,
+                     NSUIntegerMax, id, NULL, id, NSDefaultRunLoopMode, BOOL, YES);
+
+        if (!ev)
+            return 0;
+        NSUInteger evtype = msg(NSUInteger, ev, "type");
+        switch (evtype)
+        {
+            case 1:
+            {
+            }
+            case 2:
+            {
+            }
+        }
+        msg1(void, app, "sendEvent:", id, ev);
+        return 0;
     #else
         return shouldClose;
     #endif
