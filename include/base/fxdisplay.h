@@ -1,13 +1,14 @@
-//-----------------------------------------------------------------------------
-// FXUI SDK
-// FXUI: Graphical User Interface Framework:
-//
-// Version 0.1       Date :
-//
-//-----------------------------------------------------------------------------
-// MIT
-// © 2025, , All Rights Reserved
-//-----------------------------------------------------------------------------
+/**----------------------------------------------------------------------------
+* FXUI SDK
+* FXUI: Graphical User Interface Framework:
+*
+* Version 0.1       Date :
+*
+*------------------------------------------------------------------------------
+* MIT
+* © 2025, , All Rights Reserved
+*------------------------------------------------------------------------------
+**/
 
 #ifndef __FXDISPLAY_H__
 #define __FXDISPLAY_H__
@@ -52,6 +53,12 @@ namespace FX
         } MonitorInfo;
 }
 
+
+/**
+ * Display interface
+ * Get and obtain monitor(s) info form backends for toolkit needs
+ **/
+
 namespace FX
 {
     class FXDisplay
@@ -63,6 +70,9 @@ namespace FX
             FXDisplay(FX::FXRect& size);
             ~FXDisplay();
         public:
+            /**
+             * Initialize display
+             **/
             bool Init();
             void Cleanup();
         public:
@@ -98,7 +108,13 @@ namespace FX
             void SetViewColor(FX::FXColor color);
             FX::FXColor GetViewColor() const;
 
+            /**
+             * Get size of the screen
+             * @param screen sreen number
+             * @return FX::FXRect rect value of defined screen
+             **/
             FX::FXRect GetDisplaySize() const;
+
             unsigned int getHeight() { return GetDisplaySize().height; }
             unsigned int getWidth()  { return GetDisplaySize().width; }
 
