@@ -228,10 +228,6 @@ message(STATUS "Build shared libraries: ${BUILD_SHARED_LIBS}")
 
 #option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" ON)
 
-add_subdirectory(src/test/app)
-add_subdirectory(src/test/window)
-add_subdirectory(src/test/widgets)
-
 add_library(${CMAKE_PROJECT_NAME} STATIC
     ${FXUI_SOURCES}
     ${PLATFORM_SOURCES}
@@ -248,37 +244,6 @@ add_library(${CMAKE_PROJECT_NAME} STATIC
 #  ${PLATFORM_SOURCES}
 #  )
 #endif()
-
-add_executable(${CMAKE_PROJECT_NAME}_example
-    ##WIN32
-    src/test/example.cpp
-    )
-
-add_executable(${CMAKE_PROJECT_NAME}_init_dpy
-    #WIN32
-    src/test/example_init_dpy.cpp
-    )
-
-add_executable(${CMAKE_PROJECT_NAME}_init_messagebox
-    src/test/example_init_messagebox.cpp
-    )
-
-add_executable(test_create_window
-    src/test/test_create_window.cpp
-    )
-
-    target_link_libraries(${CMAKE_PROJECT_NAME}_example PUBLIC
-    ${CMAKE_PROJECT_NAME} 
-    )
-    target_link_libraries(${CMAKE_PROJECT_NAME}_init_dpy PUBLIC
-    ${CMAKE_PROJECT_NAME}
-    )
-    target_link_libraries(${CMAKE_PROJECT_NAME}_init_messagebox PUBLIC
-    ${CMAKE_PROJECT_NAME}
-    )
-    target_link_libraries( test_create_window PUBLIC
-    ${CMAKE_PROJECT_NAME}
-    )
 
 if(LINUX)
     if (BACKEND_X11)
@@ -324,3 +289,6 @@ elseif(HAIKU)
     supc++
     )
 endif()
+
+
+add_subdirectory(src/test)
