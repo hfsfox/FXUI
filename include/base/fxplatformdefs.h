@@ -1,13 +1,14 @@
-//-----------------------------------------------------------------------------
-// FXUI SDK
-// FXUI: Graphical User Interface Framework:
-//
-// Version 0.1       Date :
-//
-//-----------------------------------------------------------------------------
-// MIT
-// © 2025, , All Rights Reserved
-//-----------------------------------------------------------------------------
+/**----------------------------------------------------------------------------
+ * FXUI SDK
+ * FXUI: Graphical User Interface Framework:
+ *
+ * Version 0.1       Date :
+ *
+ *------------------------------------------------------------------------------
+ * MIT
+ * © 2025, , All Rights Reserved
+ *------------------------------------------------------------------------------
+ **/
 
 #ifndef __FXPLATFORMDEFS_H__
 #define __FXPLATFORMDEFS_H__
@@ -201,7 +202,7 @@
 #endif /* __os2__ */
 
 #if defined(__WINDOWS__) || defined(__WIN32__) || defined(__WIN64__) || defined(_WIN64) || defined(_WIN32) \
-|| defined(__WINNT) || defined(__WINNT__) || defined (__NT__)
+|| defined(__WINNT) || defined(__WINNT__) || defined (__NT__) || defined (__CYGWIN__)
     #define PLATFORM_WINDOWS
 #endif /* __windows__ */
 

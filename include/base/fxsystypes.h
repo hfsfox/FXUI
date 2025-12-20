@@ -1,13 +1,14 @@
-//-----------------------------------------------------------------------------
-// FXUI SDK
-// FXUI: Graphical User Interface Framework:
-//
-// Version 0.1       Date :
-//
-//-----------------------------------------------------------------------------
-// MIT
-// © 2025, , All Rights Reserved
-//-----------------------------------------------------------------------------
+/**----------------------------------------------------------------------------
+ * FXUI SDK
+ * FXUI: Graphical User Interface Framework:
+ *
+ * Version 0.1       Date :
+ *
+ *------------------------------------------------------------------------------
+ * MIT
+ * © 2025, , All Rights Reserved
+ *------------------------------------------------------------------------------
+ **/
 
 #ifndef __FXSYSTYPES_H__
 #define __FXSYSTYPES_H__
@@ -24,6 +25,29 @@
     #define ARCH_ARM64
 #elif defined(__arm__) || defined(__arm) || defined(_M_ARM) || defined(_ARM) || defined(__ARM_ARCH)
     #define ARCH_ARM
+        #if defined(__ARM_ARCH_2__)
+            #define ARCH_ARM2
+        #elif defined(__ARM_ARCH_3__) || defined(__ARM_ARCH_3M__)
+            #define ARCH_ARM3
+        #elif defined(__ARM_ARCH_4T__) || defined(__TARGET_ARM_4T)
+            #define ARCH_ARM4
+        #elif defined(__ARM_ARCH_5_) || defined(__ARM_ARCH_5E_)
+            #define ARCH_ARM5
+        #elif defined(__ARM_ARCH_6T2_) || defined(__ARM_ARCH_6T2_)
+            #define ARCH_ARM6T2
+        #elif defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_6J__) || defined(__ARM_ARCH_6K__) || defined(__ARM_ARCH_6Z__) || defined(__ARM_ARCH_6ZK__)
+            #define ARCH_ARM6
+        #elif defined(__ARM_ARCH_7__) || defined(__ARM_ARCH_7A__) || defined(__ARM_ARCH_7R__) || defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7S__)
+            #define ARCH_ARM7
+        #elif defined(__ARM_ARCH_7A__) || defined(__ARM_ARCH_7R__) || defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7S__)
+            #define ARCH_ARM7A
+        #elif defined(__ARM_ARCH_7R__) || defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7S__)
+            #define ARCH_ARM7R
+        #elif defined(__ARM_ARCH_7M__)
+            #define ARCH_ARM7M
+        #elif defined(__ARM_ARCH_7S__)
+            #define ARCH_ARM7S
+    #endif
 #elif defined(__PPC64__) || defined(__ppc64__) || defined(__ppc64) || defined(__powerpc64__) || defined(_ARCH_PPC64)
     #define ARCH_PPC64
 #elif defined(__PPC__) || defined(__ppc__) || defined(__powerpc__) || defined(__ppc) || defined(_M_PPC) || defined(_ARCH_PPC)

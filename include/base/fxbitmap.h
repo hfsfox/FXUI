@@ -1,3 +1,15 @@
+/**----------------------------------------------------------------------------
+ * FXUI SDK
+ * FXUI: Graphical User Interface Framework:
+ *
+ * Version 0.1       Date :
+ *
+ *------------------------------------------------------------------------------
+ * MIT
+ * © 2025, , All Rights Reserved
+ *------------------------------------------------------------------------------
+ **/
+
 #ifndef __FXBITMAP_H__
 #define __FXBITMAP_H__
 
@@ -8,6 +20,20 @@ enum colorspace
     FX_RGB = 0,
     FX_RGBA,
     FX_GRAYSCALE
+};
+
+/**
+ *
+ *Pixel description format for color component
+ *
+ **/
+
+enum pixel_format_t
+{
+    PIXEL_RGBA,
+    PIXEL_BGRA,
+    PIXEL_RGB,
+    PIXEL_BGR
 };
 
 namespace FX
