@@ -292,3 +292,4 @@ endif()
 
 
 add_subdirectory(src/test)
+add_subdirectory(base)

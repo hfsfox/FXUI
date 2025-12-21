@@ -1,0 +1,11 @@
+<!-- UI layout test file -->
+<?xml version="1.1" encoding="UTF-8"?>
+
+<ui resizable ="true">
+    <window window_title="FXUI Layout test">
+        <layout>
+            <grid grid_visible="true">
+            </grid>
+        </layout>
+    </window>
+</ui>
