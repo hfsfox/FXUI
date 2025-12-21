@@ -57,8 +57,8 @@ enum draw_flags_t
  **/
 enum text_draw_case_t
 {
-    FX_TEXT_DRAW_DEFAULT = FX_TEXT_DRAW_NONE,   //!< Default value (no text adjust)
     FX_TEXT_DRAW_NONE,                          //!< No text adjust
+    FX_TEXT_DRAW_DEFAULT = FX_TEXT_DRAW_NONE,   //!< Default value (no text adjust)
     FX_TEXT_DRAW_TO_UPPER,                      //!< Convert to upper case
     FX_TEXT_DRAW_TO_LOWER                       //!< Convert to lower case
 };
