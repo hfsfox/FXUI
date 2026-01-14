@@ -3,7 +3,7 @@ include_directories(${CMAKE_PROJECT_NAME}_base PUBLIC
     )
 
 set(FX_UI_BASE_SOURCES
-    src/base/fxapplication.cpp
+    src/fxapplication.cpp
     )
 
 add_library(${CMAKE_PROJECT_NAME}_base STATIC
