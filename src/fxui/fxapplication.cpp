@@ -173,7 +173,6 @@ FX::FXApplication::GetAppLocation()
     GetModuleFileNameW(NULL, wpath, MAX_PATH);
     // Convert wchar_t to UTF-8
     WideCharToMultiByte(CP_UTF8, 0, wpath, -1, path, MAX_PATH, NULL, NULL);
-    //return buffer;
     #elif defined(PLATFORM_HAIKU)
         snprintf(path, 128, "%s", "unimplemented");
     #elif defined(PLATFORM_LINUX)

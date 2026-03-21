@@ -12,13 +12,18 @@
 #ifndef     __FXCLIPBOARD__
 #define     __FXCLIPBOARD__
 
+#include <base/fxstatuscode.h>
+
 namespace FX
 {
     class FXClipboard
     {
         public:
-         FXClipboard();
-         ~FXClipboard();
+            FXClipboard();
+            ~FXClipboard();
+        public:
+            status_code_t close_clipboard();
+            status_code_t read_clipboard();
     };
 }
 

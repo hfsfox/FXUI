@@ -44,6 +44,15 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
+# Enable all warnings in Debug mode
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-Wall -Wextra -Wpedantic)
+    elseif(MSVC)
+        add_compile_options(/W4)
+    endif()
+endif()
+
 set(CMAKE_MODULE_PATH "${${PROJECT_NAME}_SOURCE_DIR}/CMakeModules")
 
 include(FXUIBuildApp)
@@ -152,6 +161,8 @@ set(FXUI_BASE_SOURCES
     src/fxui/fxbitmap.cpp
     src/fxui/fxfont.cpp
     src/fxui/fxview.cpp
+    src/fxui/fxclipboard.cpp
+    src/fxui/fxstatuscode.cpp
 )
 
 set(FXUI_LAYOUT_SOURCES

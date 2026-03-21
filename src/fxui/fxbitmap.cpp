@@ -46,10 +46,22 @@ _LoadPixmap(char** xpm_data)
 }
 
 FX::FXBitmap::FXBitmap()
+    :
+    color_space(FX_RGB)
 {
 }
 
-FX::FXBitmap::FXBitmap(int width, int height, colorspace colorspace)
+FX::FXBitmap::FXBitmap(uint32_t ResourceID)
+    :
+    color_space(FX_RGB)
+{
+}
+
+FX::FXBitmap::FXBitmap(int _width, int _height, colorspace colorspace)
+    :
+    color_space(colorspace),
+    width(_width),
+    height(_height)
 {
 }
 

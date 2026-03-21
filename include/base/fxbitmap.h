@@ -15,6 +15,14 @@
 
 #include <stdint.h>
 
+typedef struct fx_bitmap_t
+{
+    int32_t     width;
+    int32_t     height;
+    int32_t     stride;
+    uint8_t    *data;
+} fx_bitmap_t;
+
 enum colorspace
 {
     FX_RGB = 0,
@@ -58,6 +66,9 @@ namespace FX
             uint32_t height;
             int pixel_format;
             bool loaded;
+            colorspace color_space;
+            //colorspace
+            //fx_bitmap_t bitmap;
             //
             //void* platform_bitmap;
         private:
