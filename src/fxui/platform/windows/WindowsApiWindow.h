@@ -9,6 +9,7 @@
 
 namespace
 {
+	/*
 	float GetDPIRatioFromSystem()
 	{
 		typedef UINT(WINAPI* GetDpiForSystem_t)();
@@ -17,7 +18,7 @@ namespace
 			return sysval / 96.f;
 		}
 		return 1.f;
-	}
+	}*/
 }
 
 class WinAPIObject
