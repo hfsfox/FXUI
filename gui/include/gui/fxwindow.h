@@ -26,7 +26,7 @@ namespace FX
     class FXWindow
     {
         public:
-            explicit FXWindow(/*FXDisplay *dpy,*/ FX::FXEventHandler *handler)
+            explicit FXWindow(FXDisplay *dpy, void* parentptr, FX::FXEventHandler *handler, bool embedded)
             {
                 if(!handler == NULL)
                     _window_handler = handler;
